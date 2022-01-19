@@ -1,0 +1,43 @@
+hr
+{
+
+    height: 4px;
+}
+
+.modal-button{
+ margin:auto ;
+ float: right
+}
+
+
+
+.demo-table {
+  width: 100%;
+}
+
+/* .mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+} */
+
+.mat-row:hover .mat-cell {
+
+  background-color: rgb(241, 241, 241);
+}
+
+
+
+.mat-column-select {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+
+.mat-column-name {
+  padding-left: 16px;
+}
+
+.big-checkbox {width: 18px; height: 18px;}

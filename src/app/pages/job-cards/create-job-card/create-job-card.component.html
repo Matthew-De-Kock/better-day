@@ -1,0 +1,364 @@
+<br>
+<br><br>
+<br>
+<div class="d-flex justify-content-center  text-center " >
+
+  <form class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 1000px;  " >
+
+  <h1>Job Card</h1>
+  <hr >
+
+<!-- ///////////////////////////////////////User////////////////////////////////////////// -->
+  <div class="row ">
+<div class="col "  >
+  <div class="form-group">
+    <select class="form-select" id="exampleSelect" placeholder="Owner">
+      <option value="Owner" selected disabled hidden>Owner</option>
+      <option class="form-control" >Warwick </option>
+      <option class="form-control">Daniel</option>
+    </select>
+</div>
+
+</div>
+
+
+    <div class="col ">
+  <div class="pt-4 border  mb-5 bg-body rounded flex-wrap"  >
+    <div class="row">
+      <div class="col " ><h1 class =" pe-2" style="color: red;">JOB No.</h1></div>
+      <div class="col" > <h1 class =" ps-2" style="color: red; font-weight: 500">001</h1></div>
+    </div>
+
+
+
+  </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+
+        <div class="input-group ">
+          <input class="form-control" placeholder="Select Start Date"
+                 name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary bi bi-calendar-event" (click)="d.toggle()" type="button"> </button>
+
+          </div>
+      </div>
+    </div>
+
+
+    <div class="col">
+      <input  id=client class="form-control mb-3 " placeholder="Client"  ngModel name="client"   >
+    </div>
+  </div>
+<div class="row">
+  <div class="col">  <input  id=order-no class="form-control  mt-1" placeholder="ORDER No"  ngModel name="order-no"   ></div>
+  <div class="col">
+    <div class="form-group">
+    <select class="form-select" id="exampleSelect" placeholder="Owner">
+      <option value="Owner" style="color:rgb(255, 0, 0)" selected disabled hidden>Company</option>
+      <option>Mac-Automation </option>
+      <option>All Ellectrical</option>
+      <option>STS</option>
+    </select>
+</div></div>
+</div>
+
+<textarea id=description class="form-control  mt-3 mb-4" placeholder="Description" ngModel name="description"  rows="1"></textarea>
+<hr >
+
+<!-- ///////////////////////////////////////Owner////////////////////////////////////////// -->
+<div class="row mt-3">
+  <div class="col">  <input  id=panel-no class="form-control  mt-1" placeholder="Panel Number"  ngModel name="panel-no"   ></div>
+  <div class="col">     <select class="form-select" id="exampleSelect" >
+    <option value="Owner" style="color:rgb(255, 0, 0)" selected disabled hidden>Drawings By:</option>
+    <option>LT </option>
+  </select></div>
+</div>
+
+<div class="row mt-3">
+  <div class="col">
+    <select class="form-select" >
+    <option style="color:rgb(255, 0, 0)" selected disabled hidden>Panel-Builder/s:</option>
+    <mat-checkbox>Jarod</mat-checkbox>
+    <mat-checkbox>Rueben</mat-checkbox>
+  </select>
+</div>
+  <div class="col">
+      <select class="form-select"  >
+    <option style="color:rgb(255, 0, 0)" selected disabled hidden>Programmed By:</option>
+    <option>Daniel</option>
+    <option>Gerard</option>
+  </select>
+</div>
+</div>
+
+
+<div class="row mt-3 " >
+  <div class="col">
+    <select class="form-select"  >
+    <option style="color:rgb(255, 0, 0)" selected disabled hidden>Tested By:</option>
+    <option>Daniel</option>
+    <option>Gerard</option>
+  </select>
+</div>
+  <div class="col"></div>
+</div>
+<hr>
+<!-- ///////////////////////////////////////Add Material From Store////////////////////////////////////////// -->
+<h2>Purchase Orders</h2>
+<button class="btn btn-lg btn-outline-success" (click)="open(purchaseOrder)">Add Purchase Order</button>
+<ng-template #purchaseOrder let-modal>
+
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-basic-title">Puchase Order</h2>
+    <button  mat-icon-button   style="background-color:rgb(255, 255, 255)"(click)="modal.dismiss()" >
+      <mat-icon style="color:rgb(0, 0, 0)">close</mat-icon>
+    </button>
+  </div>
+  <form  #f="ngForm" (ngSubmit)="onAddPurchaseOrder(f)">
+  <div class="modal-body">
+
+      <div class="form-group">
+        <input  id=supplier class="form-control  mt-1" placeholder="Supplier"  ngModel name="supplier">
+        <input  id=mat-order-no class="form-control  mt-3 mb-3" placeholder="Order Number"  ngModel name="mat_order_no">
+        <button  class="modal-button btn btn-success" type="submit">Add</button>
+        </div>
+<br>
+<br>
+  </div>
+
+</form>
+</ng-template>
+<table class="table table-striped mt-4">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Supplier</th>
+    <th scope="col">Order Number</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let country of countries; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ country.supplier }}</td>
+    <td>{{ country.orderNum | number }}</td>
+  </tr>
+  </tbody>
+</table>
+
+
+<hr>
+<!-- ///////////////////////////////////////Add Material From Store////////////////////////////////////////// -->
+<h2>Materials From Storage</h2>
+<button class="btn btn-lg btn-outline-success" (click)="openXl(content)">Add Material From Store</button>
+<table class="table table-striped mt-4">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Part</th>
+    <th scope="col">Quantity</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let storage of storages; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ storage.name }}</td>
+    <td>{{ storage.qty }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #content let-modal>
+
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-basic-title">Materials From Store</h2>
+    <button  mat-icon-button style="background-color:rgb(255, 255, 255)"(click)="modal.dismiss()" >
+      <mat-icon style="color:rgb(0, 0, 0)">close</mat-icon>
+    </button>
+  </div>
+  <mat-tab-group>
+    <!--  Tab 1 -->
+    <mat-tab label="Add Parts">
+      <form  #f="ngForm" (ngSubmit)="onAdd(f)">
+        <div class="modal-body">
+
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let storageItem" (click)="$event.stopPropagation()">
+              <!-- <mat-checkbox (change)="onRowToggled(storageItem)"
+              [checked]="selection.isSelected(storageItem)"
+              >
+              </mat-checkbox> -->
+              <input class="form-check-input big-checkbox" type="checkbox" value="" id="flexCheckDefault"
+              (change)="onRowToggled(storageItem)"
+              [checked]="selection.isSelected(storageItem)">
+
+              </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let storageItem">{{storageItem.name}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="part_number">
+              <th mat-header-cell *matHeaderCellDef>Part Number</th>
+              <td mat-cell *matCellDef="let storageItem">{{storageItem.part_number}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="qty">
+              <th mat-header-cell *matHeaderCellDef>Qty</th>
+              <td mat-cell *matCellDef="let storageItem">{{storageItem.qty}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let storageItem">{{storageItem.description}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+                mat-row
+
+                *matRowDef="let row; columns: displayedColumns;"
+            ></tr>
+
+
+
+          </table>
+<h2 class="mt-4">Materials</h2>
+
+          <ul>
+            <!-- <div *ngIf="storages==null"> -->
+            <div *ngFor="let partArr of partsArr">
+              <div class="row " style="width:300px">
+                <div class="col">
+                  <p style="float: left; margin-top:15px" class="mt-2.5"> {{partArr}}</p>
+                </div>
+                <div class="col">     <div style="padding-left: 35px;  float:left; text-align:center; " >
+                  <input type="number"style="float: right; width: 85px; margin-right:auto ; margin-left:auto" min="1" id=qty class="form-control  mt-1"  placeholder="qty"  ngModel name="{{[partArr]}}">
+                </div></div>
+              </div>
+            </div>
+          <!-- </div> -->
+
+<div >
+  <!-- <div *ngFor="let storage of storages">
+    <div class="row " style="width:300px">
+      <div class="col">
+        <p style="float: left; margin-top:15px" class="mt-2.5"> {{storage.name}}</p>
+      </div>
+      <div class="col">     <div style="padding-left: 35px;  float:left; text-align:center; " >
+        <input type="number"style="float: right; width: 85px; margin-right:auto ; margin-left:auto" min="1" id=qty class="form-control  mt-1"  placeholder="qty" [(ngModel)]="storage.qty" ngModel name="{{[storage.name]}}">
+      </div></div>
+    </div>
+  </div> -->
+</div>
+
+
+          </ul>
+
+      <br>
+      <br>
+        </div>
+
+        <div style="text-align: center;">
+          <button class="btn btn-primary mb-4" style="width:125px" type="submit">Add</button>
+        </div>
+
+      </form>
+    </mat-tab>
+
+    <!-- Tab 2  -->
+    <mat-tab label="Manually Add Part">
+      <form  #f="ngForm" (ngSubmit)="onManualPartAdd(f)">
+        <div class="modal-body">
+
+            <div class="form-group">
+              <input  id=manual_part_name_add class="form-control  mt-1" placeholder="Part Name"  ngModel name="manual_part_name_add">
+              <input  id=manual_part_num_add class="form-control  mt-3 mb-3" placeholder="Part Number"  ngModel name="manual_part_num_add">
+              <input type="number" min="1" id=qty class="form-control  mt-1"  placeholder="Qty"  ngModel name="manual_part_qty_add">
+              <input  id=manual_part_descr_add class="form-control  mt-3 mb-3" placeholder="Description"  ngModel name="manual_part_descr_add">
+              <button  class="modal-button btn btn-success" type="submit">Manual Add</button>
+              </div>
+      <br>
+      <br>
+        </div>
+
+      </form>
+    </mat-tab>
+
+  </mat-tab-group>
+</ng-template>
+<hr>
+<!-- ///////////////////////////////////////Invoices////////////////////////////////////////// -->
+<h2>Invoices</h2>
+<button class="btn btn-lg btn-outline-success" (click)="open(content)">Add Invoice</button>
+
+
+<ng-template #content let-modal>
+
+  <div class="modal-header">
+    <h2 class="modal-title" id="modal-basic-title">Puchase Order</h2>
+    <button  mat-icon-button style="background-color:rgb(255, 255, 255)"(click)="modal.dismiss()" >
+      <mat-icon style="color:rgb(0, 0, 0)">close</mat-icon>
+    </button>
+  </div>
+  <form  #f="ngForm" (ngSubmit)="onAddPurchaseOrder(f)">
+  <div class="modal-body">
+
+      <div class="form-group">
+        <input  id=supplier class="form-control  mt-1" placeholder="Supplier"  ngModel name="supplier">
+        <input  id=mat-order-no class="form-control  mt-3 mb-3" placeholder="Order Number"  ngModel name="mat_order_no">
+        <button  class="modal-button btn btn-success" type="submit">Add</button>
+        </div>
+<br>
+<br>
+  </div>
+
+</form>
+</ng-template>
+<hr>
+
+
+  <div class="mt-4">
+    <button class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Create</button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </form>
+
+  </div>
+
+

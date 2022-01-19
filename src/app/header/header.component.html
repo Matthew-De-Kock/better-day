@@ -1,0 +1,39 @@
+
+  <mat-sidenav-container fullscreen >
+
+    <mat-sidenav mode="side" #sidenav position="start" >
+<h1 class="text-center" style="font-size:26px">Better Day</h1>
+<hr style="width:100%">
+      <button style="width: 100%;" mat-button class="item" routerLink="dashboard"><mat-icon  class="ml-4" mat-list-icon style="margin-right: 10%;" >dashboard</mat-icon>Dashboard</button><br>
+
+<hr>
+<label class="text-center mb-3" style="width: 100%; font-weight: 500;  font-size: 18px;">Job Card</label>
+      <button  style="width: 100%;" mat-button class="item"routerLink="jobcard/create-jobcard"  ><mat-icon  mat-list-icon style="margin-right: 10%;">pageview</mat-icon>View Job Card</button>
+      <button  style="width: 100%;" mat-button class="item"routerLink="jobcard/create-jobcard"  ><mat-icon  mat-list-icon style="margin-right: 10%;">add_box</mat-icon>Create Job Card</button>
+
+         </mat-sidenav>
+
+
+
+
+         <mat-sidenav-content>
+          <mat-toolbar class="border">
+            <button  style="text-align:center !important" mat-icon-button  (click)="sidenav.toggle()">
+              <mat-icon >menu</mat-icon>
+            </button>
+
+            <span class="spacer"></span>
+
+            <button  style="text-align:center !important"  mat-icon-button xPosition="after"   >
+              <mat-icon style=" margin-right: 10%; margin-bottom: 4%;"  class="icon">account_circle</mat-icon>
+            </button>
+
+
+        </mat-toolbar>
+        <div style="background-color: rgb(245, 248, 250); height: 100%;">
+        <router-outlet></router-outlet>
+      </div>
+
+        </mat-sidenav-content>
+
+        </mat-sidenav-container>
