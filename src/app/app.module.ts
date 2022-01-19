@@ -12,6 +12,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateJobCardComponent } from './pages/job-cards/create-job-card/create-job-card.component';
+import { CreateNewUserComponent } from './pages/admin/create-new-user/create-new-user.component';
+import {HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+
 
 
 @NgModule({
@@ -23,6 +26,7 @@ import { CreateJobCardComponent } from './pages/job-cards/create-job-card/create
     MaterialModule,
     FlexLayoutModule,
     NgbModule,
+    HttpClientModule,
 
 
   ],
@@ -32,6 +36,7 @@ import { CreateJobCardComponent } from './pages/job-cards/create-job-card/create
     HeaderComponent,
     DashboardComponent,
     CreateJobCardComponent,
+    CreateNewUserComponent,
 
 
   ],

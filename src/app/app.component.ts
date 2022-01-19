@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit,OnDestroy, HostListener } from '@angular/core';
+import { AuthService } from './Service-Files/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'better-day';
+
+  constructor(private AS:AuthService){
+    this.AS.autoAuthUser();
+
+  }
+
+
+  ngOnInit(){
+
+  }
 }
+

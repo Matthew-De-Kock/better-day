@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from "@angular/router";
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/Service-Files/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
 
 
-  constructor( private router: Router) { }
+  constructor( private router: Router, private AS:AuthService) { }
 
   ngOnInit(){
+
+    setInterval(() => {
+console.log(this.AS.getToken())
+    },2000)
   }
 
 
@@ -28,7 +33,7 @@ export class LoginComponent implements OnInit {
     email=email.toLowerCase()
     console.log(email)
     console.log(form.value.password)
-    this.router.navigate(['/dashboard']);
+this.AS.login(email,form.value.password)
   }
 
 }

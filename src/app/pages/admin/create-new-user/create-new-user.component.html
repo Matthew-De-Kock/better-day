@@ -1,0 +1,87 @@
+
+
+
+
+<div class="d-flex justify-content-center y-axis  text-center" style="padding-top:6rem" >
+
+  <form class="pt-3 shadow-lg p-3 mb-5 bg-body rounded "  style="width: 480px;  "  #f="ngForm" (ngSubmit)="onCreateNewUser(f)" >
+  <mat-icon style="font-size:60px; padding-right: 55px;"  class="pr-4">person_add</mat-icon>
+  <h1>Create New User</h1>
+  <input type="text" id=name  class="form-control mb-3" placeholder="Full Name"  ngModel name="name" required >
+  <input type="tel" id=contactNum  class="form-control mb-3" placeholder="Contact Number" ngModel name="contactNum"  required >
+  <input type="email" id=emailAddress  class="form-control mb-3" placeholder="Email"  ngModel name="email"  required >
+
+
+  <div class="input-group ">
+    <input type="password" id=password  class="form-control  mb-3" placeholder="Password" ngModel name="password" #pwInput="ngModel"  minlength="6" required >
+    <div class="ps-2 pt-2 input-group-append">
+      <mat-hint align="end">{{pwInput.value?.length}} / 6</mat-hint>
+    </div>
+</div>
+
+<div class="input-group ">
+  <input type="password" id=cPassword  class="form-control" placeholder="Confirm Password" ngModel name="confirm_password" #cPwInput="ngModel" minlength="6"  required >
+  <div class="ps-2 pt-2 input-group-append">
+    <mat-hint align="end">{{cPwInput.value?.length}} / 6</mat-hint>
+  </div>
+</div>
+<!-- <mat-error *ngIf="pwInput.hasError('minlength') ">Password Must be at least 6 characters</mat-error> -->
+<!-- <mat-error *ngIf="pwInput.value.length <6">Password Must contain at least 6 characters</mat-error> -->
+<div class="pt-2">
+  <mat-error *ngIf="pwLengthFault==true">Password MUST contain at least 6 characters</mat-error>
+</div>
+
+<div class>
+  <mat-error *ngIf="pwMatchFault==true">Passwords Do Not Match</mat-error>
+</div>
+<br>
+
+
+<div >
+
+</div>
+<div required>
+
+  <div class="form-check text-start"  >
+    <input type="radio" class="form-check-input me-3" id="radio1" name="optradio" value="Admin" ngModel name="role">Admin
+    <label class="form-check-label " for="radio1"></label>
+  </div>
+  <div class="form-check text-start">
+    <input type="radio" class="form-check-input me-3" id="radio2" name="optradio" value="Accounts" ngModel name="role">Accounts
+    <label class="form-check-label ps-4" for="radio2"></label>
+  </div>
+  <div class="form-check text-start">
+    <input type="radio" class="form-check-input me-3" id="radio3" name="optradio" value="Owner" ngModel name="role">Owner
+    <label class="form-check-label ps-4" for="radio3"></label>
+  </div>
+  <div class="form-check text-start">
+    <input type="radio" class="form-check-input me-3" id="radio4" name="optradio" value="User" ngModel name="role">User
+    <label class="form-check-label ps-4" for="radio4"></label>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+  <div class="mt-4">
+    <!-- <button
+    *ngIf=" pwInput.value=='' && pwInput.value=='' "
+    class="btn btn-primary btn-md btn-block "   type="submit" style="width:250px" disabled>Create User
+  </button> -->
+  <button
+  class="btn btn-primary btn-md btn-block "   type="submit" style="width:250px" >Create User
+</button>
+
+  </div>
+
+  <!-- <div class="spinner-grow" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div> -->
+  </form>
+
+  </div>
+

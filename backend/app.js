@@ -24,6 +24,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 
 const AuthRoutes = require("./routes/auth")
+const AdminRoutes = require("./routes/admin")
 
 const app = express();
 
@@ -60,4 +61,6 @@ app.use((req, res, next) => {
 
 
 app.use(AuthRoutes)
+app.use(AdminRoutes)
+
 module.exports=app;

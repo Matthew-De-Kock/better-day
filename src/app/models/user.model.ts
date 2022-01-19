@@ -1,10 +1,9 @@
 import { ArrayType } from "@angular/compiler";
 
 export interface User {
-  firstName: string;
-  secondName: string;
-  contactNumber: number;
-  userEmail: string;
+  name: string;
+  contactNumber: string;
+  email: string;
   password:string;
-  roles: string[];
+  role: string;
 }
