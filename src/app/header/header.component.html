@@ -2,26 +2,28 @@
   <mat-sidenav-container fullscreen >
 
     <mat-sidenav mode="side" #sidenav position="start" >
-<h1 class="text-center" style="font-size:26px">Better Day</h1>
+<h1 class="text-start pt-4 ps-2" style="font-size:26px ;color:white">Better Day</h1>
 <hr style="width:100%">
-      <button style="width: 100%;" mat-button class="item" routerLink="dashboard"><mat-icon  class="ml-4" mat-list-icon style="margin-right: 10%;" >dashboard</mat-icon>Dashboard</button><br>
+      <button  (click)="sidenav.toggle()" style="width: 100%;" mat-button class="item" routerLink="dashboard"><mat-icon  class="ml-4" mat-list-icon style="margin-right: 10%;" >dashboard</mat-icon>Dashboard</button><br>
 
       <hr>
-<label class="text-center mb-3" style="width: 100%; font-weight: 500;  font-size: 18px;">Admin</label>
-      <button  style="width: 100%;" mat-button class="item"routerLink="jobcard/create-new-user" ><mat-icon  mat-list-icon style="margin-right: 10%;">person_add</mat-icon>Create New User</button>
+<label class="text-start mb-3 ps-3" style="width: 100%; font-weight: 500; color: rgb(238, 238, 238);  font-size: 14px;">Admin</label>
+      <button  (click)="sidenav.toggle()"style="width: 100%;" mat-button class="item"routerLink="/create-new-user" ><mat-icon  mat-list-icon style="margin-right: 10%;">person_add</mat-icon>Create New User</button>
 
 
 <hr>
-<label class="text-center mb-3" style="width: 100%; font-weight: 500;  font-size: 18px;">Job Card</label>
-      <button  style="width: 100%;" mat-button class="item"routerLink="jobcard/create-jobcard"  ><mat-icon  mat-list-icon style="margin-right: 10%;">pageview</mat-icon>View Job Card</button>
-      <button  style="width: 100%;" mat-button class="item"routerLink="jobcard/create-jobcard"  ><mat-icon  mat-list-icon style="margin-right: 10%;">add_box</mat-icon>Create Job Card</button>
-         </mat-sidenav>
+<!-- <label class="text-start mb-3 ps-3" style="width: 100%; font-weight: 500; color: rgb(238, 238, 238); font-size: 14px;">Job Card</label> -->
+<button (click)="sidenav.toggle()" style="width: 100%;"class="text-start" mat-button class="item"routerLink="/jobcard"  ><i class="bi bi-card-text" style="margin-right: 11%; font-size: 24px;"></i>Job Cards</button>
+      <!-- <button  style="width: 100%;"class="text-start" mat-button class="item"routerLink="jobcard/create-jobcard"  ><mat-icon  mat-list-icon style="margin-right: 10%;">pageview</mat-icon>View Job Card</button>
+      <button  style="width: 100%;" mat-button class="item"routerLink="jobcard/create-jobcard"  ><mat-icon  mat-list-icon style="margin-right: 10%;">note_add</mat-icon>Create Job Card</button> -->
+
+    </mat-sidenav>
 
 
 
 
          <mat-sidenav-content>
-          <mat-toolbar class="border"  *ngIf="userIsAuthenticated==true">
+          <mat-toolbar class="shadow"  *ngIf="userIsAuthenticated==true" >
             <button  style="text-align:center !important" mat-icon-button  (click)="sidenav.toggle()">
               <mat-icon >menu</mat-icon>
             </button>

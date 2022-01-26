@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(){
 
-    setInterval(() => {
-console.log(this.AS.getToken())
-    },2000)
+//     setInterval(() => {
+// console.log(this.AS.getToken())
+//     },2000)
   }
 
 

@@ -25,6 +25,7 @@ const path = require('path');
 
 const AuthRoutes = require("./routes/auth")
 const AdminRoutes = require("./routes/admin")
+const JobCardRoutes = require("./routes/jobcards")
 
 const app = express();
 
@@ -62,5 +63,6 @@ app.use((req, res, next) => {
 
 app.use(AuthRoutes)
 app.use(AdminRoutes)
+app.use(JobCardRoutes)
 
 module.exports=app;

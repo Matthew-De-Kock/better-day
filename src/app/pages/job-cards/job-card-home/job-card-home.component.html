@@ -1,0 +1,40 @@
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="row ms-4">
+  <div class="col">
+    <button routerLink="jobcards-in-progress" class="btn btn-primary btn-lg shadow" style="width: 90%; height:10rem"><i class="bi bi-sunglasses" style="font-size:34px"></i> <br> Job Cards In Progress</button>
+  </div>
+
+  <div class="col">
+<button class="btn btn-primary btn-lg shadow " (click)="open(content)" style="width: 90%; height:10rem"><i class="bi bi-file-earmark-plus" style="font-size:34px" ></i> <br> Create Job Card</button>
+  </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Job Card</h4>
+      <button type="button" class=" btn"  (click)="modal.dismiss('Cross click')">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+  <p>Are you sure you want to create a new Job Card?</p>
+      </form>
+    </div>
+    <div class="modal-footer d-flex justify-content-center ">
+      <button type="button" class="btn btn-success" style="width: 100%;" (click)="createNewJobCard_Number()" (click)="modal.dismiss('Cross click')">Create Job Card</button>
+    </div>
+  </ng-template>
+
+
+
+  <div class="col">
+    <button class="btn btn-primary btn-lg shadow" style="width: 90%; height:10rem"><i class="bi bi-search" style="font-size:34px"></i> <br> Search Job Cards</button>
+  </div>
+</div>
+
+

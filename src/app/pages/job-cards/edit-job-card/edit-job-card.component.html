@@ -1,21 +1,22 @@
+<p>edit-job-card works!</p>
 <br>
 <br><br>
 <br>
 <div class="d-flex justify-content-center  text-center " >
 
-  <form class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 1000px;  " >
+  <div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 1000px;  " >
 
   <h1>Job Card</h1>
   <hr >
 
 <!-- ///////////////////////////////////////User////////////////////////////////////////// -->
-<form  #f="ngForm"  (ngSubmit)="CreateJobCard(f)" >
+<form  #f="ngForm"  (ngSubmit)="SaveJobCard(f)" >
   <div class="row ">
 <div class="col "  >
   <div class="form-group">
     <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Owner:</span>
-      <select class="form-select" id="exampleSelect" ngModel name="owner">
+      <select class="form-select" id="exampleSelect" [(ngModel)]="owner" ngModel name="owner">
         <option value="Owner" selected  hidden>Owner</option>
         <option class="form-control" >Warwick </option>
         <option class="form-control">Daniel</option>
@@ -32,7 +33,7 @@
     <div class="row">
       <div class="input-group">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;color:red" >Job Number:</span>
-        <input type="text" aria-label="First name" class="form-control" ngModel name="job_number"      [(ngModel)]="jobNumber">
+        <input  type="text" aria-label="First name" class="form-control"  [(ngModel)]="job_Number" ngModel name="job_number">
       </div>
     </div>
 
@@ -46,27 +47,36 @@
     <div class="col">
 
         <div class="input-group ">
-          <input class="form-control" placeholder="Select Start Date"
-                 name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" ngModel name="start_Date">
+          <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Start Date:</span>
+          <input class="form-control" placeholder="Select Start Date" [(ngModel)]="model"
+                 name="dp"  ngbDatepicker #d="ngbDatepicker" ngModel name="start_Date">
           <div class="input-group-append">
             <button class="btn btn-outline-primary bi bi-calendar-event" (click)="d.toggle()" type="button"> </button>
-
           </div>
       </div>
     </div>
 
-
     <div class="col">
-      <input  id=client class="form-control mb-3 " placeholder="Client"  ngModel name="client"   >
+      <div class="input-group">
+      <span class="input-group-text " style="font-weight: 400; background-color:white " >Client:</span>
+      <input  id=client class="form-control " placeholder="Client" [(ngModel)]="client" ngModel name="client"   >
     </div>
+   </div>
+
   </div>
-<div class="row">
-  <div class="col">  <input  id=order-no class="form-control  mt-1" placeholder="ORDER No"  ngModel name="order_no"   ></div>
+<div class="row mt-3">
+
+  <div class="col">
+    <div class="input-group ">
+    <span class="input-group-text " style="font-weight: 400; background-color:white " >Order Number:</span>
+    <input  id=order-no class="form-control " placeholder="ORDER No" [(ngModel)]="order_Number"  ngModel name="order_no"   >
+  </div>
+ </div>
   <div class="col">
     <div class="form-group">
-      <div class="input-group mt-1">
+      <div class="input-group ">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Company:</span>
-        <select class="form-select" id="exampleSelect" ngModel name="company">
+        <select class="form-select" id="exampleSelect" [(ngModel)]="company" ngModel name="company">
           <option class="form-control" >Mac-Automation </option>
           <option class="form-control" >All-Electrical </option>
           <option class="form-control">STS</option>
@@ -76,13 +86,72 @@
 </div>
 </div>
 
-<textarea id=description class="form-control  mt-3 mb-4" placeholder="Description" ngModel name="description"  rows="1"></textarea>
+<div class="form-group  mt-3 mb-4">
+<div class="input-group ">
+<span class="input-group-text " style="font-weight: 400; background-color:white ;" >Description:</span>
+<textarea id=description class="form-control " placeholder="Description" [(ngModel)]="description" ngModel name="description"  rows="1"></textarea>
+</div>
+</div>
+<!-- ///////////////////////////////////////Owner////////////////////////////////////////// -->
 
-<button class="btn btn-primary mt-4 " style="width:200px">Create Job Card</button>
+<div class="row mt-3">
+  <div class="col">
+    <div class="input-group  ">
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel Number:</span>
+      <input  id=panel-no class="form-control " placeholder="Panel Number" [(ngModel)]="panel_Number" ngModel name="panel_Number"   ></div>
+  </div>
+
+  <div class="col">
+    <div class="input-group  mt-1">
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Drawings By:</span>
+      <select class="form-select" id="exampleSelect" [(ngModel)]="drawings_By" ngModel name="drawings_By">
+        <option class="form-control" >LT</option>
+      </select>
+    </div>
+</div>
+</div>
+
+<div class="row mt-3">
+  <div class="col">
+    <div class="input-group">
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel-Builder/s</span>
+      <select class="form-select" id="exampleSelect" [(ngModel)]="panel_Builders" ngModel name="panel_Builders">
+        <option class="form-control" ></option>
+      </select>
+    </div>
+</div>
+  <div class="col">
+    <div class="input-group">
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Programmed By:</span>
+      <select class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
+        <option class="form-control" >Daniel</option>
+        <option class="form-control" >Gerard</option>
+      </select>
+    </div>
+</div>
+</div>
+
+
+<div class="row mt-3 " >
+  <div class="col">
+    <div class="input-group">
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Tested By:</span>
+      <select class="form-select" id="exampleSelect" [(ngModel)]="tested_By" ngModel name="tested_By">
+        <option class="form-control" >Daniel</option>
+        <option class="form-control" >Gerard</option>
+      </select>
+    </div>
+</div>
+  <div class="col"></div>
+</div>
+<!-- <button class="btn btn-primary mt-4 " style="width:200px">Create Job Card</button> -->
+<div class="mt-4">
+  <button class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Save</button>
+</div>
+<hr>
 </form>
-<!-- <hr> -->
-<!-- ///////////////////////////////////////Add Material From Store////////////////////////////////////////// -->
-<!-- <h2>Purchase Orders</h2>
+<!-- ///////////////////////////////////////Purchase Order////////////////////////////////////////// -->
+<h2>Purchase Orders</h2>
 <button class="btn btn-lg btn-outline-success" (click)="open(purchaseOrder)">Add Purchase Order</button>
 <ng-template #purchaseOrder let-modal>
 
@@ -103,8 +172,8 @@
 <br>
 <br>
   </div>
-
 </form>
+
 </ng-template>
 <table class="table table-striped mt-4">
   <thead>
@@ -116,10 +185,10 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let country of countries; index as i">
+  <tr *ngFor="let purchase_order of PURCHASE_ORDERS; index as i">
     <th scope="row">{{ i + 1 }}</th>
-    <td>{{ country.supplier }}</td>
-    <td>{{ country.orderNum | number }}</td>
+    <td>{{ purchase_order.supplier }}</td>
+    <td>{{ purchase_order.order_Number }}</td>
   </tr>
   </tbody>
 </table>
@@ -160,7 +229,7 @@
   </div>
   <mat-tab-group>
 
-    <mat-tab label="Add Parts">
+    <!-- <mat-tab label="Add Parts">
       <form  #f="ngForm" (ngSubmit)="onAdd(f)">
         <div class="modal-body">
 
@@ -226,9 +295,10 @@
           <button class="btn btn-primary mb-4" style="width:125px" type="submit">Add</button>
         </div>
       </form>
-    </mat-tab>
+    </mat-tab> -->
+
     <mat-tab label="Manually Add Part">
-      <form  #f="ngForm" (ngSubmit)="onManualPartAdd(f)">
+      <form  #f="ngForm" (ngSubmit)="onAddManualPart(f)">
         <div class="modal-body">
             <div class="form-group">
               <input  id=manual_part_name_add class="form-control  mt-1" placeholder="Part Name"  ngModel name="manual_part_name_add">
@@ -278,9 +348,6 @@
 <hr>
 
 
-  <div class="mt-4">
-    <button class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Create</button>
-  </div> -->
 
 
 
@@ -303,7 +370,8 @@
 
 
 
-  </form>
+
+</div>
 
   </div>
 

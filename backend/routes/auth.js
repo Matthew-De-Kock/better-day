@@ -24,7 +24,6 @@ const User = require('../models/user');
             });
                }
         fetchedUser=user;
-console.log(fetchedUser)
         return bcrypt.compare(req.body.password, user.password)
        })
        .then(result => {
