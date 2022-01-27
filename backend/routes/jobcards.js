@@ -5,6 +5,8 @@ const router = express.Router();
 const User = require('../models/user');
 const JobCard = require('../models/jobcard');
 const PurchaseOrder = require('../models/purchase-order');
+const JobCardStorageParts = require('../models/jobcard-storage-parts');
+const Invoice = require('../models/invoice');
 
 
 
@@ -117,7 +119,6 @@ date = new Date( req.body.start_Date.year, req.body.start_Date.month, req.body.s
       status:req.body.status,
       });
 
-      console.log(jobcard)
 jobcard.save().then(result =>{
           res.status(201).json({
             message: "jobcard Created successfully",
@@ -181,7 +182,6 @@ JobCard.findOneAndUpdate({job_Number: req.body.job_Number},jobcard).then(result=
           order_Number: req.body.order_Number
           });
 
-console.log(purchaseOrder)
     purchaseOrder.save().then(result =>{
 
               res.status(201).json({
@@ -197,7 +197,8 @@ console.log(purchaseOrder)
 
 
      });
-     router.post("/jobcard/jobcards-in-progress/get-purchase-orders",(req,res,next)=>{
+
+   router.post("/jobcard/jobcard-in-progress/get-purchase-orders",(req,res,next)=>{
       var MongoClient = require('mongodb').MongoClient;
       var url = "mongodb://localhost:27017/";
       MongoClient.connect(url, function(err, db) {
@@ -230,4 +231,137 @@ console.log(purchaseOrder)
     })
     })
 
+
+    router.post("/jobcard/jobcard-in-progress/add-part", (req,res,next)=>{
+
+      const jobCardStorageParts = new JobCardStorageParts({
+        job_Number: req.body.job_Number ,
+        part_Name: req.body.part_Name,
+        part_Number: req.body.part_Number ,
+        part_Qty: req.body.part_Qty,
+        part_Descr: req.body.part_Descr
+        });
+
+jobCardStorageParts.save().then(result =>{
+
+            res.status(201).json({
+              message: "Part Added successfully ",
+              result: result,
+            });
+          })
+          .catch(err=>{
+            res.status(500).json({
+              error:err
+            });
+          });
+
+
+   });
+   router.post("/jobcard/jobcard-in-progress/get-jobcard-parts",(req,res,next)=>{
+    var MongoClient = require('mongodb').MongoClient;
+    var url = "mongodb://localhost:27017/";
+    MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+       var dbo = db.db("Betterday");
+
+       var query = {job_Number:req.body.job_Number};
+
+       var job_Number_Arr=[];
+       var part_Name_Arr=[];
+       var part_Number_Arr=[];
+       var part_Qty_Arr=[];
+       var part_Descr_Arr=[];
+
+       dbo.collection("jobcard-storage-parts").find(query).toArray(function(err, data){
+        if (err) throw err;
+          i = 0;
+      while (i < data.length)
+      {
+
+        job_Number_Arr[i] = data[i].job_Number
+        part_Name_Arr[i] = data[i].part_Name
+        part_Number_Arr[i] = data[i].part_Number
+        part_Qty_Arr[i] = data[i].part_Qty
+        part_Descr_Arr[i] = data[i].part_Descr
+          i++;
+       }
+  res.status(200).json({
+    job_Number_Arr,
+    part_Name_Arr,
+    part_Number_Arr,
+    part_Qty_Arr,
+    part_Descr_Arr
+     });
+   } );
+  })
+  })
+
+
+
+
+
+      router.post("/jobcard/jobcard-in-progress/add-invoice", (req,res,next)=>{
+        date = new Date( req.body.date.year, req.body.date.month, req.body.date.day,12,00)
+      const invoice = new Invoice({
+        job_Number: req.body.job_Number ,
+        invoice_Number: req.body.invoice_Number,
+        client_Name: req.body.client_Name ,
+        date: req.body.date,
+        timestamp: req.body.timestamp
+        });
+console.log("Save: " + invoice)
+invoice.save().then(result =>{
+
+            res.status(201).json({
+              message: "Invoice Added successfully ",
+              result: result,
+            });
+          })
+          .catch(err=>{
+            res.status(500).json({
+              error:err
+            });
+          });
+
+
+   });
+   router.post("/jobcard/jobcard-in-progress/get-invoices",(req,res,next)=>{
+    var MongoClient = require('mongodb').MongoClient;
+    var url = "mongodb://localhost:27017/";
+    MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+       var dbo = db.db("Betterday");
+
+       var query = {job_Number:req.body.job_Number};
+
+       var job_Number_Arr=[];
+       var invoice_Number_Arr=[];
+       var client_Name_Arr=[];
+       var date_Arr=[];
+       var timestamp_Arr=[];
+
+       dbo.collection("invoices").find(query).toArray(function(err, data){
+        if (err) throw err;
+          i = 0;
+      while (i < data.length)
+      {
+
+        job_Number_Arr[i] = data[i].job_Number
+        invoice_Number_Arr[i] = data[i].invoice_Number
+        client_Name_Arr[i] = data[i].client_Name
+        date_Arr[i] = data[i].date
+        timestamp_Arr[i] = data[i].timestamp
+          i++;
+       }
+
+  res.status(200).json({
+    job_Number_Arr,
+    invoice_Number_Arr,
+    client_Name_Arr,
+    date_Arr,
+    timestamp_Arr
+     });
+   } );
+  })
+  })
   module.exports= router;

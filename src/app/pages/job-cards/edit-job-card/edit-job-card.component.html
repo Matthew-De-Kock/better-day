@@ -48,7 +48,7 @@
 
         <div class="input-group ">
           <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Start Date:</span>
-          <input class="form-control" placeholder="Select Start Date" [(ngModel)]="model"
+          <input class="form-control" placeholder="Select Start Date" [(ngModel)]="JC_StartDate"
                  name="dp"  ngbDatepicker #d="ngbDatepicker" ngModel name="start_Date">
           <div class="input-group-append">
             <button class="btn btn-outline-primary bi bi-calendar-event" (click)="d.toggle()" type="button"> </button>
@@ -198,23 +198,25 @@
 
 
 
-
+<!-- ///////////////////////////////////////////////add Parts From Storage-->
 <h2>Materials From Storage</h2>
-<button class="btn btn-lg btn-outline-success" (click)="openXl(content)">Add Material From Store</button>
+<button class="btn btn-lg btn-outline-success" (click)="open(content)">Add Material From Store</button>
 <table class="table table-striped mt-4">
   <thead>
   <tr>
     <th scope="col">#</th>
-    <th scope="col">Part</th>
+    <th scope="col">Part Name</th>
+    <th scope="col">Part Number</th>
     <th scope="col">Quantity</th>
 
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let storage of storages; index as i">
+  <tr *ngFor="let jobcard_parts of JOBCARD_PARTS; index as i">
     <th scope="row">{{ i + 1 }}</th>
-    <td>{{ storage.name }}</td>
-    <td>{{ storage.qty }}</td>
+    <td>{{ jobcard_parts.part_Name }}</td>
+    <td>{{ jobcard_parts.part_Number }}</td>
+    <td>{{ jobcard_parts.part_Qty }}</td>
   </tr>
   </tbody>
 </table>
@@ -321,49 +323,59 @@
 
 
 
-
+<!-- ///////////////////////////////////////////////add Invoice -->
 <h2>Invoices</h2>
-<button class="btn btn-lg btn-outline-success" (click)="open(content)">Add Invoice</button>
-<ng-template #content let-modal>
+<button class="btn btn-lg btn-outline-success" (click)="open(invoice)">Add Invoice</button>
+
+<table class="table table-striped mt-4">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Invoice Number</th>
+    <th scope="col">Client </th>
+    <th scope="col">Invoice Date</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let invoice of INVOICES; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ invoice.invoice_Number }}</td>
+    <td>{{ invoice.client_Name }}</td>
+    <td>{{ invoice.date }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #invoice let-modal>
   <div class="modal-header">
-    <h2 class="modal-title" id="modal-basic-title">Puchase Order</h2>
+    <h2 class="modal-title" id="modal-basic-title">Add Invoice</h2>
     <button  mat-icon-button style="background-color:rgb(255, 255, 255)"(click)="modal.dismiss()" >
       <mat-icon style="color:rgb(0, 0, 0)">close</mat-icon>
     </button>
   </div>
-  <form  #f="ngForm" (ngSubmit)="onAddPurchaseOrder(f)">
-  <div class="modal-body">
 
-      <div class="form-group">
-        <input  id=supplier class="form-control  mt-1" placeholder="Supplier"  ngModel name="supplier">
-        <input  id=mat-order-no class="form-control  mt-3 mb-3" placeholder="Order Number"  ngModel name="mat_order_no">
-        <button  class="modal-button btn btn-success" type="submit">Add</button>
-        </div>
-<br>
-<br>
+  <form  #f="ngForm" (ngSubmit)="onAddInvoice(f)">
+  <div class="modal-body">
+    <div class="form-group">
+    <input  id=invoice_Number class="form-control  mt-1" placeholder="Invoice Number"  ngModel name="invoice_Number">
+    <div class="input-group mt-2">
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Client:</span>
+      <select class="form-select" id="invoice_Client"  ngModel name="invoice_Client">
+        <option value="Owner" selected  hidden>Owner</option>
+        <option class="form-control" >Warwick </option>
+        <option class="form-control">Daniel</option>
+      </select>
+    </div>
+    <input type="date" min="1" id=qty class="form-control  mt-2"  placeholder="date"  ngModel name="date">
+
+    <button  class="modal-button btn btn-success mt-3  d-flex justify-content-center" style="width:150px" type="submit">Add</button>
+  </div>
   </div>
 
 </form>
 </ng-template>
 <hr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

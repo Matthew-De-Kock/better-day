@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require("mongoose-unique-validator");
 
-const StoragePartsScheme = mongoose.Schema({
+const JobCardStoragePartsScheme = mongoose.Schema({
   job_Number: Number ,
   part_Name: String,
   part_Number: String ,
@@ -10,6 +10,6 @@ const StoragePartsScheme = mongoose.Schema({
   part_Descr: String
 });
 
-StoragePartsScheme.plugin(uniqueValidator);
+JobCardStoragePartsScheme.plugin(uniqueValidator);
 
-module.exports = mongoose.model('storage-parts', StoragePartsScheme);
+module.exports = mongoose.model('jobcard-storage-parts', JobCardStoragePartsScheme);

@@ -6,7 +6,7 @@ hr
 
 .modal-button{
  margin:auto ;
- float: right
+text-align: center;
 }
 
 
@@ -41,3 +41,6 @@ hr
 }
 
 .big-checkbox {width: 18px; height: 18px;}
+
+
+

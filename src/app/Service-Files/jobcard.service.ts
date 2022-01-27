@@ -7,6 +7,8 @@ import { User } from "../models/user.model";
 import { JobCard } from "../models/job-card.model";
 import { PurchaseOrder } from "../models/purchase-order.model";
 import { StorageParts  } from "../models/storage-parts.model";
+import { Invoice  } from "../models/invoice.model";
+
 import { Router } from "@angular/router";
 // import { ServerURLService } from "./server-url.service";
 
@@ -41,12 +43,9 @@ export class JobCardService {
 Get_JobCard_Number():Observable<any[]>{//automated Number
   return  this.http.get<any[]>("http://localhost:3000/jobcard/jobnum")
 }
-
-
 Get_JobCards_InProgress():Observable<any[]>{
   return  this.http.get<any[]>("http://localhost:3000/jobcard/jobcards-in-progress")
 }
-
 
 
 CreateJobCard(
@@ -168,6 +167,9 @@ CreateJobCard(
         console.log(error.error.message)
      });
   }
+
+
+
  AddPurchaseOrderToDB(
   job_Number:number,
   supplier:string,
@@ -188,12 +190,10 @@ CreateJobCard(
    });
  }
  Get_PurchaseOrdersForJobCard(job_Number:number){
-   console.log(job_Number)
- return this.http.post<any>("http://localhost:3000/jobcard/jobcards-in-progress/get-purchase-orders", {job_Number: job_Number})
-
+ return this.http.post<any>("http://localhost:3000/jobcard/jobcard-in-progress/get-purchase-orders", {job_Number: job_Number})
 }
 
-onAddManualPart(job_Number:number,part_Name:string,part_Number:string,part_Qty:number,part_Descr:string){
+AddManualPart(job_Number:number,part_Name:string,part_Number:string,part_Qty:number,part_Descr:string){
 const storageParts: StorageParts={
   job_Number: job_Number ,
   part_Name: part_Name,
@@ -209,7 +209,36 @@ this.http.post("http://localhost:3000/jobcard/jobcard-in-progress/add-part", sto
 }, error =>{
   console.log(error.error.message)
 })
-}
+    }
+Get_JobCardParts(job_Number:number){
+    return this.http.post<any>("http://localhost:3000/jobcard/jobcard-in-progress/get-jobcard-parts", {job_Number: job_Number})
+   }
+
+AddInvoice(job_Number:number,invoice_Number:string,client_Name:string,date:Date){
+  let timestamp = new Date()
+    const invoice: Invoice={
+      job_Number: job_Number ,
+      invoice_Number: invoice_Number,
+      client_Name: client_Name,
+      date: date,
+      timestamp: timestamp
+    }
+    console.log(invoice)
+    this.http.post("http://localhost:3000/jobcard/jobcard-in-progress/add-invoice", invoice)
+    .subscribe(data => {
+      console.log(data)
+    }, error =>{
+      console.log(error.error.message)
+    })
+        }
+Get_Invoices(job_Number:number){
+    return this.http.post<any>("http://localhost:3000/jobcard/jobcard-in-progress/get-invoices", {job_Number: job_Number})
+   }
+
+
+
+
+
 
 
 
