@@ -1,6 +1,6 @@
 hr
 {
-
+color:rgb(0, 110, 255);
     height: 4px;
 }
 
@@ -11,19 +11,10 @@ text-align: center;
 
 
 
-.demo-table {
-  width: 100%;
-}
-
-/* .mat-row .mat-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
-} */
 
 .mat-row:hover .mat-cell {
-
-  background-color: rgb(241, 241, 241);
+ background-color: rgb(241, 241, 241);
+ /* background-color: rgb(0, 145, 255); */
 }
 
 
@@ -43,4 +34,14 @@ text-align: center;
 .big-checkbox {width: 18px; height: 18px;}
 
 
+::ng-deep .mat-select-placeholder {
+  color: orange !important;
+}
 
+::ng-deep mat-select span.mat-form-field-label-wrapper label {
+  color:orange !important;
+}
+
+::ng-deep mat-select.mat-focused span.mat-form-field-label-wrapper label {
+  color:green !important;
+}

@@ -4,10 +4,10 @@
 <br>
 <div class="d-flex justify-content-center  text-center " >
 
-  <div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 1000px;  " >
+  <div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 1050px;  " >
 
   <h1>Job Card</h1>
-  <hr >
+  <hr class="shadow-lg">
 
 <!-- ///////////////////////////////////////User////////////////////////////////////////// -->
 <form  #f="ngForm"  (ngSubmit)="SaveJobCard(f)" >
@@ -98,7 +98,9 @@
   <div class="col">
     <div class="input-group  ">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel Number:</span>
-      <input  id=panel-no class="form-control " placeholder="Panel Number" [(ngModel)]="panel_Number" ngModel name="panel_Number"   ></div>
+      <input  id=panel-no class="form-control " placeholder="Panel Number" [(ngModel)]="panel_Number" ngModel name="panel_Number"   >
+
+    </div>
   </div>
 
   <div class="col">
@@ -113,15 +115,51 @@
 
 <div class="row mt-3">
   <div class="col">
-    <div class="input-group">
+    <div class="input-group border border-white" >
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel-Builder/s</span>
-      <select class="form-select" id="exampleSelect" [(ngModel)]="panel_Builders" ngModel name="panel_Builders">
-        <option class="form-control" ></option>
-      </select>
+      <div  id=pb class="form-control " placeholder=""    >
+        <button type="button" mat-flat-button class="text-end" style=" font-size:15px; height:25px;width:100%; background-color:rgb(255, 255, 255); border-color:rgb(255, 255, 255); color:rgb(60, 60, 60)" (click)="open(panelBuilders)"><mat-icon style="font-size:20px;">arrow_drop_down</mat-icon> </button>
+      </div>
     </div>
+    <ng-template #panelBuilders let-modal>
+
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-basic-title">Panel Builders</h2>
+        <button  mat-icon-button   style="background-color:rgb(255, 255, 255)"(click)="modal.dismiss()" >
+          <mat-icon style="color:rgb(0, 0, 0)">close</mat-icon>
+        </button>
+      </div>
+
+      <form  #f="ngForm" (ngSubmit)="SelectPanelBuilders(f)">
+      <div class="modal-body " >
+
+          <div class="form-group">
+            <div class="form-check text-start"  >
+              <input type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb1_CHECKED" ngModel name="pb1">Rueben
+              <label class="form-check-label "></label>
+            </div>
+            <div class="form-check text-start">
+              <input type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb2_CHECKED" ngModel name="pb2">Jaryd
+              <label class="form-check-label ps-4"></label>
+            </div>
+            <div class="form-check text-start">
+              <input type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb3_CHECKED" ngModel name="pb3">Martin
+              <label class="form-check-label ps-4"></label>
+            </div>
+            <div class="form-check text-start">
+              <input type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb4_CHECKED" ngModel name="pb4">Jusain
+              <label class="form-check-label ps-4"></label>
+            </div>
+            <br>
+            <button  class="modal-button btn btn-primary d-flex justify-content-center   " type="submit">Add Panel Builders</button>
+            </div>
+      </div>
+    </form>
+
+    </ng-template>
 </div>
   <div class="col">
-    <div class="input-group">
+    <div class="input-group border-none">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Programmed By:</span>
       <select class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
         <option class="form-control" >Daniel</option>
@@ -144,7 +182,65 @@
 </div>
   <div class="col"></div>
 </div>
-<!-- <button class="btn btn-primary mt-4 " style="width:200px">Create Job Card</button> -->
+
+<div class="row mt-3 " >
+<div class="col">
+  <div class="input-group  mt-3" >
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': statBG_Preliminary, 'color': statText_P}">Preliminary</span>
+    <select  [formControl]="StatSelectedPre"(click)="StatusColor()" class="form-select" id="exampleSelect"  [ngStyle]="{'background-color': statBG_Preliminary, 'color': statText_P}">
+      <option class="form-control" value=""></option>
+      <option class="form-control" value="Completed" >Completed</option>
+      <option class="form-control"  value="In Progress" >In Progress</option>
+      <option class="form-control" value="Problem" >Problem</option>
+    </select>
+
+<!--
+    <mat-select [(value)]="StatSelected" (click)="StatusColor()" class="form-control" id="exampleSelect"  [ngStyle]="{'background-color': statBGC, 'color': statText}">
+      <mat-option  value="Completed" >Completed</mat-option>
+      <mat-option  value="In Progress" >In Progress</mat-option>
+      <mat-option class="form-control" value="Problem" >Problem</mat-option>
+    </mat-select> -->
+
+  </div>
+</div>
+<div class="col">
+  <div class="input-group  mt-3">
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': statBG_Execution, 'color': statText_E}">Execution</span>
+    <select  [formControl]="StatSelectedExe"(click)="StatusColor()" class="form-select" id="exampleSelect"  [ngStyle]="{'background-color': statBG_Execution, 'color': statText_E}">
+      <option class="form-control" value=""></option>
+      <option class="form-control" value="Completed" >Completed</option>
+      <option class="form-control"  value="In Progress" >In Progress</option>
+      <option class="form-control" value="Problem" >Problem</option>
+    </select>
+  </div>
+</div>
+<div class="col">
+  <div class="input-group  mt-3">
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': statBG_Launch, 'color': statText_L}">Launch</span>
+    <select  [formControl]="StatSelectedL"(click)="StatusColor()" class="form-select" id="exampleSelect"  [ngStyle]="{'background-color': statBG_Launch, 'color': statText_L}">
+      <option class="form-control" value=""></option>
+      <option class="form-control" value="Completed" >Completed</option>
+      <option class="form-control"  value="In Progress" >In Progress</option>
+      <option class="form-control" value="Problem" >Problem</option>
+    </select>
+  </div>
+</div>
+<div class="col">
+  <div class="input-group  mt-3">
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': statBG_Closure, 'color': statText_C}">Closure</span>
+    <select  [formControl]="StatSelectedClo"(click)="StatusColor()" class="form-select" id="exampleSelect"  [ngStyle]="{'background-color': statBG_Closure, 'color': statText_C}">
+      <option class="form-control" value=""></option>
+      <option class="form-control" value="Completed" >Completed</option>
+      <option class="form-control"  value="In Progress" >In Progress</option>
+      <option class="form-control" value="Problem" >Problem</option>
+    </select>
+  </div>
+</div>
+
+</div>
+
+
+
 <div class="mt-4">
   <button class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Save</button>
 </div>
@@ -167,10 +263,8 @@
       <div class="form-group">
         <input  id=supplier class="form-control  mt-1" placeholder="Supplier"  ngModel name="supplier">
         <input  id=mat-order-no class="form-control  mt-3 mb-3" placeholder="Order Number"  ngModel name="mat_order_no">
-        <button  class="modal-button btn btn-success" type="submit">Add</button>
+        <button  class="modal-button btn btn-primary d-flex justify-content-center " style="width:150px" type="submit">Add</button>
         </div>
-<br>
-<br>
   </div>
 </form>
 
@@ -307,10 +401,8 @@
               <input  id=manual_part_num_add class="form-control  mt-3 mb-3" placeholder="Part Number"  ngModel name="manual_part_num_add">
               <input type="number" min="1" id=qty class="form-control  mt-1"  placeholder="Qty"  ngModel name="manual_part_qty_add">
               <input  id=manual_part_descr_add class="form-control  mt-3 mb-3" placeholder="Description"  ngModel name="manual_part_descr_add">
-              <button  class="modal-button btn btn-success" type="submit">Manual Add</button>
+              <button  class="modal-button btn btn-primary d-flex justify-content-center "style="width:150px" type="submit">Manual Add</button>
               </div>
-      <br>
-      <br>
         </div>
       </form>
     </mat-tab>
@@ -369,22 +461,17 @@
     </div>
     <input type="date" min="1" id=qty class="form-control  mt-2"  placeholder="date"  ngModel name="date">
 
-    <button  class="modal-button btn btn-success mt-3  d-flex justify-content-center" style="width:150px" type="submit">Add</button>
+    <button  class="modal-button btn btn-primary mt-3  d-flex justify-content-center" style="width:150px" type="submit">Add</button>
   </div>
   </div>
 
 </form>
 </ng-template>
-<hr>
-
-
-
 
 
 
 
 </div>
-
   </div>
 
 

@@ -150,7 +150,7 @@ CreateJobCard(
 
       panel_Number: panel_Number,
       drawings_By: drawings_By,
-      panel_Builders: [],
+      panel_Builders: panel_Builders,
       programmed_By: programmed_By,
       tested_by: tested_By,
       purchase_Orders: [],

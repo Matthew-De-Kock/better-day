@@ -40,7 +40,7 @@ const User = require('../models/user');
 
     res.status(200).json({
       token: token,
-      expiresIn: 3600,
+      expiresIn: 36000,
       name: fetchedUser.name,
       contactNumber: fetchedUser.contactNumber,
       email: fetchedUser.email,

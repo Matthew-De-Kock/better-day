@@ -37,6 +37,29 @@ interface Storage {
 })
 export class EditJobCardComponent implements OnInit {
 
+StatSelectedPre= new FormControl();
+StatSelectedExe= new FormControl();
+StatSelectedL= new FormControl();
+StatSelectedClo= new FormControl();
+// statBG_Preliminary="rgb(50,205,50) "
+
+statBG_Preliminary="white"
+statBG_Execution="white "
+statBG_Launch="white"
+statBG_Closure="white"
+
+statText_P='black'
+statText_E='black'
+statText_L='black'
+statText_C='black'
+
+
+  pb1_CHECKED:boolean = false;
+  pb2_CHECKED:boolean = false
+  pb3_CHECKED:boolean = false
+  pb4_CHECKED:boolean = false
+
+
   job_Number!: number ;
   owner!: string;
   start_Date!: Date;
@@ -54,6 +77,8 @@ export class EditJobCardComponent implements OnInit {
   invoices!: string[];
   status!:string;
 
+  pb = new FormControl();
+PBs:string[]=["Rueben", "Jaryd", "Jussain"]
 flag!:boolean;
 
   JC_StartDate!: NgbDateStruct;
@@ -119,6 +144,31 @@ flag!:boolean;
     this.invoices=this.JobCard_Service.getInvoices()
     this.status=this.JobCard_Service.getStatus()
 
+
+for (let i = 0; i < this.panel_Builders.length; i++) {
+switch (this.panel_Builders[i])
+{
+
+  case"Rueben":
+  this.pb1_CHECKED=true
+  break
+
+  case"Jaryd":
+  this.pb2_CHECKED=true
+  break
+
+  case"Martin":
+  this.pb3_CHECKED=true
+  break
+
+  case"Jusain":
+  this.pb4_CHECKED=true
+  break
+}
+
+
+}
+
     this.flag=true
     this.callPurchaseOrderTable()
     this.callJobCardPartsFromStorage()
@@ -141,11 +191,153 @@ flag!:boolean;
 
     }
   }
+
+  StatusColor(){
+
+
+
+switch(this.StatSelectedPre.value)
+{ case"Completed":
+     this.statBG_Preliminary ="green"
+     this.statText_P="white"
+  break;
+
+  case"In Progress":
+     this.statBG_Preliminary ="blue"
+     this.statText_P="white"
+  break;
+
+  case"Problem":
+     this.statBG_Preliminary ="red"
+     this.statText_P="white"
+  break;
+
+  case"":
+     this.statBG_Preliminary ="white"
+     this.statText_P="black"
+break;
+}
+
+
+switch(this.StatSelectedExe.value)
+{ case"Completed":
+     this.statBG_Execution ="green"
+     this.statText_E="white"
+  break;
+
+  case"In Progress":
+     this.statBG_Execution ="blue"
+     this.statText_E="white"
+  break;
+
+  case"Problem":
+     this.statBG_Execution ="red"
+     this.statText_E="white"
+  break;
+
+  case"":
+  this.statBG_Execution ="white"
+  this.statText_E="black"
+break;
+}
+
+
+switch(this.StatSelectedL.value)
+{ case"Completed":
+     this.statBG_Launch ="green"
+     this.statText_L="white"
+  break;
+
+  case"In Progress":
+     this.statBG_Launch ="blue"
+     this.statText_L="white"
+  break;
+
+  case"Problem":
+     this.statBG_Launch ="red"
+     this.statText_L="white"
+  break;
+
+  case"":
+  this.statBG_Launch ="white"
+  this.statText_L="black"
+break;
+}
+
+
+switch(this.StatSelectedClo.value)
+{ case"Completed":
+     this.statBG_Closure ="green"
+     this.statText_C="white"
+  break;
+
+  case"In Progress":
+     this.statBG_Closure ="blue"
+     this.statText_C="white"
+  break;
+
+  case"Problem":
+     this.statBG_Closure ="red"
+     this.statText_C="white"
+  break;
+
+  case"":
+  this.statBG_Closure ="white"
+  this.statText_C="black"
+break;
+}
+
+
+
+  }
+
   open(content:any) {
     this.modalService.open(content, { size: 'md' });
   }
 
+  openSM(content:any) {
+    this.modalService.open(content, { size: 'sm' });
+  }
 
+  SelectPanelBuilders(form: NgForm){
+
+   var  count=0
+   if(form.value.pb1==true){
+     this.panel_Builders[count]= "Rueben"
+     this.pb1_CHECKED=true
+     count++
+   }
+   else if(form.value.pb1==undefined||form.value.pb1==false)
+   { this.pb1_CHECKED=false}
+
+   if(form.value.pb2==true){
+    this.panel_Builders[count]= "Jaryd"
+     this.pb2_CHECKED=true
+     count++
+   }
+   else if(form.value.pb2==undefined||form.value.pb2==false)
+   { this.pb2_CHECKED=false}
+
+
+  if(form.value.pb3==true){
+    this.panel_Builders[count]= "Martin"
+     this.pb3_CHECKED=true
+     count++
+   }
+   else if(form.value.pb3==undefined||form.value.pb3==false)
+   { this.pb3_CHECKED=false}
+
+
+  if(form.value.pb4==true){
+    this.panel_Builders[count]= "Jusain"
+     this.pb4_CHECKED=true
+     count++
+   }
+   else if(form.value.pb4==undefined||form.value.pb4==false)
+   { this.pb4_CHECKED=false}
+
+console.log(this.panel_Builders)
+  }
   SaveJobCard(form: NgForm){
     var job_number = form.value.job_number
     var owner = form.value.owner
@@ -156,7 +348,8 @@ flag!:boolean;
     var description = form.value.description
     var panel_Number = form.value.panel_Number
     var drawings_By = form.value.drawings_By
-    var panel_Builders = form.value.panel_Builders
+
+    var panel_Builders = this.panel_Builders
     var programmed_By = form.value.programmed_By
     var tested_By = form.value.tested_By
     var status = "In Progress"
