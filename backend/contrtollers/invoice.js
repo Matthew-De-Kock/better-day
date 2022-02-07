@@ -12,7 +12,6 @@ const invoice = new Invoice({
   date: req.body.date,
   timestamp: req.body.timestamp
   });
-console.log("Save: " + invoice)
 invoice.save().then(result =>{
 
       res.status(201).json({

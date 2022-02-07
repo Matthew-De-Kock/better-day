@@ -47,9 +47,7 @@ exports.CreateNewJobCard=(req,res,next)=>{
         drawings_By:req.body.drawings_By,
         panel_Builders: req.body.panel_Builders,
         programmed_By: req.body.programmed_By,
-        purchase_Orders: req.body.purchase_Orders,
-        parts_From_Storage: req.body.parts_From_Storage,
-        invoices: req.body.invoices,
+        phases: req.body.phases,
         status:req.body.status,
         });
 
@@ -81,9 +79,8 @@ exports.CreateNewJobCard=(req,res,next)=>{
           drawings_By:req.body.drawings_By,
           panel_Builders: req.body.panel_Builders,
           programmed_By: req.body.programmed_By,
-          purchase_Orders: req.body.purchase_Orders,
-          parts_From_Storage: req.body.parts_From_Storage,
-          invoices: req.body.invoices,
+          tested_By: req.body.tested_By,
+          phases: req.body.phases,
           status:req.body.status,
           };
 
@@ -119,9 +116,8 @@ exports.CreateNewJobCard=(req,res,next)=>{
           drawings_By:  fetchedJobCard.drawings_By,
           panel_Builders:  fetchedJobCard.panel_Builders,
           programmed_By:  fetchedJobCard.programmed_By,
-          purchase_Orders:  fetchedJobCard.purchase_Orders,
-          parts_From_Storage:  fetchedJobCard.parts_From_Storage,
-          invoices:  fetchedJobCard.invoices,
+          tested_By:  fetchedJobCard.tested_By,
+          phases: fetchedJobCard.phases,
           status:  fetchedJobCard.status
          });
       });

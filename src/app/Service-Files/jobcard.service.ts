@@ -27,10 +27,8 @@ export class JobCardService {
   drawings_By!:string;
   panel_Builders!: string[];
   programmed_By!: string;
-  tested_by!: string;
-  purchase_Orders!: string[];
-  parts_From_Storage!:string[];
-  invoices!: string[];
+  tested_By!: string;
+  phases!:string[];
   status!:string;
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -78,11 +76,9 @@ CreateJobCard(
       drawings_By: drawings_By,
       panel_Builders: [],
       programmed_By: programmed_By,
-      tested_by: tested_By,
-      purchase_Orders: [],
-      parts_From_Storage:[],
-      invoices: [],
-      status:status
+      tested_By: tested_By,
+      phases:[],
+      status:'In Progress'
      };
       console.log(jobcard)
 
@@ -112,10 +108,9 @@ CreateJobCard(
        this.drawings_By=responseData.drawings_By
        this.panel_Builders=responseData.panel_Builders
        this.programmed_By=responseData.programmed_By
-       this.tested_by=responseData.tested_by
-       this.purchase_Orders=responseData.purchase_Orders
-       this.parts_From_Storage=responseData.parts_From_Storage
-       this.invoices=responseData.invoices
+       this.tested_By=responseData.tested_By
+       console.log(responseData.tested_By)
+       this.phases=responseData.phases
        this.status=responseData.status
 
       }, error =>{
@@ -123,9 +118,10 @@ CreateJobCard(
       });
   }
   SaveJobCard(
+
     job_Number:number,
     owner:string,
-    start_Date:Date,
+    start_Date:any,
     client:string,
     order_no:string,
     company:string,
@@ -135,10 +131,11 @@ CreateJobCard(
      panel_Builders:string[],
      programmed_By:string,
      tested_By:string,
+     phases:string[],
      status: string){
 
 
-
+console.log("Request")
     const jobcard: JobCard = {
       job_Number: job_Number ,
       owner: owner,
@@ -152,10 +149,8 @@ CreateJobCard(
       drawings_By: drawings_By,
       panel_Builders: panel_Builders,
       programmed_By: programmed_By,
-      tested_by: tested_By,
-      purchase_Orders: [],
-      parts_From_Storage:[],
-      invoices: [],
+      tested_By: tested_By,
+      phases:phases,
       status:status
      };
       console.log(jobcard)
@@ -276,16 +271,20 @@ Get_Invoices(job_Number:number){
     return this.programmed_By;
   }
   getTestedBy(){
-    return this.tested_by;
+    return this.tested_By;
   }
-  getPurchaseOrders(){
-    return this.purchase_Orders;
-  }
-  getPartsFromStorage(){
-    return this.parts_From_Storage;
-  }
-  getInvoices(){
-    return this.invoices;
+  // getPurchaseOrders(){
+  //   return this.purchase_Orders;
+  // }
+  // getPartsFromStorage(){
+  //   return this.parts_From_Storage;
+  // }
+  // getInvoices(){
+  //   return this.invoices;
+  // }
+
+  getPhases(){
+    return this.phases;
   }
   getStatus(){
     return this.status;

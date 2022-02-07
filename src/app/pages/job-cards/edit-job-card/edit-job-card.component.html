@@ -94,6 +94,8 @@
 </div>
 <!-- ///////////////////////////////////////Owner////////////////////////////////////////// -->
 
+
+<hr>
 <div class="row mt-3">
   <div class="col">
     <div class="input-group  ">
@@ -104,12 +106,26 @@
   </div>
 
   <div class="col">
-    <div class="input-group  mt-1">
+</div>
+</div>
+
+
+<div class="row mt-3">
+  <div class="col">
+    <div class="input-group ">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Drawings By:</span>
       <select class="form-select" id="exampleSelect" [(ngModel)]="drawings_By" ngModel name="drawings_By">
         <option class="form-control" >LT</option>
       </select>
     </div>
+  </div>
+  <div class="col">    <div class="input-group border-none">
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Programmed By</span>
+    <select class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
+      <option class="form-control" >Daniel</option>
+      <option class="form-control" >Gerard</option>
+    </select>
+  </div>
 </div>
 </div>
 
@@ -118,7 +134,7 @@
     <div class="input-group border border-white" >
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel-Builder/s</span>
       <div  id=pb class="form-control " placeholder=""    >
-        <button type="button" mat-flat-button class="text-end" style=" font-size:15px; height:25px;width:100%; background-color:rgb(255, 255, 255); border-color:rgb(255, 255, 255); color:rgb(60, 60, 60)" (click)="open(panelBuilders)"><mat-icon style="font-size:20px;">arrow_drop_down</mat-icon> </button>
+        <button type="button" mat-flat-button class="text-end" style=" font-size:15px; height:15px;width:100%; background-color:rgb(255, 255, 255); border-color:rgb(255, 255, 255); color:rgb(60, 60, 60)" (click)="open(panelBuilders)"><mat-icon style="font-size:20px;">arrow_drop_down</mat-icon></button>
       </div>
     </div>
     <ng-template #panelBuilders let-modal>
@@ -158,32 +174,39 @@
 
     </ng-template>
 </div>
+    <div class="col">
+      <div class="input-group mt-1">
+        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Tested By:</span>
+        <select class="form-select" id="exampleSelect" [(ngModel)]="tested_By" ngModel name="tested_By">
+          <option class="form-control" >Daniel</option>
+          <option class="form-control" >Gerard</option>
+        </select>
+      </div>
+  </div>
+
+</div>
+
+
+<div class="mt-4">
+  <button class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Save</button>
+</div>
+
+<hr>
+<div class="row mt-3">
+
+
   <div class="col">
-    <div class="input-group border-none">
-      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Programmed By:</span>
-      <select class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
-        <option class="form-control" >Daniel</option>
-        <option class="form-control" >Gerard</option>
-      </select>
-    </div>
-</div>
-</div>
 
-
+  </div>
+</div>
 <div class="row mt-3 " >
+
   <div class="col">
-    <div class="input-group">
-      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Tested By:</span>
-      <select class="form-select" id="exampleSelect" [(ngModel)]="tested_By" ngModel name="tested_By">
-        <option class="form-control" >Daniel</option>
-        <option class="form-control" >Gerard</option>
-      </select>
-    </div>
-</div>
-  <div class="col"></div>
+
+  </div>
 </div>
 
-<div class="row mt-3 " >
+<!-- <div class="row mt-3 " >
 <div class="col">
   <div class="input-group  mt-3" >
     <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': statBG_Preliminary, 'color': statText_P}">Preliminary</span>
@@ -193,62 +216,80 @@
       <option class="form-control"  value="In Progress" >In Progress</option>
       <option class="form-control" value="Problem" >Problem</option>
     </select>
-
-<!--
-    <mat-select [(value)]="StatSelected" (click)="StatusColor()" class="form-control" id="exampleSelect"  [ngStyle]="{'background-color': statBGC, 'color': statText}">
-      <mat-option  value="Completed" >Completed</mat-option>
-      <mat-option  value="In Progress" >In Progress</mat-option>
-      <mat-option class="form-control" value="Problem" >Problem</mat-option>
-    </mat-select> -->
-
   </div>
 </div>
+</div> -->
+
+
+<div class="row mt-3">
+  <div class="col">
+      <div class=" text-center">
+      <span class="input-group-text text-center" [ngStyle]="{'background-color': workers_assigned_phase_BG_color, 'color': workers_assigned_phase_Text_color}" >Workers Assigned</span>
+    </div>
+  </div>
+  <div class="col">
+
+    <span class="input-group-text border border-white" style="font-weight: 400; background-color:rgb(211, 211, 211) " >Drawings</span>
+
+
+  </div>
+  <div class="col">
+
+    <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211) " >Panel Status</span>
+
+
+  </div>
 <div class="col">
-  <div class="input-group  mt-3">
-    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': statBG_Execution, 'color': statText_E}">Execution</span>
-    <select  [formControl]="StatSelectedExe"(click)="StatusColor()" class="form-select" id="exampleSelect"  [ngStyle]="{'background-color': statBG_Execution, 'color': statText_E}">
-      <option class="form-control" value=""></option>
-      <option class="form-control" value="Completed" >Completed</option>
-      <option class="form-control"  value="In Progress" >In Progress</option>
-      <option class="form-control" value="Problem" >Problem</option>
-    </select>
+    <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211) " >Programing</span>
   </div>
+
 </div>
+
+<div class="row mt-3">
+  <div class="col">
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': 'rgb(211, 211, 211)', 'color': 'black'}">Testing</span>
+  </div>
+
 <div class="col">
-  <div class="input-group  mt-3">
-    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': statBG_Launch, 'color': statText_L}">Launch</span>
-    <select  [formControl]="StatSelectedL"(click)="StatusColor()" class="form-select" id="exampleSelect"  [ngStyle]="{'background-color': statBG_Launch, 'color': statText_L}">
-      <option class="form-control" value=""></option>
-      <option class="form-control" value="Completed" >Completed</option>
-      <option class="form-control"  value="In Progress" >In Progress</option>
-      <option class="form-control" value="Problem" >Problem</option>
-    </select>
-  </div>
+
+  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': purchase_order_complete_phase_BG_color, 'color': purchase_order_complete_phase_Text_color}">Parts Ordered</span>
+
 </div>
+
 <div class="col">
-  <div class="input-group  mt-3">
-    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': statBG_Closure, 'color': statText_C}">Closure</span>
-    <select  [formControl]="StatSelectedClo"(click)="StatusColor()" class="form-select" id="exampleSelect"  [ngStyle]="{'background-color': statBG_Closure, 'color': statText_C}">
-      <option class="form-control" value=""></option>
-      <option class="form-control" value="Completed" >Completed</option>
-      <option class="form-control"  value="In Progress" >In Progress</option>
-      <option class="form-control" value="Problem" >Problem</option>
-    </select>
+  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': 'rgb(211, 211, 211)', 'color': 'black'}">Parts Arrived</span>
+</div>
+
+<div class="col">
+
+  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': 'rgb(211, 211, 211)', 'color': 'black'}">Installation</span>
+
+</div>
+
+</div>
+
+<div class="row mt-3">
+  <div class="col">
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;" [ngStyle]="{'background-color': invoiceing_complete_phase_BG_color, 'color': invoiceing_complete_phase_Text_color}">Invoicing</span>
   </div>
+
+  <div class="col">
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': 'rgb(211, 211, 211)', 'color': 'black'}">Job Card</span>
+  </div>
+  <div class="col"></div>
+  <div class="col"></div>
 </div>
 
-</div>
 
 
 
-<div class="mt-4">
-  <button class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Save</button>
-</div>
 <hr>
 </form>
 <!-- ///////////////////////////////////////Purchase Order////////////////////////////////////////// -->
 <h2>Purchase Orders</h2>
-<button class="btn btn-lg btn-outline-success" (click)="open(purchaseOrder)">Add Purchase Order</button>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(purchaseOrder)">Add Purchase Order</button>
+<button class="btn btn-lg btn-outline-success ms-2" (click)="onCompletePurchaseOrders()">Complete Purchase Orders</button>
 <ng-template #purchaseOrder let-modal>
 
   <div class="modal-header">
@@ -294,7 +335,7 @@
 
 <!-- ///////////////////////////////////////////////add Parts From Storage-->
 <h2>Materials From Storage</h2>
-<button class="btn btn-lg btn-outline-success" (click)="open(content)">Add Material From Store</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Material From Store</button>
 <table class="table table-striped mt-4">
   <thead>
   <tr>
@@ -417,7 +458,8 @@
 
 <!-- ///////////////////////////////////////////////add Invoice -->
 <h2>Invoices</h2>
-<button class="btn btn-lg btn-outline-success" (click)="open(invoice)">Add Invoice</button>
+<button class="btn btn-lg btn-outline-primary" (click)="open(invoice)">Add Invoice</button>
+<button class="btn btn-lg btn-outline-success ms-2" (click)="onCompleteInvoicing()">Complete Invoices</button>
 
 <table class="table table-striped mt-4">
   <thead>

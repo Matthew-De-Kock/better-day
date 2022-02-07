@@ -1,3 +1,5 @@
+const JobCardStorageParts = require('../models/jobcard-storage-parts');
+
 exports.AddJobCardStoragePart=(req,res,next)=>{
 
   const jobCardStorageParts = new JobCardStorageParts({

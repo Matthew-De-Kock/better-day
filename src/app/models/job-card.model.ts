@@ -12,9 +12,7 @@ export interface JobCard {
   drawings_By:string;
   panel_Builders: string[];
   programmed_By: string;
-  tested_by: string;
-  purchase_Orders: string[];
-  parts_From_Storage:string[];
-  invoices: string[];
+  tested_By: string;
+  phases: string[]
   status:string;
 }

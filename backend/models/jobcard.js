@@ -14,10 +14,9 @@ const jobcardScheme = mongoose.Schema({
   drawings_By:{type: String },
   panel_Builders: {type: Array},
   programmed_By: {type: String },
-  purchase_Orders: {type: Array },
-  parts_From_Storage:{type: Array },
-  invoices:{type: Array },
-  status: {type: String}
+  tested_By: {type: String },
+  phases:{type:Array},
+  status: {type: Array}
 });
 
 jobcardScheme.plugin(uniqueValidator);
