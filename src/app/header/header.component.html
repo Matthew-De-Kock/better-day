@@ -2,7 +2,10 @@
   <mat-sidenav-container fullscreen >
 
     <mat-sidenav mode="side" #sidenav position="start" >
-<h1 class="text-start pt-4 ps-2" style="font-size:26px ;color:white">Better Day</h1>
+      <!-- <div style="background-color: rgb(255, 255, 255); height:65px;"> -->
+        <h1 class="text-start pt-4 ps-2" style="font-size:26px ;color:rgb(255, 255, 255)">Better Day</h1>
+      <!-- </div> -->
+
 <hr style="width:100%">
       <button  (click)="sidenav.toggle()" style="width: 100%;" mat-button class="item" routerLink="dashboard"><mat-icon  class="ml-4" mat-list-icon style="margin-right: 10%;" >dashboard</mat-icon>Dashboard</button><br>
 
@@ -23,7 +26,7 @@
 
 
          <mat-sidenav-content>
-          <mat-toolbar class="shadow"  *ngIf="userIsAuthenticated==true" >
+          <mat-toolbar class="shadow-sm"  *ngIf="userIsAuthenticated==true" >
             <button  style="text-align:center !important" mat-icon-button  (click)="sidenav.toggle()">
               <mat-icon >menu</mat-icon>
             </button>
@@ -40,7 +43,7 @@
                   </mat-menu>
 
         </mat-toolbar>
-        <div class="" style="background-color: rgb(245, 248, 250); ; height: 100%;">
+        <div class="" style="background-color: rgb(245, 248, 250);  height: 100%;">
 
         <router-outlet></router-outlet>
       </div>

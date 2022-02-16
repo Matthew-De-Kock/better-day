@@ -78,6 +78,7 @@ export class AuthService {
         this.name=response.name;
         this.contactNumber=response.contactNumber;
         this.role=response.role;
+
         this.email=response.email;
         this.authStatusListener.next(true);
         const now = new Date();

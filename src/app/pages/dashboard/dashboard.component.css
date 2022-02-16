@@ -1,1 +1,35 @@
 
+.wrapper{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,100%);
+justify-content: flex-end;
+}
+
+.my-hr-line {
+  position: relative;
+  left: -15px;
+  width: calc(100% + 30px);
+
+}
+div
+{
+    color: rgb(79, 79, 79);
+}
+
+ul{
+  position: relative;
+}
+ul li{
+  list-style: none;
+}
+ul li::after{
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  top: 2px;
+  left: -8px;
+  /* + or - top and left according to your style, so that they look perfect*/
+}

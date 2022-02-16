@@ -7,19 +7,20 @@ import { CreateJobCardComponent } from './pages/job-cards/create-job-card/create
 import { JobCardHomeComponent } from './pages/job-cards/job-card-home/job-card-home.component';
 import { EditJobCardComponent } from './pages/job-cards/edit-job-card/edit-job-card.component';
 import {ViewJobCardsInProgressComponent} from './pages/job-cards/view-job-cards-in-progress/view-job-cards-in-progress.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
 
   {path: '', redirectTo : '/login',pathMatch: 'full'},
 
 {path: 'login', component:LoginComponent},
-{path: 'dashboard', component:DashboardComponent},
-{path: 'create-new-user', component:CreateNewUserComponent},
+{path: 'dashboard', component:DashboardComponent,canActivate:[AuthGuard]},
+{path: 'create-new-user', component:CreateNewUserComponent,canActivate:[AuthGuard]},
 
-{path: 'jobcard', component:JobCardHomeComponent},
-{path: 'jobcard/jobcards-in-progress', component:ViewJobCardsInProgressComponent},
-{path: 'jobcard/jobcards-in-progress/edit-jobcard', component:EditJobCardComponent},
-{path: 'jobcard/create-jobcard', component:CreateJobCardComponent},
+{path: 'jobcard', component:JobCardHomeComponent,canActivate:[AuthGuard]},
+{path: 'jobcard/jobcards-in-progress', component:ViewJobCardsInProgressComponent,canActivate:[AuthGuard]},
+{path: 'jobcard/jobcards-in-progress/edit-jobcard', component:EditJobCardComponent,canActivate:[AuthGuard]},
+{path: 'jobcard/create-jobcard', component:CreateJobCardComponent,canActivate:[AuthGuard]},
 
 ];
 
@@ -28,6 +29,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

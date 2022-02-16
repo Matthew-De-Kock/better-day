@@ -31,8 +31,6 @@ export class LoginComponent implements OnInit {
 
     var email = form.value.email;
     email=email.toLowerCase()
-    console.log(email)
-    console.log(form.value.password)
 this.AS.login(email,form.value.password)
   }
 

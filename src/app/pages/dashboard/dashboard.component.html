@@ -1,35 +1,241 @@
-
+<div style="background-color: rgb(245, 248, 250);">
 <br>
 <br>
 <br>
 <br>
 
-<div class="row ms-4">
-  <div class="col">
 
-<div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded"  style="width: 350px;  "  >
-  <h1>Better Day</h1>
-  <h1>Stats 1</h1>
-  <div class="mt-4">
+
+
+
+
+<div class="row ms-3 pe-2" >
+
+  <div class="col ps-1 " style="min-width:500px; ">
+    <div class=" shadow-sm p-3  bg-body text-start "  style="width: 100%; ">
+      <h2 class="ps-2 pt-2">Your Tasks</h2>
+<br>
+      <div class="row">
+        <div class="col">Job Number</div>
+        <div class="col">Description</div>
+        <div class="col">Job</div>
+        <div class="col"></div>
+      </div>
+      <hr class="my-hr-line">
+
+      <div class="overflow-auto " style="max-height:280px;">
+
+  <div *ngFor="let d of drawings_JobNumber_arr; index as i" >
+<ul>
+  <li>
+    <div class="row" style="max-width: 100%">
+      <div class="col">    <div style ="color: rgb(255, 0, 0);  float:left"class="me-4 mt-2" >{{d}}</div></div>
+      <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >{{drawings_Descr_arr[i]}}</div> </div>
+      <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >Drawing</div> </div>
+      <div class="col">
+        <select [ngModel]="statSelected[i]" (change)="onDrawingTaskStatusSelect(i,$event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
+          <option class="form-control" value=""></option>
+          <option class="form-control" value="Completed" >Completed</option>
+          <option class="form-control"  value="In Progress" >In Progress</option>
+          <option class="form-control" value="Problem" >Problem</option>
+        </select>
+      </div>
+    </div>
+  </li>
+</ul>
+        <hr >
+      </div>
+
+
+      <div *ngFor="let d of programmed_By_JobNumber_arr; index as i" >
+        <ul>
+          <li>
+            <div class="row" style="max-width: 100%">
+              <div class="col">    <div style ="color: rgb(255, 0, 0);  float:left"class="me-4 mt-2" >{{d}}</div></div>
+              <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >{{programmed_By_Descr_arr[i]}}</div> </div>
+              <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >Programing</div> </div>
+              <div class="col">
+                <select [ngModel]="statSelected[i]" (change)="onProgrammedByTaskStatusSelect(i,$event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': programmedBy_task_BC_arr[i], 'color': programmedBy_task_TC_arr[i]}">
+                  <option class="form-control" value=""></option>
+                  <option class="form-control" value="Completed" >Completed</option>
+                  <option class="form-control"  value="In Progress" >In Progress</option>
+                  <option class="form-control" value="Problem" >Problem</option>
+                </select>
+              </div>
+            </div>
+          </li>
+        </ul>
+                <hr >
+              </div>
+
+
+              <div *ngFor="let d of tested_By_JobNumber_arr; index as i" >
+                <ul>
+                  <li>
+                    <div class="row" style="max-width: 100%">
+                      <div class="col">    <div style ="color: rgb(255, 0, 0);  float:left"class="me-4 mt-2" >{{d}}</div></div>
+                      <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >{{tested_By_Descr_arr[i]}}</div> </div>
+                      <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >Testing</div> </div>
+                      <div class="col">
+                        <select [ngModel]="statSelected[i]" (change)="onTestedByTaskStatusSelect(i,$event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
+                          <option class="form-control" value=""></option>
+                          <option class="form-control" value="Completed" >Completed</option>
+                          <option class="form-control"  value="In Progress" >In Progress</option>
+                          <option class="form-control" value="Problem" >Problem</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                        <hr >
+                      </div>
+
+                      <div *ngFor="let d of panel_Builders_JobNumber_arr; index as i" >
+                        <ul>
+                          <li>
+                            <div class="row" style="max-width: 100%">
+                              <div class="col">    <div style ="color: rgb(255, 0, 0);  float:left"class="me-4 mt-2" >{{d}}</div></div>
+                              <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >{{panel_Builders_Descr_arr[i]}}</div> </div>
+                              <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >Panel Build</div> </div>
+                              <div class="col">
+                                <select [ngModel]="statSelected[i]" (change)="onPanelBuildTaskStatusSelect(i,$event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
+                                  <option class="form-control" value=""></option>
+                                  <option class="form-control" value="Completed" >Completed</option>
+                                  <option class="form-control"  value="In Progress" >In Progress</option>
+                                  <option class="form-control" value="Problem" >Problem</option>
+                                </select>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                                <hr >
+                              </div>
+
+        <!-- <mat-list-item style="background-color:#7ba4e2; color:rgb(43, 43, 43)"role="listitem" class="mb-2">Item 2</mat-list-item>
+
+        <mat-list-item style="background-color:#e27b7b; color:rgb(43, 43, 43)"role="listitem" class="mb-2">Item 3</mat-list-item>
+
+        <mat-list-item style="background-color:#eedf69; color:rgb(43, 43, 43)"role="listitem" class="mb-2">Item 3</mat-list-item> -->
+
+
+    </div>
+    </div>
   </div>
+
+  <div class="col  ps-1" style="min-width:360px">
+    <div class=" shadow-sm p-3  bg-body text-start "  style="width: 100%;">
+      <h2 class="ps-2 pt-2">Finished Tasks</h2>
+      <hr class="my-hr-line">
+      <div class="overflow-auto " style="max-height:232px">
+      <mat-list role="list">
+        <mat-list-item style="background-color:#7be27b; color:rgb(68, 68, 68)" role="listitem" class="mb-2">Item 1</mat-list-item>
+
+        <mat-list-item style="background-color:#7be27b; color:rgb(68, 68, 68)"role="listitem" class="mb-2">Item 2</mat-list-item>
+
+        <mat-list-item style="background-color:#7be27b; color:rgb(68, 68, 68)"role="listitem" class="mb-2">Item 3</mat-list-item>
+
+        <mat-list-item style="background-color:#7be27b; color:rgb(68, 68, 68)"role="listitem" class="mb-2">Item 3</mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+
+
+
+
+
+
 </div>
-  </div>
-
-  <div class="col">
-    <div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 350px;  "  >
-      <h1>Better Day</h1>
-      <h1>Stats 2</h1>
-      <div class="mt-4">
+</div>
+<div *ngFor="let d of drawings_JobNumber_arr; index as i" class="col-3 mt-3 ms-3">
+  <div class="pt-3 shadow-sm p-3 mb-2 bg-body rounded "  style="width: 350px;"  >
+    <h1>{{drawings_Descr_arr[i]}}</h1>
+    <h2> Job Number: {{d}}</h2>
+    <div class="mt-4">
+      <div class="input-group mt-1">
+        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Status:</span>
+        <select  [ngModel]="statSelected[i]" (change)="onStatusChange(d,$event)" class="form-select" id="exampleSelect"  >
+          <option class="form-control" [value]="" selected></option>
+          <option class="form-control" [value]="'In Progress'">In Progress</option>
+          <option class="form-control" [value]="'Completed'">Completed</option>
+          <option class="form-control" [value]="'Problem'">Problem</option>
+        </select>
       </div>
     </div>
   </div>
-  <div class="col">
-    <div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 350px;  "  >
-      <h1>Better Day</h1>
-      <h1>Stats 3 </h1>
-      <div class="mt-4">
+</div>
+
+</div>
+<!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="row justify-content-start pt-2">
+  <div class=" shadow-sm p-3  bg-body rounded text-center"  style="width: 100%;height:60px ">
+    <h2>Panel Building Jobs</h2>
+  </div>
+<div *ngFor="let d of panel_Builders_JobNumber_arr; index as i" class="col-3 mt-3 ms-3">
+  <div class="pt-3 shadow-sm p-3 mb-2 bg-body rounded "  style="width: 350px;  "  >
+    <h1>{{panel_Builders_Descr_arr[i]}}</h1>
+    <h2> Job Number: {{d}}</h2>
+    <div class="mt-4">
+      <div class="input-group mt-1">
+        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Status:</span>
+        <select  [ngModel]="statSelected[i]" (change)="onStatusChange(d,$event)" class="form-select" id="exampleSelect"  >
+          <option class="form-control" [value]="" selected></option>
+          <option class="form-control" [value]="'In Progress'">In Progress</option>
+          <option class="form-control" [value]="'Completed'">Completed</option>
+          <option class="form-control" [value]="'Problem'">Problem</option>
+        </select>
       </div>
     </div>
   </div>
 </div>
+</div>
+<!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="row justify-content-start pt-2">
+  <div class=" shadow-sm p-3  bg-body rounded text-center"  style="width: 100%;height:60px ">
+    <h2>Programming Jobs</h2>
+  </div>
+<div *ngFor="let d of programmed_By_JobNumber_arr; index as i" class="col-3 mt-3 ms-3">
+  <div class="pt-3 shadow-sm p-3 mb-2 bg-body rounded "  style="width: 350px;  "  >
+    <h1>{{programmed_By_Descr_arr[i]}}</h1>
+    <h2> Job Number: {{d}}</h2>
+    <div class="mt-4">
+      <div class="input-group mt-1">
+        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Status:</span>
+        <select  [ngModel]="statSelected[i]" (change)="onStatusChange(d,$event)" class="form-select" id="exampleSelect"  >
+          <option class="form-control" [value]="" selected></option>
+          <option class="form-control" [value]="'In Progress'">In Progress</option>
+          <option class="form-control" [value]="'Completed'">Completed</option>
+          <option class="form-control" [value]="'Problem'">Problem</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="row justify-content-start pt-2">
+  <div class=" shadow-sm p-3  bg-body rounded text-center"  style="width: 100%;height:60px ">
+    <h2>Testing Jobs</h2>
+  </div>
+<div *ngFor="let d of tested_By_JobNumber_arr; index as i" class="col-3 mt-3 ms-3">
+  <div class="pt-3 shadow-sm p-3 mb-2 bg-body rounded "  style="width: 350px;  "  >
+    <h1>{{tested_By_Descr_arr[i]}}</h1>
+    <h2> Job Number: {{d}}</h2>
+    <div class="mt-4">
+      <div class="input-group mt-1">
+        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Status:</span>
+        <select  [ngModel]="statSelected[i]" (change)="onStatusChange(d,$event)" class="form-select" id="exampleSelect"  >
+          <option class="form-control" [value]="" selected></option>
+          <option class="form-control" [value]="'In Progress'">In Progress</option>
+          <option class="form-control" [value]="'Completed'">Completed</option>
+          <option class="form-control" [value]="'Problem'">Problem</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
 
