@@ -17,12 +17,12 @@ exports.GetNewJobCardNumber=(req,res,next)=>{
      dbo.collection("jobcards").find(query).toArray(function(err, data){
 
    if (err) throw err;
-   i = 0;
-    while (i < data.length)
-    {
-      jobcard_arr[i] =data[i].job_Number
-         i++;
-         count = i
+    i = 0;
+     while (i < data.length)
+     {
+     jobcard_arr[i] =data[i].job_Number
+          i++;
+          count = i
      }
  var recentJobNum = jobcard_arr[count-1]
 res.status(200).json({

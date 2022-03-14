@@ -33,11 +33,12 @@
       <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >{{drawings_Descr_arr[i]}}</div> </div>
       <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >Drawing</div> </div>
       <div class="col">
-        <select [ngModel]="statSelected[i]" (change)="onDrawingTaskStatusSelect(i,$event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
-          <option class="form-control" value=""></option>
-          <option class="form-control" value="Completed" >Completed</option>
+        <select [ngModel]="drawings_phase_status_arr[i]" (change)="onDrawingTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
+          <option class="form-control"  value="Acknowledge" >Acknowledge</option>
           <option class="form-control"  value="In Progress" >In Progress</option>
+          <option class="form-control" value="Completed" >Completed</option>
           <option class="form-control" value="Problem" >Problem</option>
+          
         </select>
       </div>
     </div>
@@ -55,10 +56,10 @@
               <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >{{programmed_By_Descr_arr[i]}}</div> </div>
               <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >Programing</div> </div>
               <div class="col">
-                <select [ngModel]="statSelected[i]" (change)="onProgrammedByTaskStatusSelect(i,$event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': programmedBy_task_BC_arr[i], 'color': programmedBy_task_TC_arr[i]}">
-                  <option class="form-control" value=""></option>
-                  <option class="form-control" value="Completed" >Completed</option>
+                <select [ngModel]="programming_phase_status_arr[i]" (change)="onProgrammedByTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': programmedBy_task_BC_arr[i], 'color': programmedBy_task_TC_arr[i]}">
+                  <option class="form-control"  value="Acknowledge" >Acknowledge</option>
                   <option class="form-control"  value="In Progress" >In Progress</option>
+                  <option class="form-control" value="Completed" >Completed</option>
                   <option class="form-control" value="Problem" >Problem</option>
                 </select>
               </div>
@@ -77,10 +78,10 @@
                       <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >{{tested_By_Descr_arr[i]}}</div> </div>
                       <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >Testing</div> </div>
                       <div class="col">
-                        <select [ngModel]="statSelected[i]" (change)="onTestedByTaskStatusSelect(i,$event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
-                          <option class="form-control" value=""></option>
-                          <option class="form-control" value="Completed" >Completed</option>
+                        <select [ngModel]="testedBy_phase_status_arr[i]" (change)="onTestedByTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
+                          <option class="form-control"  value="Acknowledge" >Acknowledge</option>
                           <option class="form-control"  value="In Progress" >In Progress</option>
+                          <option class="form-control" value="Completed" >Completed</option>
                           <option class="form-control" value="Problem" >Problem</option>
                         </select>
                       </div>
@@ -98,10 +99,10 @@
                               <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >{{panel_Builders_Descr_arr[i]}}</div> </div>
                               <div class="col">    <div style ="color: black ; float:left"class="me-4 mt-2" >Panel Build</div> </div>
                               <div class="col">
-                                <select [ngModel]="statSelected[i]" (change)="onPanelBuildTaskStatusSelect(i,$event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
-                                  <option class="form-control" value=""></option>
-                                  <option class="form-control" value="Completed" >Completed</option>
+                                <select [ngModel]="panelBuild_phase_status_arr[i]" (change)="onPanelBuildTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': panelBuild_task_BC_arr[i], 'color': panelBuild_task_TC_arr[i]}">
+                                  <option class="form-control"  value="Acknowledge" >Acknowledge</option>
                                   <option class="form-control"  value="In Progress" >In Progress</option>
+                                  <option class="form-control" value="Completed" >Completed</option>
                                   <option class="form-control" value="Problem" >Problem</option>
                                 </select>
                               </div>
@@ -147,27 +148,11 @@
 
 </div>
 </div>
-<div *ngFor="let d of drawings_JobNumber_arr; index as i" class="col-3 mt-3 ms-3">
-  <div class="pt-3 shadow-sm p-3 mb-2 bg-body rounded "  style="width: 350px;"  >
-    <h1>{{drawings_Descr_arr[i]}}</h1>
-    <h2> Job Number: {{d}}</h2>
-    <div class="mt-4">
-      <div class="input-group mt-1">
-        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Status:</span>
-        <select  [ngModel]="statSelected[i]" (change)="onStatusChange(d,$event)" class="form-select" id="exampleSelect"  >
-          <option class="form-control" [value]="" selected></option>
-          <option class="form-control" [value]="'In Progress'">In Progress</option>
-          <option class="form-control" [value]="'Completed'">Completed</option>
-          <option class="form-control" [value]="'Problem'">Problem</option>
-        </select>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 </div>
 <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-<div class="row justify-content-start pt-2">
+<!-- <div class="row justify-content-start pt-2">
   <div class=" shadow-sm p-3  bg-body rounded text-center"  style="width: 100%;height:60px ">
     <h2>Panel Building Jobs</h2>
   </div>
@@ -188,9 +173,9 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
 <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-<div class="row justify-content-start pt-2">
+<!-- <div class="row justify-content-start pt-2">
   <div class=" shadow-sm p-3  bg-body rounded text-center"  style="width: 100%;height:60px ">
     <h2>Programming Jobs</h2>
   </div>
@@ -211,9 +196,9 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
 <!-- /////////////////////////////////////////////////////////////////////////////////////////// -->
-<div class="row justify-content-start pt-2">
+<!-- <div class="row justify-content-start pt-2">
   <div class=" shadow-sm p-3  bg-body rounded text-center"  style="width: 100%;height:60px ">
     <h2>Testing Jobs</h2>
   </div>
@@ -234,7 +219,7 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
 
 
 

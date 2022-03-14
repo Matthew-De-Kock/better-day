@@ -16,7 +16,7 @@ const jobcardScheme = mongoose.Schema({
   programmed_By: {type: String },
   tested_By: {type: String },
   phases:{type:Array},
-  status: {type: Array}
+  status: {type: String}
 });
 
 jobcardScheme.plugin(uniqueValidator);

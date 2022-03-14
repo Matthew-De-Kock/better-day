@@ -5,24 +5,10 @@ const router = express.Router();
 const User = require('../models/user');
 
 
-
 router.post("/jobcard/create-new-user"
 ,
 //checkAuth,
-(req, res, next) => {   //creating new user
-
-    // User.findOne({userEmail: req.body.userEmail})
-    // .then(user =>{
-    //     if (user){
-
-    //       return res.status(401).json({
-    //         message: "User Email Already Used!"
-    //       });
-    //      }
-    //   })
-
-
-
+(req, res, next) => { 
 
   bcrypt.hash(req.body.password, 10)
   .then(hash=>{

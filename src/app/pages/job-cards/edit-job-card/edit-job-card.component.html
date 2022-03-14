@@ -186,83 +186,71 @@
 
 </div>
 
+<!-- Installation -->
+  <!-- <div class="row mt-3">
+    <div class="col">
+      <div class="input-group ">
+        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Installation:</span>
+        <div class="form-control">
+          <mat-checkbox [color]='color' [(ngModel)]="itemsDeliveredChecked" (change)="onItemsDelivered($event)" style="padding-left:5px" >Installed</mat-checkbox>
+        </div>
+      </div>
+  </div>
+    <div class="col">
+  
+    </div>
+  
+  </div> -->
+<!-- // -->
+
 
 <div class="mt-4">
   <button class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Save</button>
 </div>
 
 <hr>
-<div class="row mt-3">
 
 
-  <div class="col">
 
-  </div>
-</div>
-<div class="row mt-3 " >
-
-  <div class="col">
-
-  </div>
-</div>
-
-<!-- <div class="row mt-3 " >
-<div class="col">
-  <div class="input-group  mt-3" >
-    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': statBG_Preliminary, 'color': statText_P}">Preliminary</span>
-    <select  [formControl]="StatSelectedPre"(click)="StatusColor()" class="form-select" id="exampleSelect"  [ngStyle]="{'background-color': statBG_Preliminary, 'color': statText_P}">
-      <option class="form-control" value=""></option>
-      <option class="form-control" value="Completed" >Completed</option>
-      <option class="form-control"  value="In Progress" >In Progress</option>
-      <option class="form-control" value="Problem" >Problem</option>
-    </select>
-  </div>
-</div>
-</div> -->
 
 
 <div class="row mt-3">
   <div class="col">
-      <div class=" text-center">
       <span class="input-group-text text-center" [ngStyle]="{'background-color': workers_assigned_phase_BG_color, 'color': workers_assigned_phase_Text_color}" >Workers Assigned</span>
-    </div>
+  </div>
+  <div class="col">
+      <span class="input-group-text text-center" [ngStyle]="{'background-color': drawings_phase_BG_color, 'color': drawings_assigned_phase_Text_color}" >Drawings</span>
   </div>
   <div class="col">
 
-    <span class="input-group-text border border-white" style="font-weight: 400; background-color:rgb(211, 211, 211) " >Drawings</span>
-
-
-  </div>
-  <div class="col">
-
-    <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211) " >Panel Status</span>
+    <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211) "[ngStyle]="{'background-color': panel_phase_BG_color, 'color': panel_phase_Text_color}" >Panel Status</span>
 
 
   </div>
 <div class="col">
-    <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211) " >Programing</span>
+    <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211);"[ngStyle]="{'background-color': programmed_phase_BG_color, 'color': programmed_phase_Text_color}" >Programing</span>
   </div>
 
 </div>
 
 <div class="row mt-3">
   <div class="col">
-      <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': 'rgb(211, 211, 211)', 'color': 'black'}">Testing</span>
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': tested_phase_BG_color, 'color': tested_phase_Text_color}">Testing</span>
   </div>
 
 <div class="col">
 
-  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': purchase_order_complete_phase_BG_color, 'color': purchase_order_complete_phase_Text_color}">Parts Ordered</span>
+  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': purchase_order_phase_BG_color, 'color': purchase_order_phase_Text_color}">Parts Ordered</span>
 
 </div>
 
 <div class="col">
-  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': 'rgb(211, 211, 211)', 'color': 'black'}">Parts Arrived</span>
+  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': itemsDelivered_phase_BG_color, 'color': itemsDeivered_phase_Text_color}">Parts Arrived</span>
 </div>
 
 <div class="col">
 
-  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': 'rgb(211, 211, 211)', 'color': 'black'}">Installation</span>
+  <span class="input-group-text " style="font-weight: 400; background-color:white ;" [ngStyle]="{'background-color': installation_phase_BG_color, 'color': installation_phase_Text_color}">Installation</span>
 
 </div>
 
@@ -274,7 +262,7 @@
   </div>
 
   <div class="col">
-    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': 'rgb(211, 211, 211)', 'color': 'black'}">Job Card</span>
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': status_phase_BG_color, 'color': status_phase_Text_color}">Job Card</span>
   </div>
   <div class="col"></div>
   <div class="col"></div>
@@ -285,11 +273,21 @@
 
 <hr>
 </form>
+
+<!-- ///////////////////////////////////////Purchase Order////////////////////////////////////////// -->
+<h2>Installation</h2>
+<mat-checkbox [color]='color' [(ngModel)]="installationChecked" (change)="onPanelInstalled($event)" style="padding-left:5px" >Panel Installed</mat-checkbox>
+
+<hr>
 <!-- ///////////////////////////////////////Purchase Order////////////////////////////////////////// -->
 <h2>Purchase Orders</h2>
 
 <button class="btn btn-lg btn-outline-primary" (click)="open(purchaseOrder)">Add Purchase Order</button>
 <button class="btn btn-lg btn-outline-success ms-2" (click)="onCompletePurchaseOrders()">Complete Purchase Orders</button>
+<mat-checkbox [color]='color' [(ngModel)]="itemsDeliveredChecked" (change)="onItemsDelivered($event)" style="padding-left:5px" >Items Delivered</mat-checkbox>
+
+
+
 <ng-template #purchaseOrder let-modal>
 
   <div class="modal-header">
@@ -366,73 +364,6 @@
   </div>
   <mat-tab-group>
 
-    <!-- <mat-tab label="Add Parts">
-      <form  #f="ngForm" (ngSubmit)="onAdd(f)">
-        <div class="modal-body">
-
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-            <ng-container matColumnDef="select">
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let storageItem" (click)="$event.stopPropagation()">
-              <input class="form-check-input big-checkbox" type="checkbox" value="" id="flexCheckDefault"
-              (change)="onRowToggled(storageItem)"
-              [checked]="selection.isSelected(storageItem)">
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef>Name</th>
-              <td mat-cell *matCellDef="let storageItem">{{storageItem.name}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="part_number">
-              <th mat-header-cell *matHeaderCellDef>Part Number</th>
-              <td mat-cell *matCellDef="let storageItem">{{storageItem.part_number}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="qty">
-              <th mat-header-cell *matHeaderCellDef>Qty</th>
-              <td mat-cell *matCellDef="let storageItem">{{storageItem.qty}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="description">
-              <th mat-header-cell *matHeaderCellDef>Description</th>
-              <td mat-cell *matCellDef="let storageItem">{{storageItem.description}}</td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr
-                mat-row
-                *matRowDef="let row; columns: displayedColumns;"
-            ></tr>
-
-
-
-          </table>
-<h2 class="mt-4">Materials</h2>
-          <ul>
-            <div *ngFor="let partArr of partsArr">
-              <div class="row " style="width:300px">
-                <div class="col">
-                  <p style="float: left; margin-top:15px" class="mt-2.5"> {{partArr}}</p>
-                </div>
-                <div class="col">     <div style="padding-left: 35px;  float:left; text-align:center; " >
-                  <input type="number"style="float: right; width: 85px; margin-right:auto ; margin-left:auto" min="1" id=qty class="form-control  mt-1"  placeholder="qty"  ngModel name="{{[partArr]}}">
-                </div></div>
-              </div>
-            </div>
-<div >
-</div>
-          </ul>
-      <br>
-      <br>
-        </div>
-
-        <div style="text-align: center;">
-          <button class="btn btn-primary mb-4" style="width:125px" type="submit">Add</button>
-        </div>
-      </form>
-    </mat-tab> -->
 
     <mat-tab label="Manually Add Part">
       <form  #f="ngForm" (ngSubmit)="onAddManualPart(f)">
@@ -456,7 +387,7 @@
 
 
 
-<!-- ///////////////////////////////////////////////add Invoice -->
+<!-- ///////////////////////////////////////////////add Invoice ////////////////////////////////// -->
 <h2>Invoices</h2>
 <button class="btn btn-lg btn-outline-primary" (click)="open(invoice)">Add Invoice</button>
 <button class="btn btn-lg btn-outline-success ms-2" (click)="onCompleteInvoicing()">Complete Invoices</button>

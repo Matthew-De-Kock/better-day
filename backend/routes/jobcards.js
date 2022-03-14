@@ -6,14 +6,9 @@ const User = require('../models/user');
 const JobCard = require('../models/jobcard');
 const PurchaseOrder = require('../models/purchase-order');
 const JobCardStorageParts = require('../models/jobcard-storage-parts');
-
-
 const InvoiceController = require("../contrtollers/invoice")
-
 const JobCardStoragePartsController = require("../contrtollers/jobcard-storage-parts")
-
 const PurchaseOrderController = require("../contrtollers/purchase-order")
-
 const JobcardController = require("../contrtollers/jobcard")
 
 

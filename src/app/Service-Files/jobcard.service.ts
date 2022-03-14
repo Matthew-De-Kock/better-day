@@ -91,9 +91,6 @@ CreateJobCard(
   }
 
   Fetch_JobCard(job_Number:number){
-    // const job: Email = {
-    //   userEmail:userEmail,}
-
 
     this.http.post<JobCard>("http://localhost:3000/jobcard/jobcard-in-progress", {job_Number: job_Number})
       .subscribe(responseData => {
@@ -109,7 +106,6 @@ CreateJobCard(
        this.panel_Builders=responseData.panel_Builders
        this.programmed_By=responseData.programmed_By
        this.tested_By=responseData.tested_By
-       console.log(responseData.tested_By)
        this.phases=responseData.phases
        this.status=responseData.status
 
@@ -135,7 +131,6 @@ CreateJobCard(
      status: string){
 
 
-console.log("Request")
     const jobcard: JobCard = {
       job_Number: job_Number ,
       owner: owner,
@@ -153,7 +148,7 @@ console.log("Request")
       phases:phases,
       status:status
      };
-      console.log(jobcard)
+
 
    this.http.post("http://localhost:3000/jobcard/save-jobcard", jobcard)
      .subscribe((responseData) => {

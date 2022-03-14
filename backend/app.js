@@ -1,22 +1,3 @@
-// const express = require('express')
-// const app = express();
-// const AuthRoutes = require("./routes/auth")
-
-
-
-// app.use(AuthRoutes);
-// module.exports= app
-
-
-
-
-
-
-
-
-
-
-
 
 const express = require('express');
 const bodyParser = require("body-parser");
@@ -27,6 +8,7 @@ const AuthRoutes = require("./routes/auth")
 const AdminRoutes = require("./routes/admin")
 const JobCardRoutes = require("./routes/jobcards")
 const DashboardRoutes = require("./routes/dashboard")
+const admin = require('./Database-Functions/create-admin')
 
 const app = express();
 
@@ -37,7 +19,7 @@ console.log('Connected to database')
 .catch(()=>{
 console.log('Connection Failed')
 });
-
+admin.CreateAdmin()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

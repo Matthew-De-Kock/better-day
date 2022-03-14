@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { PurchaseOrder } from "src/app/models/purchase-order.model";
 import { StorageParts } from "src/app/models/storage-parts.model";
 import { Invoice } from "src/app/models/invoice.model";
+import { DashboardService } from 'src/app/Service-Files/dashboard.service';
 
 
 
@@ -37,34 +38,45 @@ interface Storage {
 })
 export class EditJobCardComponent implements OnInit {
 ////////////////////
-  workers_assigned_phase:any;
   workers_assigned_phase_BG_color:any;
   workers_assigned_phase_Text_color:any;
 
-  purchase_order_complete_phase_BG_color:any;
-  purchase_order_complete_phase_Text_color:any;
+  drawings_phase_BG_color:any;
+  drawings_assigned_phase_Text_color:any;
+
+  
+  programmed_phase_BG_color:any;
+  programmed_phase_Text_color:any;
+
+  
+  panel_phase_BG_color:any;
+  panel_phase_Text_color:any;
+
+  
+  tested_phase_BG_color:any;
+  tested_phase_Text_color:any;
+
+  purchase_order_phase_BG_color:any;
+  purchase_order_phase_Text_color:any;
+
+  installation_phase_BG_color:any;
+  installation_phase_Text_color:any;
+
+  itemsDelivered_phase_BG_color:any;
+  itemsDeivered_phase_Text_color:any;
 
   invoiceing_complete_phase_BG_color:any;
   invoiceing_complete_phase_Text_color:any;
+
+  status_phase_BG_color:any;
+  status_phase_Text_color:any;
 ///////////////////
 
-StatSelectedPre= new FormControl();
-StatSelectedExe= new FormControl();
-StatSelectedL= new FormControl();
-StatSelectedClo= new FormControl();
-// statBG_Preliminary="rgb(50,205,50) "
-
-statBG_Preliminary="white"
-statBG_Execution="white "
-statBG_Launch="white"
-statBG_Closure="white"
-
-statText_P='black'
-statText_E='black'
-statText_L='black'
-statText_C='black'
 
 
+
+
+color = 'primary'
   pb1_CHECKED:boolean = false;
   pb2_CHECKED:boolean = false
   pb3_CHECKED:boolean = false
@@ -102,6 +114,8 @@ flag!:boolean;
 
 purchase_Orders_complete:boolean = false
 invoices_complete:boolean = false
+itemsDeliveredChecked:boolean = false
+installationChecked:boolean = false
 
   STORAGE: Storage[]=[]
   storages:any;
@@ -117,7 +131,7 @@ invoices_complete:boolean = false
  qtysArr:any=[]
 
  jobNumber!:number;
-  constructor(config: NgbModalConfig, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) {
+  constructor(config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) {
     config.backdrop = 'static';
     config.keyboard = false;
 
@@ -142,7 +156,6 @@ invoices_complete:boolean = false
     var date = start_Date.toString().split("T")
     var arr = date[0].split("-")
     this.JC_StartDate = {year:parseInt(arr[0]),month:parseInt(arr[1]),day:parseInt(arr[2])}
-    console.log(this.JC_StartDate)
     this.client=this.JobCard_Service.getClient()
     this.order_Number=this.JobCard_Service.getOrderNumber()
     this.company=this.JobCard_Service.getCompany()
@@ -153,101 +166,15 @@ invoices_complete:boolean = false
     this.programmed_By=this.JobCard_Service.getProgrammedBy()
     this.tested_By=this.JobCard_Service.getTestedBy()
     this.phases = this.JobCard_Service.getPhases();
-    console.log(this.phases)
-    setInterval(() => {
-      this.checkPhases()
-    },1000)
 
+   var flag = setInterval(()=>{
+    this.checkPhases()
 
-    // this.StatSelectedPre.setValue(this.phases[0])
-    // this.StatSelectedExe.setValue(this.phases[1])
-    // this.StatSelectedL.setValue(this.phases[2])
-    // this.StatSelectedClo.setValue(this.phases[3])
-
-// switch(this.StatSelectedPre.value)
-// { case"Completed":
-//      this.statBG_Preliminary ="#5cb85c"
-//      this.statText_P="white"
-//   break;
-
-//   case"In Progress":
-//      this.statBG_Preliminary ="#0275d8"
-//      this.statText_P="white"
-//   break;
-
-//   case"Problem":
-//      this.statBG_Preliminary ="#d9534f"
-//      this.statText_P="white"
-//   break;
-
-//   case"":
-//      this.statBG_Preliminary ="white"
-//      this.statText_P="black"
-// break;
-// }
-// switch(this.StatSelectedExe.value)
-// { case"Completed":
-//      this.statBG_Execution ="#5cb85c"
-//      this.statText_E="white"
-//   break;
-
-//   case"In Progress":
-//      this.statBG_Execution ="#0275d8"
-//      this.statText_E="white"
-//   break;
-
-//   case"Problem":
-//      this.statBG_Execution ="#d9534f"
-//      this.statText_E="white"
-//   break;
-
-//   case"":
-//   this.statBG_Execution ="white"
-//   this.statText_E="black"
-// break;
-// }
-// switch(this.StatSelectedL.value)
-// { case"Completed":
-//      this.statBG_Launch ="#5cb85c"
-//      this.statText_L="white"
-//   break;
-
-//   case"In Progress":
-//      this.statBG_Launch ="#0275d8"
-//      this.statText_L="white"
-//   break;
-
-//   case"Problem":
-//      this.statBG_Launch ="#d9534f"
-//      this.statText_L="white"
-//   break;
-
-//   case"":
-//   this.statBG_Launch ="white"
-//   this.statText_L="black"
-// break;
-// }
-// switch(this.StatSelectedClo.value)
-// { case"Completed":
-//      this.statBG_Closure ="#5cb85c"
-//      this.statText_C="white"
-//   break;
-
-//   case"In Progress":
-//      this.statBG_Closure ="#0275d8"
-//      this.statText_C="white"
-//   break;
-
-//   case"Problem":
-//      this.statBG_Closure ="#d9534f"
-//      this.statText_C="white"
-//   break;
-
-//   case"":
-//   this.statBG_Closure ="white"
-//   this.statText_C="black"
-// break;
-// }
+        if (this.flag==false)
+        {
+          clearInterval(flag)
+          }
+   },1000)
 
     this.status=this.JobCard_Service.getStatus()
 
@@ -271,10 +198,8 @@ switch (this.panel_Builders[i])
   case"Jusain":
   this.pb4_CHECKED=true
   break
-}
-
-
-}
+} //end switch
+}//end for loop
 
 
 
@@ -293,104 +218,220 @@ switch (this.panel_Builders[i])
 
     }
   }
+  checkPhases(){
+    // Wokers Assigned Staus
+    // workers automatic color
+      if(this.panel_Builders.length!=0 &&  this.drawings_By!=undefined && this.programmed_By!=undefined &&  this.tested_By!=undefined){
+        this.workers_assigned_phase_BG_color="#5cb85c"
+        this.workers_assigned_phase_Text_color='white'
+        this.phases[0]="Completed"
+        }
+     else if(this.panel_Builders.length!=0 || this.drawings_By!=undefined ||this.programmed_By!=undefined || this.tested_By!=undefined){
+        this.workers_assigned_phase_BG_color="#0275d8"
+        this.workers_assigned_phase_Text_color='white'
+        this.phases[0]="In Progress"
+        }
+      else  if(this.panel_Builders.length==0 &&  this.drawings_By==undefined && this.programmed_By==undefined &&  this.tested_By==undefined){
+          this.workers_assigned_phase_BG_color="rgb(242, 242, 242) "
+          this.workers_assigned_phase_Text_color='black'
+          this.phases[0]="Not Started"
+          }
+    //
+    
+      // Drawings Completed 
+       if(this.phases[1]=='Acknowledge'){
+        this.drawings_phase_BG_color="#f0ad4e"
+        this.drawings_assigned_phase_Text_color='white'
+      }
+      else if(this.phases[1]=='In Progress'){
+        this.drawings_phase_BG_color="#0275d8"
+        this.drawings_assigned_phase_Text_color='white'
+      }
+      else if(this.phases[1]=='Completed'){
+        this.drawings_phase_BG_color="#5cb85c"
+        this.drawings_assigned_phase_Text_color='white'
+      }
+      else if(this.phases[1]=='Problem'){
+        this.drawings_phase_BG_color="#d9534f"
+        this.drawings_assigned_phase_Text_color='white'
+      }
+      else if(this.phases[1]==undefined){
+        this.drawings_phase_BG_color="rgb(242, 242, 242) "
+        this.drawings_assigned_phase_Text_color='black'
+      }
+    //
+     // Panel Status Completed 
+     if(this.phases[2]=='Acknowledge'){
+      this.panel_phase_BG_color="#f0ad4e"
+      this.panel_phase_Text_color='white'
+    }
+    else if(this.phases[2]=='In Progress'){
+      this.panel_phase_BG_color="#0275d8"
+      this.panel_phase_Text_color='white'
+    }
+    else if(this.phases[2]=='Completed'){
+      this.panel_phase_BG_color="#5cb85c"
+      this.panel_phase_Text_color='white'
+    }
+    else if(this.phases[2]=='Problem'){
+      this.panel_phase_BG_color="#d9534f"
+      this.panel_phase_Text_color='white'
+    }
+    else if(this.phases[2]==undefined){
+      this.panel_phase_BG_color="rgb(242, 242, 242) "
+      this.panel_phase_Text_color='black'
+    }
+    //
+      // programmed Completed 
+      if(this.phases[3]=='Acknowledge'){
+        this.programmed_phase_BG_color="#f0ad4e"
+        this.programmed_phase_Text_color='white'
+      }
+      else if(this.phases[3]=='In Progress'){
+        this.programmed_phase_BG_color="#0275d8"
+        this.programmed_phase_Text_color='white'
+      }
+      else if(this.phases[3]=='Completed'){
+        this.programmed_phase_BG_color="#5cb85c"
+        this.programmed_phase_Text_color='white'
+      }
+      else if(this.phases[3]=='Problem'){
+        this.programmed_phase_BG_color="#d9534f"
+        this.programmed_phase_Text_color='white'
+      }
+      else if(this.phases[3]==undefined){
+        this.programmed_phase_BG_color="rgb(242, 242, 242) "
+        this.programmed_phase_Text_color='black'
+      }
+    //
+      // Testing Completed 
+      if(this.phases[4]=='Acknowledge'){
+        this.tested_phase_BG_color="#f0ad4e"
+        this.tested_phase_Text_color='white'
+      }
+      else if(this.phases[4]=='In Progress'){
+        this.tested_phase_BG_color="#0275d8"
+        this.tested_phase_Text_color='white'
+      }
+      else if(this.phases[4]=='Completed'){
+        this.tested_phase_BG_color="#5cb85c"
+        this.tested_phase_Text_color='white'
+      }
+      else if(this.phases[4]=='Problem'){
+        this.tested_phase_BG_color="#d9534f"
+        this.tested_phase_Text_color='white'
+      }
+      else if(this.phases[4]==undefined){
+        this.tested_phase_BG_color="rgb(242, 242, 242) "
+        this.tested_phase_Text_color='black'
+      }
+    //
+    //purchase Orders Completed
+    if(this.phases[5]=='Completed'){
+      this.purchase_order_phase_BG_color="#5cb85c"
+      this.purchase_order_phase_Text_color='white'
+    }
+    else if(this.phases[5]=='In Progress'){
+      this.purchase_order_phase_BG_color="#0275d8"
+      this.purchase_order_phase_Text_color='white'
+    }
+    else if(this.phases[5]==undefined){
+      this.purchase_order_phase_BG_color="rgb(242, 242, 242) "
+      this.purchase_order_phase_Text_color='black'
+    }
+    //
+    // Items Delivered
+    if(this.PURCHASE_ORDERS.length!=null){
+      this.itemsDelivered_phase_BG_color="#0275d8"
+      this.itemsDeivered_phase_Text_color='white'
+      this.itemsDeliveredChecked = false
+    }
+    if(this.phases[6]=='Completed'){
+      this.itemsDelivered_phase_BG_color="#5cb85c"
+      this.itemsDeivered_phase_Text_color='white'
+      this.itemsDeliveredChecked = true
+    }
+    
+    else if(this.phases[6]==undefined || this.phases[6]=='' ){
+      this.itemsDelivered_phase_BG_color="rgb(242, 242, 242) "
+      this.itemsDeivered_phase_Text_color='black'
+      this.itemsDeliveredChecked = false
+    }
+    
+    //
 
-  StatusColor(){
-switch(this.StatSelectedPre.value)
-{ case"Completed":
-     this.statBG_Preliminary ="#5cb85c"
-     this.statText_P="white"
-  break;
+        // Installation
 
-  case"In Progress":
-     this.statBG_Preliminary ="#0275d8"
-     this.statText_P="white"
-  break;
-
-  case"Problem":
-     this.statBG_Preliminary ="#d9534f"
-     this.statText_P="white"
-  break;
-
-  case"":
-     this.statBG_Preliminary ="white"
-     this.statText_P="black"
-break;
-}
-switch(this.StatSelectedExe.value)
-{ case"Completed":
-     this.statBG_Execution ="#5cb85c"
-     this.statText_E="white"
-  break;
-
-  case"In Progress":
-     this.statBG_Execution ="#0275d8"
-     this.statText_E="white"
-  break;
-
-  case"Problem":
-     this.statBG_Execution ="#d9534f"
-     this.statText_E="white"
-  break;
-
-  case"":
-  this.statBG_Execution ="white"
-  this.statText_E="black"
-break;
-}
-switch(this.StatSelectedL.value)
-{ case"Completed":
-     this.statBG_Launch ="#5cb85c"
-     this.statText_L="white"
-  break;
-
-  case"In Progress":
-     this.statBG_Launch ="#0275d8"
-     this.statText_L="white"
-  break;
-
-  case"Problem":
-     this.statBG_Launch ="#d9534f"
-     this.statText_L="white"
-  break;
-
-  case"":
-  this.statBG_Launch ="white"
-  this.statText_L="black"
-break;
-}
-switch(this.StatSelectedClo.value)
-{ case"Completed":
-     this.statBG_Closure ="#5cb85c"
-     this.statText_C="white"
-  break;
-
-  case"In Progress":
-     this.statBG_Closure ="#0275d8"
-     this.statText_C="white"
-  break;
-
-  case"Problem":
-     this.statBG_Closure ="#d9534f"
-     this.statText_C="white"
-  break;
-
-  case"":
-  this.statBG_Closure ="white"
-  this.statText_C="black"
-break;
-}
+        if(this.phases[7]=='Completed'){
+          this.installation_phase_BG_color="#5cb85c"
+          this.installation_phase_Text_color='white'
+          this.installationChecked = true
+        }
+        
+        else if(this.phases[7]==undefined || this.phases[7]=='' ){
+          this.installation_phase_BG_color="rgb(242, 242, 242) "
+          this.installation_phase_Text_color='black'
+          this.installationChecked = false
+        }
+        
+        //
+    // Invoicing
+    
+    if(this.phases[8]=='Completed'){
+      this.invoiceing_complete_phase_BG_color='#5cb85c'
+      this.invoiceing_complete_phase_Text_color='white'
+    }
+    else if(this.phases[8]=='In Progress'){
+      this.invoiceing_complete_phase_BG_color='#0275d8'
+      this.invoiceing_complete_phase_Text_color='white'
+    }
+    else if(this.phases[8]==undefined){
+      this.invoiceing_complete_phase_BG_color='rgb(242, 242, 242)'
+      this.invoiceing_complete_phase_Text_color='black'
+    }
+    //
+    
+        // Status
 
 
-
+if ( this.phases[0]!="Completed"|| this.phases[1]!="Completed"|| this.phases[2]!="Completed"|| this.phases[3]!="Completed"|| this.phases[4]!="Completed"|| this.phases[5]!="Completed"|| this.phases[6]!="Completed"|| this.phases[7]!="Completed"|| this.phases[8]!="Completed"){
+console.log("In Progress")
+  if(this.phases[9]=='In Progress'){
+    this.status_phase_BG_color='#0275d8'
+    this.status_phase_Text_color='white'
+  }
+  else{
+    this.ds.savePhaseStatus(9,"In Progress",this.job_Number)
+    .subscribe((responseData:any) =>{
+      this.phases=responseData.phases
+    })
   }
 
+}
+else if( this.phases[0]=="Completed"&& this.phases[1]=="Completed"&& this.phases[2]=="Completed"&& this.phases[3]=="Completed"&& this.phases[4]=="Completed"&& this.phases[5]=="Completed"&& this.phases[6]=="Completed"&& this.phases[7]=="Completed"&& this.phases[8]=="Completed"){
+  console.log("Completed")
+        if(this.phases[9]=='Completed'){
+          this.status_phase_BG_color="#5cb85c"
+          this.status_phase_Text_color='white'
+        }
+        else{
+          this.ds.savePhaseStatus(9,"Completed",this.job_Number)
+          .subscribe((responseData:any) =>{
+            this.phases=responseData.phases
+          })
+        }
+        //
+    }
+    // else if (this.phases[9] == ''){
+    //   this.installation_phase_BG_color="rgb(242, 242, 242) "
+    //   this.installation_phase_Text_color='black' 
+    // }
+// console.log(this.phases[9])
+  }
   open(content:any) {
     this.modalService.open(content, { size: 'md' });
   }
 
-  openSM(content:any) {
-    this.modalService.open(content, { size: 'sm' });
-  }
 
   SelectPanelBuilders(form: NgForm){
 
@@ -436,7 +477,7 @@ break;
     var owner = form.value.owner
     var start_Date = form.value.start_Date
 
-    console.log(this.JC_StartDate)
+ 
     var client = form.value.client
     var order_no = form.value.order_no
     var company = form.value.company
@@ -447,8 +488,8 @@ break;
     var panel_Builders = this.panel_Builders
     var programmed_By = form.value.programmed_By
     var tested_By = form.value.tested_By
-    var phases=[this.phases[0],this.StatSelectedExe.value,this.StatSelectedL.value,this.StatSelectedClo.value]
-    if(this.StatSelectedPre.value=='Completed'&& this.StatSelectedExe.value=='Completed'&& this.StatSelectedL.value=='Completed'&& this.StatSelectedClo.value=='Completed'){
+    var phases = this.phases
+    if(this.phases[0]=='Completed' && this.phases[1]=='Completed' && this.phases[2]=='Completed'&& this.phases[3]=='Completed'&& this.phases[4]=='Completed'&& this.phases[5]=='Completed'&& this.phases[6]=='Completed'&& this.phases[7]=='Completed'&& this.phases[8]=='Completed'){
 var status = 'Completed'
     }
     else
@@ -472,54 +513,65 @@ var status = 'Completed'
     );
   }
 
-
+  onPanelInstalled(event:any){
+    console.log(event.checked)
+  if (event.checked==true)
+   {
+    this.ds.savePhaseStatus(7,"Completed",this.job_Number)
+    .subscribe((responseData:any) =>{
+      this.phases=responseData.phases
+    })
+  }
+  else 
+  this.ds.savePhaseStatus(7,"",this.job_Number)
+  .subscribe((responseData:any) =>{
+    this.phases=responseData.phases
+  })
+    }
 
   onAddPurchaseOrder(form: NgForm){
 
     var supplier = form.value.supplier;
     var orderNum = form.value.mat_order_no;
      this.JobCard_Service.AddPurchaseOrderToDB(this.job_Number,supplier,orderNum)
+     this.ds.savePhaseStatus(5,"In Progress",this.job_Number)
+     .subscribe((responseData:any) =>{
+       this.phases=responseData.phases
 
-     this.phases[5]= 'In Progress';
+     })
 
-     this.JobCard_Service.SaveJobCard(
-      this.job_Number,
-      this.owner,
-      this.JC_StartDate,
-      this.client,
-      this.order_Number,
-      this.company,
-      this.description,
-      this.panel_Number,
-      this.drawings_By,
-      this.panel_Builders,
-      this.programmed_By,
-      this.tested_By,
-      this.phases,
-      this.status
-    );
+     if (this.phases[6]!="In Progress"){
+     this.ds.savePhaseStatus(6,"In Progress",this.job_Number)
+     .subscribe((responseData:any) =>{
+       this.phases=responseData.phases
+
+     })
+    }
   }
+
+
   onCompletePurchaseOrders(){
-    this.phases[5] = 'Completed'
-    this.JobCard_Service.SaveJobCard(
-      this.job_Number,
-      this.owner,
-      this.JC_StartDate,
-      this.client,
-      this.order_Number,
-      this.company,
-      this.description,
-      this.panel_Number,
-      this.drawings_By,
-      this.panel_Builders,
-      this.programmed_By,
-      this.tested_By,
-      this.phases,
-      this.status
-    );
+    this.ds.savePhaseStatus(5,"Completed",this.job_Number)
+    .subscribe((responseData:any) =>{
+      this.phases=responseData.phases
+    })
   }
 
-
+  onItemsDelivered(event:any){
+  if (event.checked==true)
+   {
+    this.ds.savePhaseStatus(6,"Completed",this.job_Number)
+    .subscribe((responseData:any) =>{
+      this.phases=responseData.phases
+    })
+  }
+  else 
+  this.ds.savePhaseStatus(6,"In Progress",this.job_Number)
+  .subscribe((responseData:any) =>{
+    this.phases=responseData.phases
+  })
+    }
+//materials from storage
   onAddManualPart(form: NgForm){
 
     var part_Name = form.value.manual_part_name_add;
@@ -540,189 +592,104 @@ var status = 'Completed'
 
     this.JobCard_Service.AddInvoice(this.job_Number,invoice_Number,client_Name,date)
 
-    this.phases[8]='In Progress'
 
-    this.JobCard_Service.SaveJobCard(
-      this.job_Number,
-      this.owner,
-      this.JC_StartDate,
-      this.client,
-      this.order_Number,
-      this.company,
-      this.description,
-      this.panel_Number,
-      this.drawings_By,
-      this.panel_Builders,
-      this.programmed_By,
-      this.tested_By,
-      this.phases,
-      this.status
-    );
+    this.ds.savePhaseStatus(8,"In Progress",this.job_Number)
+    .subscribe((responseData:any) =>{
+      this.phases=responseData.phases
+    })
+
   }
-  onCompleteInvoicing(){
-    this.phases[8] = 'Completed'
-    this.JobCard_Service.SaveJobCard(
-      this.job_Number,
-      this.owner,
-      this.JC_StartDate,
-      this.client,
-      this.order_Number,
-      this.company,
-      this.description,
-      this.panel_Number,
-      this.drawings_By,
-      this.panel_Builders,
-      this.programmed_By,
-      this.tested_By,
-      this.phases,
-      this.status
-    );
+ 
+
+
+
+
+
+
+onCompleteInvoicing(){
+  this.ds.savePhaseStatus(8,"Completed",this.job_Number)
+  .subscribe((responseData:any) =>{
+    this.phases=responseData.phases
+  })
   }
 
 
 
-  callPurchaseOrderTable(){
-    this.JobCard_Service.Get_PurchaseOrdersForJobCard(this.job_Number)
-    .subscribe((responseData) => {
 
-      if (responseData.order_Number_Arr.length!=0)
+callPurchaseOrderTable(){
+  this.JobCard_Service.Get_PurchaseOrdersForJobCard(this.job_Number)
+  .subscribe((responseData) => {
+
+    if (responseData.order_Number_Arr.length!=0)
 {
 
 
-      var data = responseData
-     for (let i = 0; i < data.order_Number_Arr.length; i++) {
+    var data = responseData
+   for (let i = 0; i < data.order_Number_Arr.length; i++) {
 
-      this.PURCHASE_ORDERS[i]=
-        {
-        job_Number:0,
-        supplier: data.supplier_Arr[i],
-        order_Number: data.order_Number_Arr[i],
-        }
-    }
-  }
-    }, error =>{
-       console.log(error.error.message)
-    });
-
-  }
-
-  callJobCardPartsFromStorage(){
-    this.JobCard_Service.Get_JobCardParts(this.job_Number)
-    .subscribe((responseData) => {
-      var data = responseData
-
-     for (let i = 0; i < data.job_Number_Arr.length; i++) {
-
-      this.JOBCARD_PARTS[i]=
-        {
-        job_Number:0,
-        part_Name: data.part_Name_Arr[i],
-        part_Number: data.part_Number_Arr[i],
-        part_Qty: data.part_Qty_Arr[i],
-        part_Descr: data.part_Descr_Arr[i],
-        }
-    }
-    }, error =>{
-       console.log(error.error.message)
-    });
-  }
-
-  callInvoices(){
-    this.JobCard_Service.Get_Invoices(this.job_Number)
-    .subscribe((responseData) => {
-      var data = responseData
-
-     for (let i = 0; i < data.job_Number_Arr.length; i++) {
-      var date = data.date_Arr[i].toString().split("T")
-      this.INVOICES[i]= {
-        job_Number:0,
-        invoice_Number: data.invoice_Number_Arr[i],
-        client_Name: data.client_Name_Arr[i],
-        date: date[0],
-        timestamp:data.date_Arr[i]
-        }
-    }
-    }, error =>{
-       console.log(error.error.message)
-    });
-  }
-
-  ngOnDestroy(){
-    this.flag=false
-}
-
-
- // onRowToggled(storageItem:StorageMaterials){
-  //   // this.storages=null
-  //  // this.STORAGE=[]
-
-  // this.selection.toggle(storageItem)
-  // this.partsArr=[]
-  // console.log(this.selection.selected )
-
-  // for (let i = 0; i < this.selection.selected.length; i++) {
-  //   this.partsArr[i] = this.selection.selected[i].name
-  // }
-  // console.log( this.partsArr )
-  // }
-
-
-
-checkPhases(){
-// Wokers Assigned Staus
-  if(this.panel_Builders.length!=0 &&  this.drawings_By!=undefined && this.programmed_By!=undefined &&  this.tested_By!=undefined){
-    this.workers_assigned_phase_BG_color="#5cb85c"
-    this.workers_assigned_phase_Text_color='white'
-    this.phases[0]="Complete"
-    }
- else if(this.panel_Builders.length!=0 || this.drawings_By!=undefined ||this.programmed_By!=undefined || this.tested_By!=undefined){
-    this.workers_assigned_phase_BG_color="#f0ad4e"
-    this.workers_assigned_phase_Text_color='white'
-    this.phases[0]="In Progress"
-    }
-  else  if(this.panel_Builders.length==0 &&  this.drawings_By==undefined && this.programmed_By==undefined &&  this.tested_By==undefined){
-      this.workers_assigned_phase_BG_color="rgb(242, 242, 242) "
-      this.workers_assigned_phase_Text_color='black'
-      this.phases[0]="Not Started"
+    this.PURCHASE_ORDERS[i]=
+      {
+      job_Number:0,
+      supplier: data.supplier_Arr[i],
+      order_Number: data.order_Number_Arr[i],
       }
-//
-//purchase Orders Completed
-
-if(this.phases[5]=='Completed'){
-  this.purchase_order_complete_phase_BG_color="#5cb85c"
-  this.purchase_order_complete_phase_Text_color='white'
+  }
 }
-else if(this.phases[5]=='In Progress'){
-  this.purchase_order_complete_phase_BG_color="#f0ad4e"
-  this.purchase_order_complete_phase_Text_color='white'
-}
-else if(this.phases[5]==undefined){
-  this.purchase_order_complete_phase_BG_color="rgb(242, 242, 242) "
-  this.purchase_order_complete_phase_Text_color='black'
-}
-//
-// Invoicing
-
-//
-if(this.phases[8]=='Completed'){
-  this.invoiceing_complete_phase_BG_color='#5cb85c'
-  this.invoiceing_complete_phase_Text_color='white'
-}
-else if(this.phases[8]=='In Progress'){
-  this.invoiceing_complete_phase_BG_color='#f0ad4e'
-  this.invoiceing_complete_phase_Text_color='white'
-}
-else if(this.phases[8]==undefined){
-  this.invoiceing_complete_phase_BG_color='rgb(242, 242, 242)'
-  this.invoiceing_complete_phase_Text_color='black'
-}
-
+  }, error =>{
+     console.log(error.error.message)
+  });
 
 }
 
-CompletePurcahseOrder(){
-  // this.
-  // this.phases[]
+callJobCardPartsFromStorage(){
+  this.JobCard_Service.Get_JobCardParts(this.job_Number)
+  .subscribe((responseData) => {
+    var data = responseData
+
+   for (let i = 0; i < data.job_Number_Arr.length; i++) {
+
+    this.JOBCARD_PARTS[i]=
+      {
+      job_Number:0,
+      part_Name: data.part_Name_Arr[i],
+      part_Number: data.part_Number_Arr[i],
+      part_Qty: data.part_Qty_Arr[i],
+      part_Descr: data.part_Descr_Arr[i],
+      }
+  }
+  }, error =>{
+     console.log(error.error.message)
+  });
 }
+
+callInvoices(){
+  this.JobCard_Service.Get_Invoices(this.job_Number)
+  .subscribe((responseData) => {
+    var data = responseData
+
+   for (let i = 0; i < data.job_Number_Arr.length; i++) {
+    var date = data.date_Arr[i].toString().split("T")
+    this.INVOICES[i]= {
+      job_Number:0,
+      invoice_Number: data.invoice_Number_Arr[i],
+      client_Name: data.client_Name_Arr[i],
+      date: date[0],
+      timestamp:data.date_Arr[i]
+      }
+  }
+  }, error =>{
+     console.log(error.error.message)
+  });
+}
+
+
+
+ngOnDestroy(){
+  this.flag=false
+}
+
+
+
+
 
 }
