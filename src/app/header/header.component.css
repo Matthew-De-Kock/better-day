@@ -15,12 +15,16 @@ mat-toolbar{
 
 }
 
-.icon{
+.icon1{
   font-size: 28px;
   color: rgb(39, 39, 39)!important;
 }
 
 
+.icon2{
+  font-size: 28px;
+  color: rgb(146, 52, 52)!important;
+}
 
 
 
@@ -31,7 +35,12 @@ button:hover{
     background-color: transparent ;
 }
 
-
+.toolbar-button:hover{
+  color: rgb(245, 59, 59);
+  /* background-color: rgb(255, 255, 255); */
+  /* color: rgb(67, 211, 255);; */
+      background-color: transparent ;
+}
 
 
  .spacer {

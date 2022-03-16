@@ -84,7 +84,7 @@ var tested_By_Descr_arr=[];
 var testedBy_phase_status_arr=[]
 var count
 dbo.collection("jobcards").find(query).toArray(function(err, data){
-  if (err) throw err;
+cosole.log(err)
   i = 0;
   while (i < data.length)
   {

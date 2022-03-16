@@ -28,6 +28,7 @@ router.post("/jobcard/jobcard-in-progress",JobcardController.GetJobCardInProgres
 
  router.post("/jobcard/save-jobcard", JobcardController.SaveJobCard);
 
+ router.post("/jobcard/save-status", JobcardController.SaveJobCardStatus);
 
 
 

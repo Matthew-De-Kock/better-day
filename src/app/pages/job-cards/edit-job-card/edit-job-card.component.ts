@@ -10,6 +10,7 @@ import { PurchaseOrder } from "src/app/models/purchase-order.model";
 import { StorageParts } from "src/app/models/storage-parts.model";
 import { Invoice } from "src/app/models/invoice.model";
 import { DashboardService } from 'src/app/Service-Files/dashboard.service';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -131,7 +132,7 @@ installationChecked:boolean = false
  qtysArr:any=[]
 
  jobNumber!:number;
-  constructor(config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) {
+  constructor(private http: HttpClient,config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) {
     config.backdrop = 'static';
     config.keyboard = false;
 
@@ -395,7 +396,6 @@ switch (this.panel_Builders[i])
 
 
 if ( this.phases[0]!="Completed"|| this.phases[1]!="Completed"|| this.phases[2]!="Completed"|| this.phases[3]!="Completed"|| this.phases[4]!="Completed"|| this.phases[5]!="Completed"|| this.phases[6]!="Completed"|| this.phases[7]!="Completed"|| this.phases[8]!="Completed"){
-console.log("In Progress")
   if(this.phases[9]=='In Progress'){
     this.status_phase_BG_color='#0275d8'
     this.status_phase_Text_color='white'
@@ -409,7 +409,6 @@ console.log("In Progress")
 
 }
 else if( this.phases[0]=="Completed"&& this.phases[1]=="Completed"&& this.phases[2]=="Completed"&& this.phases[3]=="Completed"&& this.phases[4]=="Completed"&& this.phases[5]=="Completed"&& this.phases[6]=="Completed"&& this.phases[7]=="Completed"&& this.phases[8]=="Completed"){
-  console.log("Completed")
         if(this.phases[9]=='Completed'){
           this.status_phase_BG_color="#5cb85c"
           this.status_phase_Text_color='white'
@@ -419,6 +418,13 @@ else if( this.phases[0]=="Completed"&& this.phases[1]=="Completed"&& this.phases
           .subscribe((responseData:any) =>{
             this.phases=responseData.phases
           })
+
+          this.http.post("http://localhost:3000/jobcard/save-status", {job_Number:this.job_Number,status:"Completed"})
+          .subscribe((responseData) => {
+            console.log(responseData);
+          }, error =>{
+             console.log(error.error.message)
+          });
         }
         //
     }
@@ -514,7 +520,6 @@ var status = 'Completed'
   }
 
   onPanelInstalled(event:any){
-    console.log(event.checked)
   if (event.checked==true)
    {
     this.ds.savePhaseStatus(7,"Completed",this.job_Number)

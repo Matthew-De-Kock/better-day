@@ -32,6 +32,7 @@ drawings_task_BC_arr : string[]=[];
 drawings_task_TC_arr : string[]=[];
 drawings_phase_status_arr: string[]=[];
 
+
 panelBuild_task_BC_arr : string[]=[];
 panelBuild_task_TC_arr : string[]=[];
 panelBuild_phase_status_arr: string[]=[]
@@ -39,6 +40,8 @@ panelBuild_phase_status_arr: string[]=[]
 programmedBy_task_BC_arr : string[]=[];
 programmedBy_task_TC_arr : string[]=[];
 programming_phase_status_arr: string[]=[];
+programming_phase_arr: string[]=[];
+programming_phase_completed_arr: string[]=[];
 
 testedBy_task_BC_arr : string[]=[];
 testedBy_task_TC_arr : string[]=[];
@@ -71,7 +74,6 @@ ngOnDestroy(){
         this.tested_By_JobNumber_arr=data.tested_By_JobNumber_arr
         this.tested_By_Descr_arr=data.tested_By_Descr_arr
         this.testedBy_phase_status_arr= data.testedBy_phase_status_arr
-        console.log(this.panelBuild_phase_status_arr)
 
             this.checkPhases()
                 if (this.flag==false)
@@ -141,7 +143,6 @@ checkPhases(){
     
   }
 
-console.log(this.panelBuild_phase_status_arr)
   for (let i = 0; i < this.panelBuild_phase_status_arr.length; i++) {
 
     if(this.panelBuild_phase_status_arr[i]=='Acknowledge'){
@@ -173,6 +174,7 @@ console.log(this.panelBuild_phase_status_arr)
     if(this.programming_phase_status_arr[i]=='Acknowledge'){
       this.programmedBy_task_BC_arr[i]="#f0ad4e"
       this.programmedBy_task_TC_arr[i]='white'
+      this.programming_phase_arr[i]= ""
     }
     else if(this.programming_phase_status_arr[i]=='Completed'){
       this.programmedBy_task_BC_arr[i]="#5cb85c"

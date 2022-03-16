@@ -7,7 +7,7 @@
       <!-- </div> -->
 
 <hr style="width:100%">
-      <button  (click)="sidenav.toggle()" style="width: 100%;" mat-button class="item" routerLink="dashboard"><mat-icon  class="ml-4" mat-list-icon style="margin-right: 10%;" >dashboard</mat-icon>Dashboard</button><br>
+      <button  (click)="sidenav.toggle()" style="width: 100%;" mat-button class="item" routerLink="dashboard"><mat-icon  class="ml-4 " mat-list-icon style="margin-right: 10%;" >dashboard</mat-icon>Dashboard</button><br>
 
       <hr>
 <label class="text-start mb-3 ps-3" style="width: 100%; font-weight: 500; color: rgb(238, 238, 238);  font-size: 14px;">Admin</label>
@@ -27,14 +27,14 @@
 
          <mat-sidenav-content>
           <mat-toolbar class="shadow-sm"  *ngIf="userIsAuthenticated==true" >
-            <button  style="text-align:center !important" mat-icon-button  (click)="sidenav.toggle()">
+            <button  style="text-align:center !important" class="toolbar-button" mat-icon-button  (click)="sidenav.toggle()">
               <mat-icon >menu</mat-icon>
             </button>
 
             <span class="spacer"></span>
 
             <button  style="text-align:center !important"  mat-icon-button xPosition="after"   [matMenuTriggerFor]="account">
-              <mat-icon style=" margin-right: 10%; margin-bottom: 4%;"  class="icon">account_circle</mat-icon>
+              <mat-icon style=" margin-right: 10%; margin-bottom: 4%;"  class="icon toolbar-button">account_circle</mat-icon>
             </button>
             <mat-menu   #account="matMenu" >
               <!-- <h3 style="text-align: center;"></h3>

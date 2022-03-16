@@ -151,6 +151,20 @@ exports.CreateNewJobCard=(req,res,next)=>{
       }
 
 
+      exports.SaveJobCardStatus=(req,res,next)=>{
+      JobCard.findOneAndUpdate({job_Number: req.body.job_Number},{status:"Completed"}).then(result=>{
+        res.status(200).json({
+          message: "jobcard Completed Status saved successfully",
+        });
+      })
+                // .catch(err=>{
+                //   res.status(500).json({
+                //     error:err
+                //   });
+                // });
+    
+    
+         }
 
 
 
