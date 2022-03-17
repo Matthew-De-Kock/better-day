@@ -21,3 +21,8 @@ div
     white-space: nowrap;
     width: 1%;
 }
+
+
+span { display: flex; 
+  justify-content: center }
+

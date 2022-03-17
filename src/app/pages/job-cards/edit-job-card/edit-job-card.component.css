@@ -45,3 +45,5 @@ text-align: center;
 ::ng-deep mat-select.mat-focused span.mat-form-field-label-wrapper label {
   color:green !important;
 }
+span { display: flex; 
+  justify-content: center }

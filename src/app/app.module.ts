@@ -17,6 +17,8 @@ import {HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { JobCardHomeComponent } from './pages/job-cards/job-card-home/job-card-home.component';
 import { EditJobCardComponent } from './pages/job-cards/edit-job-card/edit-job-card.component';
 import { ViewJobCardsInProgressComponent } from './pages/job-cards/view-job-cards-in-progress/view-job-cards-in-progress.component';
+import { ViewCompletedJobcardsComponent } from './pages/job-cards/view-completed-jobcards/view-completed-jobcards.component';
+import { ViewJobcardComponent } from './pages/job-cards/view-jobcard/view-jobcard.component';
 
 
 
@@ -43,8 +45,8 @@ import { ViewJobCardsInProgressComponent } from './pages/job-cards/view-job-card
     JobCardHomeComponent,
     EditJobCardComponent,
     ViewJobCardsInProgressComponent,
-
-
+    ViewCompletedJobcardsComponent,
+    ViewJobcardComponent,
   ],
 
   providers: [],

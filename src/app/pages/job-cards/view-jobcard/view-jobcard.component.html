@@ -1,8 +1,16 @@
+<div style="background-color: rgb(245, 248, 250);">
 <p></p>
 <br>
+
 <br><br>
+
+<mat-toolbar class="shadow-sm" style="  border-top: 1px solid rgb(221, 229, 235); height: 2rem; top: 62px">
+    <button onclick="history.back()" class="toolbar-button" mat-icon-button>
+      <mat-icon >keyboard_backspace</mat-icon>
+    </button>
+</mat-toolbar>
 <br>
-<div class="d-flex justify-content-center  text-center " >
+<div class="d-flex justify-content-center  text-center pt-5" >
 
   <div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 1050px;  " >
 
@@ -10,13 +18,13 @@
   <hr class="shadow-lg">
 
 <!-- ///////////////////////////////////////User////////////////////////////////////////// -->
-<form  #f="ngForm"  (ngSubmit)="SaveJobCard(f)" >
+<form  #f="ngForm">
   <div class="row ">
 <div class="col "  >
   <div class="form-group">
     <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Owner:</span>
-      <select class="form-select" id="exampleSelect" [(ngModel)]="owner" ngModel name="owner">
+      <select disabled class="form-select" id="exampleSelect" [(ngModel)]="owner" ngModel name="owner">
         <option value="Owner" selected  hidden>Owner</option>
         <option class="form-control" >Warwick </option>
         <option class="form-control">Daniel</option>
@@ -33,7 +41,7 @@
     <div class="row">
       <div class="input-group">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;color:red" >Job Number:</span>
-        <input  type="text" aria-label="First name" class="form-control"  [(ngModel)]="job_Number" ngModel name="job_number">
+        <input disabled type="text" aria-label="First name" class="form-control"  [(ngModel)]="job_Number" ngModel name="job_number">
       </div>
     </div>
 
@@ -48,18 +56,15 @@
 
         <div class="input-group ">
           <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Start Date:</span>
-          <input class="form-control" placeholder="Select Start Date" [(ngModel)]="JC_StartDate"
+          <input disabled class="form-control" placeholder="Select Start Date" [(ngModel)]="JC_StartDate"
                  name="dp"  ngbDatepicker #d="ngbDatepicker" ngModel name="start_Date">
-          <div class="input-group-append">
-            <button class="btn btn-outline-primary bi bi-calendar-event" (click)="d.toggle()" type="button"> </button>
-          </div>
       </div>
     </div>
 
     <div class="col">
       <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white " >Client:</span>
-      <input  id=client class="form-control " placeholder="Client" [(ngModel)]="client" ngModel name="client"   >
+      <input disabled id=client class="form-control " placeholder="Client" [(ngModel)]="client" ngModel name="client"   >
     </div>
    </div>
 
@@ -69,14 +74,14 @@
   <div class="col">
     <div class="input-group ">
     <span class="input-group-text " style="font-weight: 400; background-color:white " >Order Number:</span>
-    <input  id=order-no class="form-control " placeholder="ORDER No" [(ngModel)]="order_Number"  ngModel name="order_no"   >
+    <input disabled id=order-no class="form-control " placeholder="ORDER No" [(ngModel)]="order_Number"  ngModel name="order_no"   >
   </div>
  </div>
   <div class="col">
     <div class="form-group">
       <div class="input-group ">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Company:</span>
-        <select class="form-select" id="exampleSelect" [(ngModel)]="company" ngModel name="company">
+        <select disabled class="form-select" id="exampleSelect" [(ngModel)]="company" ngModel name="company">
           <option class="form-control" >Mac-Automation </option>
           <option class="form-control" >All-Electrical </option>
           <option class="form-control">STS</option>
@@ -89,7 +94,7 @@
 <div class="form-group  mt-3 mb-4">
 <div class="input-group ">
 <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Description:</span>
-<textarea id=description class="form-control " placeholder="Description" [(ngModel)]="description" ngModel name="description"  rows="1"></textarea>
+<textarea disabled id=description class="form-control " placeholder="Description" [(ngModel)]="description" ngModel name="description"  rows="1"></textarea>
 </div>
 </div>
 <!-- ///////////////////////////////////////Owner////////////////////////////////////////// -->
@@ -100,7 +105,7 @@
   <div class="col">
     <div class="input-group  ">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel Number:</span>
-      <input  id=panel-no class="form-control " placeholder="Panel Number" [(ngModel)]="panel_Number" ngModel name="panel_Number"   >
+      <input disabled id=panel-no class="form-control " placeholder="Panel Number" [(ngModel)]="panel_Number" ngModel name="panel_Number"   >
 
     </div>
   </div>
@@ -114,14 +119,14 @@
   <div class="col">
     <div class="input-group ">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Drawings By:</span>
-      <select class="form-select" id="exampleSelect" [(ngModel)]="drawings_By" ngModel name="drawings_By">
+      <select disabled class="form-select" id="exampleSelect" [(ngModel)]="drawings_By" ngModel name="drawings_By">
         <option class="form-control" >LT</option>
       </select>
     </div>
   </div>
   <div class="col">    <div class="input-group border-none">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Programmed By</span>
-    <select class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
+    <select disabled class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
       <option class="form-control" >Daniel</option>
       <option class="form-control" >Gerard</option>
     </select>
@@ -146,28 +151,27 @@
         </button>
       </div>
 
-      <form  #f="ngForm" (ngSubmit)="SelectPanelBuilders(f)">
+      <form  #f="ngForm" >
       <div class="modal-body " >
 
           <div class="form-group">
             <div class="form-check text-start"  >
-              <input type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb1_CHECKED" ngModel name="pb1">Rueben
+              <input disabled type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb1_CHECKED" ngModel name="pb1">Rueben
               <label class="form-check-label "></label>
             </div>
             <div class="form-check text-start">
-              <input type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb2_CHECKED" ngModel name="pb2">Jaryd
+              <input disabled type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb2_CHECKED" ngModel name="pb2">Jaryd
               <label class="form-check-label ps-4"></label>
             </div>
             <div class="form-check text-start">
-              <input type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb3_CHECKED" ngModel name="pb3">Martin
+              <input disabled type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb3_CHECKED" ngModel name="pb3">Martin
               <label class="form-check-label ps-4"></label>
             </div>
             <div class="form-check text-start">
-              <input type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb4_CHECKED" ngModel name="pb4">Jusain
+              <input disabled type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb4_CHECKED" ngModel name="pb4">Jusain
               <label class="form-check-label ps-4"></label>
             </div>
             <br>
-            <button  class="modal-button btn btn-primary d-flex justify-content-center   " type="submit">Add Panel Builders</button>
             </div>
       </div>
     </form>
@@ -177,7 +181,7 @@
     <div class="col">
       <div class="input-group mt-1">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Tested By:</span>
-        <select class="form-select" id="exampleSelect" [(ngModel)]="tested_By" ngModel name="tested_By">
+        <select disabled class="form-select" id="exampleSelect" [(ngModel)]="tested_By" ngModel name="tested_By">
           <option class="form-control" >Daniel</option>
           <option class="form-control" >Gerard</option>
         </select>
@@ -186,105 +190,19 @@
 
 </div>
 
-<!-- Installation -->
-  <!-- <div class="row mt-3">
-    <div class="col">
-      <div class="input-group ">
-        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Installation:</span>
-        <div class="form-control">
-          <mat-checkbox [color]='color' [(ngModel)]="itemsDeliveredChecked" (change)="onItemsDelivered($event)" style="padding-left:5px" >Installed</mat-checkbox>
-        </div>
-      </div>
-  </div>
-    <div class="col">
-  
-    </div>
-  
-  </div> -->
-<!-- // -->
-
-
-<div class="mt-4">
-  <button class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Save</button>
-</div>
-
-<hr>
-
-
-
-
-
-<div class="row mt-3">
-  <div class="col">
-      <span class="input-group-text text-center" [ngStyle]="{'background-color': workers_assigned_phase_BG_color, 'color': workers_assigned_phase_Text_color}" >Workers Assigned</span>
-  </div>
-  <div class="col">
-      <span class="input-group-text text-center" [ngStyle]="{'background-color': drawings_phase_BG_color, 'color': drawings_assigned_phase_Text_color}" >Drawings</span>
-  </div>
-  <div class="col">
-
-    <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211) "[ngStyle]="{'background-color': panel_phase_BG_color, 'color': panel_phase_Text_color}" >Panel Status</span>
-
-
-  </div>
-<div class="col">
-    <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211);"[ngStyle]="{'background-color': programmed_phase_BG_color, 'color': programmed_phase_Text_color}" >Programing</span>
-  </div>
-
-</div>
-
-<div class="row mt-3">
-  <div class="col">
-      <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': tested_phase_BG_color, 'color': tested_phase_Text_color}">Testing</span>
-  </div>
-
-<div class="col">
-
-  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': purchase_order_phase_BG_color, 'color': purchase_order_phase_Text_color}">Parts Ordered</span>
-
-</div>
-
-<div class="col">
-  <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': itemsDelivered_phase_BG_color, 'color': itemsDeivered_phase_Text_color}">Parts Arrived</span>
-</div>
-
-<div class="col">
-
-  <span class="input-group-text " style="font-weight: 400; background-color:white ;" [ngStyle]="{'background-color': installation_phase_BG_color, 'color': installation_phase_Text_color}">Installation</span>
-
-</div>
-
-</div>
-
-<div class="row mt-3">
-  <div class="col">
-    <span class="input-group-text " style="font-weight: 400; background-color:white ;" [ngStyle]="{'background-color': invoiceing_complete_phase_BG_color, 'color': invoiceing_complete_phase_Text_color}">Invoicing</span>
-  </div>
-
-  <div class="col">
-    <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': status_phase_BG_color, 'color': status_phase_Text_color}">Job Card</span>
-  </div>
-  <div class="col"></div>
-  <div class="col"></div>
-</div>
-
-
-
-
 <hr>
 </form>
 
 <!-- ///////////////////////////////////////Purchase Order////////////////////////////////////////// -->
 <h2>Installation</h2>
-<mat-checkbox [color]='color' [(ngModel)]="installationChecked" (change)="onPanelInstalled($event)" style="padding-left:5px" >Panel Installed</mat-checkbox>
+<mat-checkbox [disabled]="true" [color]='color' [(ngModel)]="installationChecked"  style="padding-left:5px" >Panel Installed</mat-checkbox>
 
 <hr>
 <!-- ///////////////////////////////////////Purchase Order////////////////////////////////////////// -->
 <h2>Purchase Orders</h2>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(purchaseOrder)">Add Purchase Order</button>
-<button class="btn btn-lg btn-outline-success ms-2" (click)="onCompletePurchaseOrders()">Complete Purchase Orders</button>
-<mat-checkbox [color]='color' [(ngModel)]="itemsDeliveredChecked" (change)="onItemsDelivered($event)" style="padding-left:5px" >Items Delivered</mat-checkbox>
+
+<mat-checkbox [disabled]="true" [color]='color' [(ngModel)]="itemsDeliveredChecked"  style="padding-left:5px" >Items Delivered</mat-checkbox>
 
 
 
@@ -296,7 +214,7 @@
       <mat-icon style="color:rgb(0, 0, 0)">close</mat-icon>
     </button>
   </div>
-  <form  #f="ngForm" (ngSubmit)="onAddPurchaseOrder(f)">
+  <form  #f="ngForm" >
   <div class="modal-body">
 
       <div class="form-group">
@@ -333,7 +251,6 @@
 
 <!-- ///////////////////////////////////////////////add Parts From Storage-->
 <h2>Materials From Storage</h2>
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Material From Store</button>
 <table class="table table-striped mt-4">
   <thead>
   <tr>
@@ -366,7 +283,7 @@
 
 
     <mat-tab label="Manually Add Part">
-      <form  #f="ngForm" (ngSubmit)="onAddManualPart(f)">
+      <form  #f="ngForm" >
         <div class="modal-body">
             <div class="form-group">
               <input  id=manual_part_name_add class="form-control  mt-1" placeholder="Part Name"  ngModel name="manual_part_name_add">
@@ -389,8 +306,7 @@
 
 <!-- ///////////////////////////////////////////////add Invoice ////////////////////////////////// -->
 <h2>Invoices</h2>
-<button class="btn btn-lg btn-outline-primary" (click)="open(invoice)">Add Invoice</button>
-<button class="btn btn-lg btn-outline-success ms-2" (click)="onCompleteInvoicing()">Complete Invoices</button>
+
 
 <table class="table table-striped mt-4">
   <thead>
@@ -420,7 +336,7 @@
     </button>
   </div>
 
-  <form  #f="ngForm" (ngSubmit)="onAddInvoice(f)">
+  <form  #f="ngForm" >
   <div class="modal-body">
     <div class="form-group">
     <input  id=invoice_Number class="form-control  mt-1" placeholder="Invoice Number"  ngModel name="invoice_Number">
@@ -448,3 +364,5 @@
   </div>
 
 
+
+</div>

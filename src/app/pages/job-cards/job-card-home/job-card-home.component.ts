@@ -20,8 +20,6 @@ export class JobCardHomeComponent implements OnInit {
   }
 
   createNewJobCard_Number(){
-
-
 this.router.navigate(['jobcard/create-jobcard']);
   }
 }

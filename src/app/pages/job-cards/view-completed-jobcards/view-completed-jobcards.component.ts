@@ -9,38 +9,32 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 
 
-interface JobCardInProgress {
+interface JobCard {
   job_Number: string;
   owner: number;
   order_Number: number;
   description: string;
 }
-// const ELEMENT_DATA: JobCardInProgress[] = [
-//   { name: 'Relay', part_number: 10579, qty: 8,description:"Volts 2"},
-//   { name: 'VSD', part_number: 10879, qty: 5,description:""},
-//   { name: 'Nuts', part_number: 10979, qty: 150,description:" 5mm"},
-//   { name: 'Nuts', part_number: 19979, qty: 125,description:"8mm"},
 
-// ];
+
 @Component({
-  selector: 'app-view-job-cards-in-progress',
-  templateUrl: './view-job-cards-in-progress.component.html',
-  styleUrls: ['./view-job-cards-in-progress.component.css']
+  selector: 'app-view-completed-jobcards',
+  templateUrl: './view-completed-jobcards.component.html',
+  styleUrls: ['./view-completed-jobcards.component.css']
 })
-export class ViewJobCardsInProgressComponent implements OnInit {
+export class ViewCompletedJobcardsComponent implements OnInit {
 
   STORAGE: Storage[]=[]
   storages:any;
   displayedColumns: string[] = ['job_Number', 'owner', 'order_Number', 'description'];
-  ELEMENT_DATA: JobCardInProgress[] =[]
+  ELEMENT_DATA: JobCard[] =[]
   dataSource:any;
 
   job_Number:any;
-
-  clickedRows = new Set<JobCardInProgress>();
+  clickedRows = new Set<JobCard>();
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, private JobCard_Service:JobCardService,  private router: Router) {
-    this.JobCard_Service.Get_JobCards_InProgress().subscribe(resp=>{
+    this.JobCard_Service.Get_Completed_JobCards().subscribe(resp=>{
       var data:any
       data = resp
       for (let i = 0; i < data.jobcards_InProgress.length; i++) {
@@ -50,25 +44,23 @@ export class ViewJobCardsInProgressComponent implements OnInit {
     })
   }
 
-
-
   ngOnInit() {
   }
 
 
-GetJobCardInProgress(){
-  for (let entry of this.clickedRows) {
-     this.job_Number=(entry.job_Number);
+  GetCompletedJobCard(){
+    for (let entry of this.clickedRows) {
+       this.job_Number=(entry.job_Number);
+    }
+   this.JobCard_Service.Fetch_JobCard(this.job_Number)
+  
+   setTimeout(() => {
+     this.router.navigate(['jobcard/completed-jobcards/view-jobcard'])
+   }, 500);
   }
- this.JobCard_Service.Fetch_JobCard(this.job_Number)
 
- setTimeout(() => {
-   this.router.navigate(['jobcard/jobcards-in-progress/edit-jobcard'])
- }, 500);
-}
-
-applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
-}
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

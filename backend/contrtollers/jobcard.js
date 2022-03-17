@@ -100,7 +100,7 @@ exports.CreateNewJobCard=(req,res,next)=>{
 
      }
 
-     exports.GetJobCardInProgress= (req, res, next) => {
+     exports.GetJobCard= (req, res, next) => {
       JobCard.findOne({job_Number: req.body.job_Number})
       .then(jobcard =>{
         fetchedJobCard=jobcard;
@@ -150,7 +150,6 @@ exports.CreateNewJobCard=(req,res,next)=>{
       })
       }
 
-
       exports.SaveJobCardStatus=(req,res,next)=>{
       JobCard.findOneAndUpdate({job_Number: req.body.job_Number},{status:"Completed"}).then(result=>{
         res.status(200).json({
@@ -165,6 +164,30 @@ exports.CreateNewJobCard=(req,res,next)=>{
     
     
          }
+
+
+         exports.GetListCompletedJobCards=(req,res,next)=>{
+          var MongoClient = require('mongodb').MongoClient;
+          var url = "mongodb://localhost:27017/";
+          MongoClient.connect(url, function(err, db) {
+        
+             var dbo = db.db("Betterday");
+             var query = {status:"Completed" };
+             var jobcards_InProgress=[];
+  
+             dbo.collection("jobcards").find(query).toArray(function(err, data){
+                i = 0;
+            while (i < data.length)
+            {
+              jobcards_InProgress[i] =data[i]
+                 i++;
+             }
+        res.status(200).json({
+          jobcards_InProgress,
+           });
+         });
+        })
+        }
 
 
 

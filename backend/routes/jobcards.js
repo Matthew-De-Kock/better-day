@@ -18,9 +18,9 @@ const JobcardController = require("../contrtollers/jobcard")
 
 
 
-router.get("/jobcard/jobcards-in-progress", JobcardController.GetListJobCardsInProgress)
 
-router.post("/jobcard/jobcard-in-progress",JobcardController.GetJobCardInProgress)
+
+
 
  router.get("/jobcard/jobnum",JobcardController.GetNewJobCardNumber)
 
@@ -31,17 +31,24 @@ router.post("/jobcard/jobcard-in-progress",JobcardController.GetJobCardInProgres
  router.post("/jobcard/save-status", JobcardController.SaveJobCardStatus);
 
 
+ router.get("/jobcard/jobcards-in-progress", JobcardController.GetListJobCardsInProgress)
+   router.post("/jobcard/fetch-jobcard",JobcardController.GetJobCard)
 
-    router.post("/jobcard/jobcard-in-progress/add-purchase-order", PurchaseOrderController.AddPurchaseOrder);
-    router.post("/jobcard/jobcard-in-progress/get-purchase-orders",PurchaseOrderController.GetPurchaseOrder)
-
-
-    router.post("/jobcard/jobcard-in-progress/add-part",JobCardStoragePartsController.AddJobCardStoragePart);
-    router.post("/jobcard/jobcard-in-progress/get-jobcard-parts",JobCardStoragePartsController.GetJobCardStorageParts)
+          router.post("/jobcard/jobcard-in-progress/add-purchase-order", PurchaseOrderController.AddPurchaseOrder);
+          router.post("/jobcard/jobcard-in-progress/get-purchase-orders",PurchaseOrderController.GetPurchaseOrder)
 
 
-    router.post("/jobcard/jobcard-in-progress/add-invoice", InvoiceController.AddInvoice);
-    router.post("/jobcard/jobcard-in-progress/get-invoices",InvoiceController.GetInvoices)
+          router.post("/jobcard/jobcard-in-progress/add-part",JobCardStoragePartsController.AddJobCardStoragePart);
+          router.post("/jobcard/jobcard-in-progress/get-jobcard-parts",JobCardStoragePartsController.GetJobCardStorageParts)
+
+
+          router.post("/jobcard/jobcard-in-progress/add-invoice", InvoiceController.AddInvoice);
+          router.post("/jobcard/jobcard-in-progress/get-invoices",InvoiceController.GetInvoices)
+
+
+
+
+router.get("/jobcard/completed-jobcards", JobcardController.GetListCompletedJobCards)
 
 
   module.exports= router;

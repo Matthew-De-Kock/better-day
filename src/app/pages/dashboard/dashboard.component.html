@@ -10,7 +10,7 @@
 
 <mat-accordion >
   <mat-expansion-panel 
-
+  expanded='true'
  >
 <mat-expansion-panel-header>
 <mat-panel-title>
@@ -18,24 +18,28 @@
 </mat-panel-title>
 
 </mat-expansion-panel-header>
-<button type="button" class="btn btn-success" style="width: 120px;" (click)="sendMail()" >SendMail</button>
+<button type="button" class="btn btn-success mb-2" style="width: 120px;" (click)="sendMail()" >SendMail</button>
 <table class="table align-middle">
   <thead class="table-dark">
     <tr>
       <th class="col-sm-2">Job Number</th>
-      <th class="col-sm-5">Description</th>
-      <th class="col-sm-3">Job</th>
+      <th class="col-sm-6">Description</th>
+      <th class="col-sm-2">Task</th>
       <th class="col-sm-2">Status</th>
     </tr>
   </thead>
 
-  <tbody *ngFor="let d of drawings_JobNumber_arr; index as i">
+  <tbody *ngFor="let d of drawings_JobNumber_arr; index as i"
+  style="border-color : rgb(223, 223, 223) ;
+  border-style : solid ;
+  border-width : 0">
+
       <tr *ngIf="drawings_phase_status_arr[i]!='Completed'" >
                 <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
                <td style ="color: black ; " >{{drawings_Descr_arr[i]}}</td>
                 <td style ="color: black ; " >Drawing</td> 
           <td>
-              <select [ngModel]="drawings_phase_status_arr[i]" (change)="onDrawingTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
+              <select [ngModel]="drawings_phase_status_arr[i]" (change)="onDrawingTaskStatusSelect($event,d)" style="min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
                 <option class="form-control"  value="Acknowledge" >Acknowledge</option>
                 <option class="form-control"  value="In Progress" >In Progress</option>
                 <option class="form-control" value="Completed" >Completed</option>
@@ -45,13 +49,18 @@
 
       </tr>
     </tbody>
-    <tbody *ngFor="let d of programmed_By_JobNumber_arr; index as i">
+    <tbody *ngFor="let d of programmed_By_JobNumber_arr; index as i"
+
+    style="border-color : rgb(223, 223, 223) ;
+    border-style : solid ;
+    border-width : 0">
+
       <tr *ngIf="programming_phase_status_arr[i]!='Completed'" >
         <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
        <td style ="color: black ; " >{{programmed_By_Descr_arr[i]}}</td>
         <td style ="color: black ; " >Programing</td> 
   <td>
-      <select [ngModel]="programming_phase_status_arr[i]" (change)="onProgrammedByTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': programmedBy_task_BC_arr[i], 'color': programmedBy_task_TC_arr[i]}">
+      <select [ngModel]="programming_phase_status_arr[i]" (change)="onProgrammedByTaskStatusSelect($event,d)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': programmedBy_task_BC_arr[i], 'color': programmedBy_task_TC_arr[i]}">
         <option class="form-control"  value="Acknowledge" >Acknowledge</option>
         <option class="form-control"  value="In Progress" >In Progress</option>
         <option class="form-control" value="Completed" >Completed</option>
@@ -61,13 +70,18 @@
 
 </tr>
     </tbody>
-    <tbody *ngFor="let d of tested_By_JobNumber_arr; index as i">
+    <tbody *ngFor="let d of tested_By_JobNumber_arr; index as i"
+    
+    style="border-color : rgb(223, 223, 223) ;
+    border-style : solid ;
+    border-width : 0">
+
 <tr  *ngIf="testedBy_phase_status_arr[i]!='Completed'" >
   <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
  <td style ="color: black ; " >{{tested_By_Descr_arr[i]}}</td>
   <td style ="color: black ; " >Testing</td> 
 <td>
-<select [ngModel]="testedBy_phase_status_arr[i]" (change)="onTestedByTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
+<select [ngModel]="testedBy_phase_status_arr[i]" (change)="onTestedByTaskStatusSelect($event,d)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
   <option class="form-control"  value="Acknowledge" >Acknowledge</option>
   <option class="form-control"  value="In Progress" >In Progress</option>
   <option class="form-control" value="Completed" >Completed</option>
@@ -77,13 +91,17 @@
 
 </tr>
     </tbody>
-    <tbody  *ngFor="let d of panel_Builders_JobNumber_arr; index as i">
+    <tbody  *ngFor="let d of panel_Builders_JobNumber_arr; index as i"
+    style="border-color : rgb(223, 223, 223) ;
+    border-style : solid ;
+    border-width : 0">
+
 <tr *ngIf="panelBuild_phase_status_arr[i]!='Completed'">
   <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
  <td style ="color: black ; " >{{panel_Builders_Descr_arr[i]}}</td>
   <td style ="color: black ; " >Panel Build</td> 
 <td>
-<select [ngModel]="panelBuild_phase_status_arr[i]" (change)="onPanelBuildTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': panelBuild_task_BC_arr[i], 'color': panelBuild_task_TC_arr[i]}">
+<select [ngModel]="panelBuild_phase_status_arr[i]" (change)="onPanelBuildTaskStatusSelect($event,d)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': panelBuild_task_BC_arr[i], 'color': panelBuild_task_TC_arr[i]}">
   <option class="form-control"  value="Acknowledge" >Acknowledge</option>
   <option class="form-control"  value="In Progress" >In Progress</option>
   <option class="form-control" value="Completed" >Completed</option>
@@ -110,12 +128,11 @@
 
 <!-- Completed Tasks -->
 <div class="row ms-3 me-3" >
-<mat-accordion>
-<mat-expansion-panel (opened)="panelOpenStateCompletedTasks = true"
-(closed)="panelOpenStateCompletedTasks = false">
+<mat-accordion >
+<mat-expansion-panel expanded='true'>
 <mat-expansion-panel-header>
 <mat-panel-title>
-  <h2 class="ps-2 pt-2">Completed Tasks</h2>
+  <h2 class="ps-2 pt-3">Completed Tasks:</h2>
     <br>
 </mat-panel-title>
 
@@ -124,76 +141,78 @@
 
   
     
-  <table class="table align-middle table-successv">
+  <table class="table align-middle  table-hover">
     <thead class="table-dark">
       <tr>
         <th class="col-sm-2">Job Number</th>
-        <th class="col-sm-5">Description</th>
-        <th class="col-sm-3">Job</th>
+        <th class="col-sm-6">Description</th>
+        <th class="col-sm-2">Task</th>
         <th class="col-sm-2">Status</th>
       </tr>
     </thead>
   
-    <tbody *ngFor="let d of drawings_JobNumber_arr; index as i">
+    <tbody *ngFor="let d of drawings_JobNumber_arr; index as i"
+    
+    style="border-color : rgb(223, 223, 223) ;
+    border-style : solid ;
+    border-width : 0">
+
         <tr *ngIf="drawings_phase_status_arr[i]=='Completed'" >
                   <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
                  <td style ="color: black ; " >{{drawings_Descr_arr[i]}}</td>
                   <td style ="color: black ; " >Drawing</td> 
-            <td>
-                <select [ngModel]="drawings_phase_status_arr[i]" (change)="onDrawingTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
-                  <option class="form-control"  value="Acknowledge" >Acknowledge</option>
-                  <option class="form-control"  value="In Progress" >In Progress</option>
-                  <option class="form-control" value="Completed" >Completed</option>
-                  <option class="form-control" value="Problem" >Problem</option>
-                </select>
-              </td>
+                  <td>
+                    <span class="input-group-text" style="font-weight: 400; background-color:rgb(92, 184, 92); color:white; " >Completed</span>
+                </td>
   
         </tr>
       </tbody>
-      <tbody *ngFor="let d of programmed_By_JobNumber_arr; index as i">
+
+      <tbody  *ngFor="let d of programmed_By_JobNumber_arr; index as i"
+      
+      style="border-color : rgb(223, 223, 223) ;
+            border-style : solid ;
+            border-width : 0">
+       
         <tr *ngIf="programming_phase_status_arr[i]=='Completed'" >
+         
           <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
          <td style ="color: black ; " >{{programmed_By_Descr_arr[i]}}</td>
           <td style ="color: black ; " >Programing</td> 
     <td>
-        <select [ngModel]="programming_phase_status_arr[i]" (change)="onProgrammedByTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': programmedBy_task_BC_arr[i], 'color': programmedBy_task_TC_arr[i]}">
-          <option class="form-control"  value="Acknowledge" >Acknowledge</option>
-          <option class="form-control"  value="In Progress" >In Progress</option>
-          <option class="form-control" value="Completed" >Completed</option>
-          <option class="form-control" value="Problem" >Problem</option>
-        </select>
+      <span class="input-group-text" style="font-weight: 400; background-color:rgb(92, 184, 92); color:white; " >Completed</span>
       </td>
-  
+
   </tr>
+
       </tbody>
-      <tbody *ngFor="let d of tested_By_JobNumber_arr; index as i">
+  
+      <tbody *ngFor="let d of tested_By_JobNumber_arr; index as i"
+      style="border-color : rgb(223, 223, 223) ;
+      border-style : solid ;
+      border-width : 0">
   <tr  *ngIf="testedBy_phase_status_arr[i]=='Completed'" >
     <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
    <td style ="color: black ; " >{{tested_By_Descr_arr[i]}}</td>
     <td style ="color: black ; " >Testing</td> 
-  <td>
-  <select [ngModel]="testedBy_phase_status_arr[i]" (change)="onTestedByTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
-    <option class="form-control"  value="Acknowledge" >Acknowledge</option>
-    <option class="form-control"  value="In Progress" >In Progress</option>
-    <option class="form-control" value="Completed" >Completed</option>
-    <option class="form-control" value="Problem" >Problem</option>
-  </select>
+    <td>
+      <span class="input-group-text" style="font-weight: 400; background-color:rgb(92, 184, 92); color:white; " >Completed</span>
   </td>
   
   </tr>
       </tbody>
-      <tbody  *ngFor="let d of panel_Builders_JobNumber_arr; index as i">
+      <tbody  *ngFor="let d of panel_Builders_JobNumber_arr; index as i"
+      
+      style="border-color : rgb(223, 223, 223) ;
+      border-style : solid ;
+      border-width : 0">
+ 
   <tr *ngIf="panelBuild_phase_status_arr[i]=='Completed'">
     <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
    <td style ="color: black ; " >{{panel_Builders_Descr_arr[i]}}</td>
     <td style ="color: black ; " >Panel Build</td> 
-  <td>
-  <select [ngModel]="panelBuild_phase_status_arr[i]" (change)="onPanelBuildTaskStatusSelect($event,d)" style=" width:160px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': panelBuild_task_BC_arr[i], 'color': panelBuild_task_TC_arr[i]}">
-    <option class="form-control"  value="Acknowledge" >Acknowledge</option>
-    <option class="form-control"  value="In Progress" >In Progress</option>
-    <option class="form-control" value="Completed" >Completed</option>
-    <option class="form-control" value="Problem" >Problem</option>
-  </select>
+    <td>
+      <span class="input-group-text" style="font-weight: 400; background-color:rgb(92, 184, 92); color:white; " >Completed</span>
   </td>
   
   </tr>

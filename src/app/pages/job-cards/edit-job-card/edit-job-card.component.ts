@@ -128,9 +128,6 @@ installationChecked:boolean = false
 
 //  clickedRows = new Set<StorageMaterials>();
 
- partsArr:any[]=[]
- qtysArr:any=[]
-
  jobNumber!:number;
   constructor(private http: HttpClient,config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) {
     config.backdrop = 'static';
