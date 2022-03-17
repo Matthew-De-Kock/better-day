@@ -6,10 +6,19 @@
 
 
 <div class="row ms-3 me-3" >
-<div class=" shadow-sm p-3  bg-body text-start "  style="width: 100%; ">
-  <h2 class="ps-2 pt-2">Your Tasks</h2>
-  <br>
-  
+
+
+<mat-accordion >
+  <mat-expansion-panel 
+
+ >
+<mat-expansion-panel-header>
+<mat-panel-title>
+  <h2 class="ps-2 pt-3">Your Tasks:</h2>
+</mat-panel-title>
+
+</mat-expansion-panel-header>
+<button type="button" class="btn btn-success" style="width: 120px;" (click)="sendMail()" >SendMail</button>
 <table class="table align-middle">
   <thead class="table-dark">
     <tr>
@@ -86,8 +95,13 @@
   </tbody>
 </table>
 
+</mat-expansion-panel>
+</mat-accordion>
 
-</div>
+
+
+
+
 </div>
 <br>
 <br>
@@ -95,12 +109,20 @@
 
 
 <!-- Completed Tasks -->
-
-
 <div class="row ms-3 me-3" >
-  <div class=" shadow-sm p-3  bg-body text-start "  style="width: 100%; ">
-    <h2 class="ps-2 pt-2">Completed Tasks</h2>
+<mat-accordion>
+<mat-expansion-panel (opened)="panelOpenStateCompletedTasks = true"
+(closed)="panelOpenStateCompletedTasks = false">
+<mat-expansion-panel-header>
+<mat-panel-title>
+  <h2 class="ps-2 pt-2">Completed Tasks</h2>
     <br>
+</mat-panel-title>
+
+</mat-expansion-panel-header>
+
+
+  
     
   <table class="table align-middle table-successv">
     <thead class="table-dark">
@@ -178,12 +200,18 @@
     </tbody>
   </table>
   
-  
-  </div>
-  </div>
-  <br>
-  <br>
 
+</mat-expansion-panel>
+</mat-accordion>
+
+</div>
+
+<br>
+<br>
+
+
+  <br>
+  <br>
 <br>
 
 

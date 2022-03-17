@@ -8,7 +8,8 @@ const AuthRoutes = require("./routes/auth")
 const AdminRoutes = require("./routes/admin")
 const JobCardRoutes = require("./routes/jobcards")
 const DashboardRoutes = require("./routes/dashboard")
-const admin = require('./Database-Functions/create-admin')
+const Admin = require('./Database-Functions/create-admin')
+const Mail = require("./routes/mail")
 
 const app = express();
 
@@ -19,7 +20,7 @@ console.log('Connected to database')
 .catch(()=>{
 console.log('Connection Failed')
 });
-admin.CreateAdmin()
+Admin.CreateAdmin()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,5 +49,6 @@ app.use(AuthRoutes)
 app.use(AdminRoutes)
 app.use(JobCardRoutes)
 app.use(DashboardRoutes)
+app.use(Mail)
 
 module.exports=app;

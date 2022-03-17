@@ -7,7 +7,7 @@ exports.GetNewJobCardNumber=(req,res,next)=>{
   var MongoClient = require('mongodb').MongoClient;
   var url = "mongodb://localhost:27017/";
   MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
+
      var dbo = db.db("Betterday");
 
      var query = { };
@@ -127,14 +127,14 @@ exports.CreateNewJobCard=(req,res,next)=>{
         var MongoClient = require('mongodb').MongoClient;
         var url = "mongodb://localhost:27017/";
         MongoClient.connect(url, function(err, db) {
-          if (err) throw err;
+      
            var dbo = db.db("Betterday");
 
            var query = {status:"In Progress" };
            var jobcards_InProgress=[];
 
            dbo.collection("jobcards").find(query).toArray(function(err, data){
-            if (err) throw err;
+        
               i = 0;
 
           while (i < data.length)

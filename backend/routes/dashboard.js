@@ -9,14 +9,18 @@ const JobCard = require('../models/jobcard');
 
 
 router.post("/dashboard/getuserjobs",(req, res, next) => {
+
+  // var query = {programmed_By: req.body.name  };
+  // JobCard.find(query).then(data=>{
+  //    console.log(data)
+  //     })
+
+
   var MongoClient = require('mongodb').MongoClient;
   var url = "mongodb://localhost:27017/";
   MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
+
      var dbo = db.db("Betterday");
-
-
-
      var query = {drawings_By: req.body.name  };
      var drawings_JobNumber_arr=[];
      var drawings_Descr_arr=[];
@@ -24,7 +28,7 @@ router.post("/dashboard/getuserjobs",(req, res, next) => {
      var count
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
-   if (err) throw err;
+  //  if (err) throw err;
    i = 0;
 
     while (i < data.length)
@@ -46,7 +50,7 @@ dbo.collection("jobcards").find(query).toArray(function(err, data){
  var count
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
-if (err) throw err;
+// if (err) throw err;
 i = 0;
 while (i < data.length)
 {
@@ -66,7 +70,7 @@ var programming_phase_status_arr=[]
 var count
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
-if (err) throw err;
+// if (err) throw err;
 i = 0;
 while (i < data.length)
 {
@@ -84,7 +88,7 @@ var tested_By_Descr_arr=[];
 var testedBy_phase_status_arr=[]
 var count
 dbo.collection("jobcards").find(query).toArray(function(err, data){
-cosole.log(err)
+
   i = 0;
   while (i < data.length)
   {
@@ -112,13 +116,15 @@ cosole.log(err)
     testedBy_phase_status_arr
      });
   });
-
-
-
 })
 }
-
   );
+
+
+
+
+
+
 
 router.post("/dashboard/save-phase-status", (req,res, next) =>{
 var count = req.body.count;

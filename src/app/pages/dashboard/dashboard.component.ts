@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DashboardService } from 'src/app/Service-Files/dashboard.service';
@@ -48,7 +49,11 @@ testedBy_task_TC_arr : string[]=[];
 testedBy_phase_status_arr: string[]=[];
 
   flag!: boolean;
-  constructor(private ds: DashboardService, private JobCard_Service:JobCardService, ) { }
+  panelOpenStateTasks = true;
+  panelOpenStateCompletedTasks=true;
+
+  emailLoading:boolean=false;
+  constructor(private http: HttpClient,private ds: DashboardService, private JobCard_Service:JobCardService, ) { }
 
 
 ngOnDestroy(){
@@ -139,6 +144,8 @@ checkPhases(){
     else if(this.drawings_phase_status_arr[i]=='Problem'){
       this.drawings_task_BC_arr[i]="#d9534f"
       this.drawings_task_TC_arr[i]='white'
+
+
     }
     
   }
@@ -216,10 +223,36 @@ checkPhases(){
         else if(this.testedBy_phase_status_arr[i]=='Problem'){
           this.testedBy_task_BC_arr[i]="#d9534f"
           this.testedBy_task_TC_arr[i]='white'
+
+   
+
+
         }
       }
     
 
+
+}
+
+sendMail(){
+  this.emailLoading=true
+  let user ={
+    name: "Matthew De Kock",
+    email: "mdkdekock501@gmail.com"
+  }
+  console.log("hi")
+  this.http.post("http://localhost:3000/sendmail", user).subscribe(
+    data=>{
+      let resp:any=data
+      console.log("Email has been sent out to Supervisor")
+    },
+    err=>{
+      console.log(err)
+      this.emailLoading=false
+    },()=>{
+      this.emailLoading=false
+    }
+  )
 
 }
 
