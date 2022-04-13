@@ -12,7 +12,7 @@
 <!-- ///////////////////////////////////////User////////////////////////////////////////// -->
 <form  #f="ngForm"  (ngSubmit)="SaveJobCard(f)" >
   <div class="row ">
-<div class="col "  >
+    <div class="col-sm-6">
   <div class="form-group">
     <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Owner:</span>
@@ -26,9 +26,10 @@
 </div>
 
 </div>
+<br>
+<br>
 
-
-    <div class="col ">
+<div class="col-sm-6">
   <div class="mb-5 rounded flex-wrap"  >
     <div class="row">
       <div class="input-group">
@@ -44,7 +45,7 @@
   </div>
 
   <div class="row">
-    <div class="col">
+    <div class="col-sm-6">
 
         <div class="input-group ">
           <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Start Date:</span>
@@ -55,8 +56,10 @@
           </div>
       </div>
     </div>
+<br>
+<br>
 
-    <div class="col">
+    <div class="col-sm-6">
       <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white " >Client:</span>
       <input  id=client class="form-control " placeholder="Client" [(ngModel)]="client" ngModel name="client"   >
@@ -66,13 +69,15 @@
   </div>
 <div class="row mt-3">
 
-  <div class="col">
+  <div class="col-sm-6">
     <div class="input-group ">
     <span class="input-group-text " style="font-weight: 400; background-color:white " >Order Number:</span>
     <input  id=order-no class="form-control " placeholder="ORDER No" [(ngModel)]="order_Number"  ngModel name="order_no"   >
   </div>
  </div>
-  <div class="col">
+ <br>
+ <br>
+ <div class="col-sm-6">
     <div class="form-group">
       <div class="input-group ">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Company:</span>
@@ -97,21 +102,22 @@
 
 <hr>
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-6">
     <div class="input-group  ">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel Number:</span>
       <input  id=panel-no class="form-control " placeholder="Panel Number" [(ngModel)]="panel_Number" ngModel name="panel_Number"   >
 
     </div>
   </div>
-
-  <div class="col">
+<br>
+<br>
+  <div class="col-sm-6">
 </div>
 </div>
 
 
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-6">
     <div class="input-group ">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Drawings By:</span>
       <select class="form-select" id="exampleSelect" [(ngModel)]="drawings_By" ngModel name="drawings_By">
@@ -119,7 +125,9 @@
       </select>
     </div>
   </div>
-  <div class="col">    <div class="input-group border-none">
+  <br>
+  <br>
+  <div class="col-sm-6">    <div class="input-group border-none">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Programmed By</span>
     <select class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
       <option class="form-control" >Daniel</option>
@@ -130,7 +138,7 @@
 </div>
 
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-6">
     <div class="input-group border border-white" >
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel-Builder/s</span>
       <div  id=pb class="form-control " placeholder=""    >
@@ -174,7 +182,9 @@
 
     </ng-template>
 </div>
-    <div class="col">
+<br>
+<br>
+<div class="col-sm-6">
       <div class="input-group mt-1">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Tested By:</span>
         <select class="form-select" id="exampleSelect" [(ngModel)]="tested_By" ngModel name="tested_By">
@@ -215,57 +225,52 @@
 
 
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-3">
       <span class="input-group-text text-center" [ngStyle]="{'background-color': workers_assigned_phase_BG_color, 'color': workers_assigned_phase_Text_color}" >Workers Assigned</span>
   </div>
-  <div class="col">
+  <div class="col-sm-3">
       <span class="input-group-text text-center" [ngStyle]="{'background-color': drawings_phase_BG_color, 'color': drawings_assigned_phase_Text_color}" >Drawings</span>
   </div>
-  <div class="col">
+  <div class="col-sm-3">
 
     <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211) "[ngStyle]="{'background-color': panel_phase_BG_color, 'color': panel_phase_Text_color}" >Panel Status</span>
 
 
   </div>
-<div class="col">
+  <div class="col-sm-3">
     <span class="input-group-text " style="font-weight: 400; background-color:rgb(211, 211, 211);"[ngStyle]="{'background-color': programmed_phase_BG_color, 'color': programmed_phase_Text_color}" >Programing</span>
   </div>
 
 </div>
 
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-3">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': tested_phase_BG_color, 'color': tested_phase_Text_color}">Testing</span>
   </div>
 
-<div class="col">
-
+  <div class="col-sm-3">
   <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': purchase_order_phase_BG_color, 'color': purchase_order_phase_Text_color}">Parts Ordered</span>
-
 </div>
 
-<div class="col">
+<div class="col-sm-3">
   <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': itemsDelivered_phase_BG_color, 'color': itemsDeivered_phase_Text_color}">Parts Arrived</span>
 </div>
 
-<div class="col">
-
+<div class="col-sm-3">
   <span class="input-group-text " style="font-weight: 400; background-color:white ;" [ngStyle]="{'background-color': installation_phase_BG_color, 'color': installation_phase_Text_color}">Installation</span>
-
 </div>
 
 </div>
-
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-3">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;" [ngStyle]="{'background-color': invoiceing_complete_phase_BG_color, 'color': invoiceing_complete_phase_Text_color}">Invoicing</span>
   </div>
 
-  <div class="col">
+  <div class="col-sm-3">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;"  [ngStyle]="{'background-color': status_phase_BG_color, 'color': status_phase_Text_color}">Job Card</span>
   </div>
-  <div class="col"></div>
-  <div class="col"></div>
+  <div class="col-sm-3"></div>
+  <div class="col-sm-3"></div>
 </div>
 
 

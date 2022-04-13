@@ -1,8 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/Service-Files/auth.service';
+// import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
 import { DashboardService } from 'src/app/Service-Files/dashboard.service';
 import { JobCardService } from 'src/app/Service-Files/jobcard.service';
+
 
 
 @Component({
@@ -12,9 +16,10 @@ import { JobCardService } from 'src/app/Service-Files/jobcard.service';
 })
 export class DashboardComponent implements OnInit {
 role = localStorage.getItem("role")!;
-name = localStorage.getItem("name")!;
+userName = localStorage.getItem("name")!;
+userEmail = localStorage.getItem("email")!;
 
-
+closeResult = '';
 phases!: string[]
 
 drawings_JobNumber_arr! : string[];
@@ -53,7 +58,9 @@ testedBy_phase_status_arr: string[]=[];
   panelOpenStateCompletedTasks=true;
 
   emailLoading:boolean=false;
-  constructor(private http: HttpClient,private ds: DashboardService, private JobCard_Service:JobCardService, ) { }
+  problemJobNum = '';
+  constructor(private http: HttpClient,private ds: DashboardService, private JobCard_Service:JobCardService, private modalService: NgbModal 
+    , private as:AuthService) { }
 
 
 ngOnDestroy(){
@@ -61,9 +68,11 @@ ngOnDestroy(){
 }
 
   ngOnInit(){
+
+
     var flag = setInterval(()=>{
 
-      this.ds.GetJobs(this.name).subscribe((data=>{
+      this.ds.GetJobs(this.userName).subscribe((data=>{
         this.drawings_JobNumber_arr=data.drawings_JobNumber_arr
         this.drawings_Descr_arr=data.drawings_Descr_arr
         this.drawings_phase_status_arr= data.drawings_phase_status_arr
@@ -237,10 +246,10 @@ checkPhases(){
 sendMail(){
   this.emailLoading=true
   let user ={
-    name: "Matthew De Kock",
-    email: "mdkdekock501@gmail.com"
+    userName: this.userName,
+    email: this.userEmail
+
   }
-  console.log("hi")
   this.http.post("http://localhost:3000/sendmail", user).subscribe(
     data=>{
       let resp:any=data
@@ -256,19 +265,61 @@ sendMail(){
 
 }
 
-onDrawingTaskStatusSelect(stat:any,job_Number:string){
+
+onSendMail(form: NgForm){
+
+ var supervisorEmail= form.value.supervisor
+ var problemDescription =  form.value.description
+  this.emailLoading=true
+  let info ={
+    userName: this.userName,
+    userEmail: this.userEmail,
+    supervisor: supervisorEmail,
+    problemDescription: problemDescription,
+    jobNumber: this.problemJobNum
+  }
+  console.log("hi")
+  this.http.post("http://localhost:3000/sendmail", info).subscribe(
+    data=>{
+      let resp:any=data
+      console.log("Email has been sent out to Supervisor")
+
+     
+      this.emailLoading=false
+
+      
+    },
+
+  )
+
+}
+onDrawingTaskStatusSelect(stat:any,job_Number:string,content:any){
     this.ds.savePhaseStatus(1,stat.target.value,job_Number)
     .subscribe(data =>{
     console.log(data)
+
+
+
 })
 
 
   }
 
-  onProgrammedByTaskStatusSelect(stat:any, job_Number:string){
+  onProgrammedByTaskStatusSelect(stat:any, job_Number:string,content:any){
     this.ds.savePhaseStatus(3,stat.target.value,job_Number)
     .subscribe(data =>{
     console.log(data)
+    console.log(stat.target.value)
+this.problemJobNum = job_Number
+    if(stat.target.value=="Problem"){
+      this.modalService.open(content).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+
+
 })
 
     }
@@ -290,5 +341,13 @@ onDrawingTaskStatusSelect(stat:any,job_Number:string){
         }
 
 
-
+        private getDismissReason(reason: any): string {
+          if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+          } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+          } else {
+            return `with: ${reason}`;
+          }
+        }
 }

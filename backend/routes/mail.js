@@ -4,14 +4,19 @@ const express = require('express');
 const router = express.Router();
 router.post("/sendmail",(req,res)=>{
     console.log("request came")
-    let user = req.body
-    sendMail(user,info=>{
+    let info = req.body
+
+ console.log(info.problemDescription)
+ 
+ console.log(info.jobNumber)
+
+    sendMail(info,information=>{
         console.log('The mail has been sent !!!!')
         res.send(info)
     })
 })
 
-async function sendMail(user, callback){
+async function sendMail(info, callback){
     let transporter = nodemailer.createTransport({
 host:"smtp.gmail.com",
 port:587,
@@ -23,14 +28,14 @@ auth:{
     })
 
     let mailOptions = {
-        from: '"Matthew De Kock" <mdkdekock501@gmail.com>',
-        to: "jedi2159@gmail.com",
-        subject:"Nodemailer Test Email",
-        html:`<h1>Problem has been detected</h1`
+        from: info.userName + '<' + info.userEmail + '>',
+        to: info.supervisor,
+        subject:"Jobcard " +info.jobNumber +" Problem",
+        html: info.problemDescription 
     };
 
-    let info =await transporter.sendMail(mailOptions)
-    callback(info)
+    let information =await transporter.sendMail(mailOptions)
+    callback(information)
 }
 
 module.exports= router;

@@ -19,7 +19,8 @@ router.post("/dashboard/getuserjobs",(req, res, next) => {
   var MongoClient = require('mongodb').MongoClient;
   var url = "mongodb://localhost:27017/";
   MongoClient.connect(url, function(err, db) {
-
+if(db==undefined){}
+else{}
      var dbo = db.db("Betterday");
      var query = {drawings_By: req.body.name  };
      var drawings_JobNumber_arr=[];
@@ -30,7 +31,8 @@ router.post("/dashboard/getuserjobs",(req, res, next) => {
 dbo.collection("jobcards").find(query).toArray(function(err, data){
   //  if (err) throw err;
    i = 0;
-
+if(data.length==undefined){}
+else{
     while (i < data.length)
     {
       drawings_JobNumber_arr[i] =data[i].job_Number
@@ -40,7 +42,7 @@ dbo.collection("jobcards").find(query).toArray(function(err, data){
          count = i
      }
 
-
+    }
  });
 
  var query = {panel_Builders: req.body.name };
@@ -116,6 +118,7 @@ dbo.collection("jobcards").find(query).toArray(function(err, data){
     testedBy_phase_status_arr
      });
   });
+  
 })
 }
   );

@@ -1,17 +1,25 @@
 <div style="background-color: rgb(245, 248, 250);">
-<p></p>
 <br>
-
-<br><br>
-
-<mat-toolbar class="shadow-sm" style="  border-top: 1px solid rgb(221, 229, 235); height: 2rem; top: 62px">
+<br>
+<br>
+<mat-toolbar class="shadow-sm secondbar" style=" position: relative; border-top: 1px solid rgb(221, 229, 235); height: 2rem;">
     <button onclick="history.back()" class="toolbar-button" mat-icon-button>
       <mat-icon >keyboard_backspace</mat-icon>
     </button>
+
+    <span class="spacer"></span>
+
+    <button  (click)="downloadPDF()" style="margin-right: 82px;" class="toolbar-button" mat-icon-button xPosition="after"  >
+      Export to PDF
+      <mat-icon style=" margin-right: 20%; margin-bottom: 4%;"  class="icon toolbar-button">picture_as_pdf</mat-icon>
+    </button>
 </mat-toolbar>
 <br>
-<div class="d-flex justify-content-center  text-center pt-5" >
+<br>
+<br>
 
+<div class="d-flex justify-content-center  text-center pt-5" id="jobcard" #jobcard>
+<div></div>
   <div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 1050px;  " >
 
   <h1>Job Card</h1>
@@ -20,7 +28,8 @@
 <!-- ///////////////////////////////////////User////////////////////////////////////////// -->
 <form  #f="ngForm">
   <div class="row ">
-<div class="col "  >
+
+<div class="col-sm-6"  >
   <div class="form-group">
     <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Owner:</span>
@@ -34,9 +43,13 @@
 </div>
 
 </div>
+<br>
+<br>
 
 
-    <div class="col ">
+
+
+    <div class="col-sm-6">
   <div class="mb-5 rounded flex-wrap"  >
     <div class="row">
       <div class="input-group">
@@ -49,10 +62,12 @@
 
   </div>
     </div>
+ 
+  
   </div>
 
   <div class="row">
-    <div class="col">
+    <div class="col-sm-6">
 
         <div class="input-group ">
           <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Start Date:</span>
@@ -60,8 +75,10 @@
                  name="dp"  ngbDatepicker #d="ngbDatepicker" ngModel name="start_Date">
       </div>
     </div>
+    <br>
+    <br>
 
-    <div class="col">
+    <div class="col-sm-6">
       <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white " >Client:</span>
       <input disabled id=client class="form-control " placeholder="Client" [(ngModel)]="client" ngModel name="client"   >
@@ -69,15 +86,21 @@
    </div>
 
   </div>
+
+
+
 <div class="row mt-3">
 
-  <div class="col">
+  <div class="col-sm-6">
     <div class="input-group ">
     <span class="input-group-text " style="font-weight: 400; background-color:white " >Order Number:</span>
     <input disabled id=order-no class="form-control " placeholder="ORDER No" [(ngModel)]="order_Number"  ngModel name="order_no"   >
   </div>
  </div>
-  <div class="col">
+ <br>
+ <br>
+
+ <div class="col-sm-6">
     <div class="form-group">
       <div class="input-group ">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Company:</span>
@@ -102,21 +125,22 @@
 
 <hr>
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-6">
     <div class="input-group  ">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel Number:</span>
       <input disabled id=panel-no class="form-control " placeholder="Panel Number" [(ngModel)]="panel_Number" ngModel name="panel_Number"   >
 
     </div>
   </div>
-
-  <div class="col">
+<br>
+<br>
+  <div class="col-sm-6">
 </div>
 </div>
 
 
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-6">
     <div class="input-group ">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Drawings By:</span>
       <select disabled class="form-select" id="exampleSelect" [(ngModel)]="drawings_By" ngModel name="drawings_By">
@@ -124,7 +148,9 @@
       </select>
     </div>
   </div>
-  <div class="col">    <div class="input-group border-none">
+  <br>
+  <br>
+  <div class="col-sm-6">    <div class="input-group border-none">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Programmed By</span>
     <select disabled class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
       <option class="form-control" >Daniel</option>
@@ -135,7 +161,7 @@
 </div>
 
 <div class="row mt-3">
-  <div class="col">
+  <div class="col-sm-6">
     <div class="input-group border border-white" >
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel-Builder/s</span>
       <div  id=pb class="form-control " placeholder=""    >
@@ -178,7 +204,9 @@
 
     </ng-template>
 </div>
-    <div class="col">
+<br>
+<br>
+<div class="col-sm-6">
       <div class="input-group mt-1">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Tested By:</span>
         <select disabled class="form-select" id="exampleSelect" [(ngModel)]="tested_By" ngModel name="tested_By">
@@ -357,9 +385,7 @@
 </form>
 </ng-template>
 
-
-
-
+<br>
 </div>
   </div>
 

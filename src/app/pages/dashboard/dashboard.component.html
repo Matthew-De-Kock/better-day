@@ -19,6 +19,7 @@
 
 </mat-expansion-panel-header>
 <button type="button" class="btn btn-success mb-2" style="width: 120px;" (click)="sendMail()" >SendMail</button>
+<div style="max-height:245px"class="table-responsive">
 <table class="table align-middle">
   <thead class="table-dark">
     <tr>
@@ -39,7 +40,7 @@
                <td style ="color: black ; " >{{drawings_Descr_arr[i]}}</td>
                 <td style ="color: black ; " >Drawing</td> 
           <td>
-              <select [ngModel]="drawings_phase_status_arr[i]" (change)="onDrawingTaskStatusSelect($event,d)" style="min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
+              <select [ngModel]="drawings_phase_status_arr[i]" (change)="onDrawingTaskStatusSelect($event,d,content)" style="min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
                 <option class="form-control"  value="Acknowledge" >Acknowledge</option>
                 <option class="form-control"  value="In Progress" >In Progress</option>
                 <option class="form-control" value="Completed" >Completed</option>
@@ -60,7 +61,7 @@
        <td style ="color: black ; " >{{programmed_By_Descr_arr[i]}}</td>
         <td style ="color: black ; " >Programing</td> 
   <td>
-      <select [ngModel]="programming_phase_status_arr[i]" (change)="onProgrammedByTaskStatusSelect($event,d)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': programmedBy_task_BC_arr[i], 'color': programmedBy_task_TC_arr[i]}">
+      <select [ngModel]="programming_phase_status_arr[i]" (change)="onProgrammedByTaskStatusSelect($event,d,content)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': programmedBy_task_BC_arr[i], 'color': programmedBy_task_TC_arr[i]}">
         <option class="form-control"  value="Acknowledge" >Acknowledge</option>
         <option class="form-control"  value="In Progress" >In Progress</option>
         <option class="form-control" value="Completed" >Completed</option>
@@ -112,7 +113,7 @@
 </tr>
   </tbody>
 </table>
-
+</div>
 </mat-expansion-panel>
 </mat-accordion>
 
@@ -140,8 +141,8 @@
 
 
   
-    
-  <table class="table align-middle  table-hover">
+<div style="max-height:245px"class="table-responsive">
+  <table  class="table align-middle  table-hover">
     <thead class="table-dark">
       <tr>
         <th class="col-sm-2">Job Number</th>
@@ -218,7 +219,7 @@
   </tr>
     </tbody>
   </table>
-  
+</div>  
 
 </mat-expansion-panel>
 </mat-accordion>
@@ -242,3 +243,32 @@
 
 
 
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Notify Superior</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <mat-progress-bar style="background-color: black" *ngIf="emailLoading==true" mode="indeterminate"></mat-progress-bar>
+
+  <form   #f="ngForm" (ngSubmit)="onSendMail(f)">
+  <div class="modal-body">
+
+      <div class="mb-3">
+<label style="padding-bottom: 4px;"> Select Superior: </label>
+        <select ngModel name="supervisor" class="form-select " id="exampleSelect" >
+          <!-- <option class="form-control"  value="Acknowledge" >Warwick McLeland</option>
+          <option class="form-control"  value="In Progress" >Daniel Duvenage</option> -->
+          <option class="form-control"  value="jedi2159@gmail.com" >Matthew De Kock</option>
+        </select>
+        <br>
+        <label style="padding-bottom: 4px;"> Description of Problem:  </label>
+        <textarea id=description class="form-control " ngModel name="description"  ></textarea>
+      </div>
+ 
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Send Mail</button>
+  </div>
+</form>
+
+</ng-template>

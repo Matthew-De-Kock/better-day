@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalConfig, NgbModal,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +11,9 @@ import { StorageParts } from "src/app/models/storage-parts.model";
 import { Invoice } from "src/app/models/invoice.model";
 import { DashboardService } from 'src/app/Service-Files/dashboard.service';
 import { HttpClient } from '@angular/common/http';
+
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas'
 
 interface Country {
   supplier: string;
@@ -112,6 +115,9 @@ installationChecked:boolean = true
  displayedColumns: string[] = ['select','name', 'part_number', 'qty', 'description'];
 
  jobNumber!:number;
+
+
+
  constructor(private http: HttpClient,config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) {
   config.backdrop = 'static';
   config.keyboard = false;
@@ -179,9 +185,40 @@ break
   }
 }
 
+// @ViewChild('jobcard') jobcard!:ElementRef;
 
+// public downloadPDF(){
+// let doc = new jsPDF('p', 'pt', 'a5');;
+// let specialElementHandlers ={
+//   '#editor':function(element:any, renderer:any){
+// return true
+//   }
+// };
 
+// let jobcard = this.jobcard.nativeElement
 
+// doc.html(jobcard.innerHTML,{
+//   callback: doc=>{
+//     doc.save()
+//   }
+// })
+// }
+
+@ViewChild('jobcard') jobcard!:ElementRef;
+public downloadPDF()
+{
+  let jobcard = this.jobcard.nativeElement
+html2canvas(jobcard).then(canvas => {
+// Few necessary setting options
+ 
+const contentDataURL = canvas.toDataURL('image/png')
+let pdf = new jsPDF('p', 'cm', 'a4'); // A4 size page of PDF
+var width = pdf.internal.pageSize.getWidth();
+var height = canvas.height * width / canvas.width;
+pdf.addImage(contentDataURL, 'JPEG', 0, 0, width, height)
+pdf.save('a4.pdf'); // Generated PDF
+});
+}
 
 callPurchaseOrderTable(){
   this.JobCard_Service.Get_PurchaseOrdersForJobCard(this.job_Number)

@@ -1,17 +1,28 @@
 mat-toolbar{
-  position: -webkit-fixed;
   position: fixed !important;
   background-color: rgb(255, 255, 255);;
-  /* background-color: rgb(21, 38, 75); */
-
-
   width: 100%;
   z-index: 101;
-
 }
 .toolbar-button:hover{
     color: rgb(245, 59, 59);
-    /* background-color: rgb(255, 255, 255); */
-    /* color: rgb(67, 211, 255);; */
-        background-color: transparent ;
+   background-color: transparent ;
   }
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+@media screen and (max-width : 415px)
+{
+  .secondbar{
+    top:2rem;
+  }
+}
+
+.wrapper-grid{
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit,360px);
+  justify-content: center;
+
+}
