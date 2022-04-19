@@ -2,7 +2,17 @@
 <br>
 <br>
 <br>
+<mat-toolbar class="shadow-sm secondbar" style=" position: relative; border-top: 1px solid rgb(221, 229, 235); height: 2rem;">
+  <button onclick="history.back()" class="toolbar-button" mat-icon-button>
+    <mat-icon >keyboard_backspace</mat-icon>
+  </button>
+  <span class="spacer"></span>
+</mat-toolbar>
+
 <br>
+<br>
+
+
 <mat-form-field appearance="standard" class="filter">
   <mat-label>Search</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 1024" #input>

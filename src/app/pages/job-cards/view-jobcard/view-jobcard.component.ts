@@ -185,24 +185,7 @@ break
   }
 }
 
-// @ViewChild('jobcard') jobcard!:ElementRef;
 
-// public downloadPDF(){
-// let doc = new jsPDF('p', 'pt', 'a5');;
-// let specialElementHandlers ={
-//   '#editor':function(element:any, renderer:any){
-// return true
-//   }
-// };
-
-// let jobcard = this.jobcard.nativeElement
-
-// doc.html(jobcard.innerHTML,{
-//   callback: doc=>{
-//     doc.save()
-//   }
-// })
-// }
 
 @ViewChild('jobcard') jobcard!:ElementRef;
 public downloadPDF()

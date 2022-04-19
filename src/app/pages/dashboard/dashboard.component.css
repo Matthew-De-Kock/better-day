@@ -57,3 +57,26 @@ span { display: flex;
     overflow: hidden;
     vertical-align: middle;
 } */
+
+.pdfButton{
+  height: 20px;
+  width: 120px;
+  background-color: white;
+  border: 0;
+  font-size: small;
+  margin-bottom:11px;
+}
+
+.pdfButton:hover{
+  color: rgb(245, 59, 59);
+ background-color: transparent ;
+}
+
+.item{
+  /* color:rgb(88, 88, 88); */
+  /* color:rgb(194, 194, 194); */
+  text-align: left;
+  font-size:12px;
+  font-weight: 500;
+  font-family: "Verdana";
+}

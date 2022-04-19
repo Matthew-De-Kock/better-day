@@ -1,3 +1,19 @@
+
+mat-toolbar{
+  position: -webkit-fixed;
+  position: fixed !important;
+  background-color: rgb(255, 255, 255);;
+  width: 100%;
+  z-index: 101;
+}
+.toolbar-button:hover{
+    color: rgb(245, 59, 59);
+   background-color: transparent ;
+  }
+
+
+
+
 hr
 {
 color:rgb(0, 110, 255);

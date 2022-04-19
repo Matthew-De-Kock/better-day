@@ -16,9 +16,21 @@
 <mat-panel-title>
   <h2 class="ps-2 pt-3">Your Tasks:</h2>
 </mat-panel-title>
-
 </mat-expansion-panel-header>
-<button type="button" class="btn btn-success mb-2" style="width: 120px;" (click)="sendMail()" >SendMail</button>
+
+
+<!-- <input type="text" placeholder="Filter Table:" style="margin-bottom: 8px; width: 350px;" [(ngModel)]="filterValue" class="form-control"> -->
+<div class="text-end">
+  <!-- <button  style="width: 100px;" mat-button class="pdfButton" ><mat-icon  mat-list-icon style="margin-right: 10%;">person_add</mat-icon>Create New User</button> -->
+
+  <button routerLink="/tasks/your-tasks" style=" padding-bottom: 20px;" class="pdfButton "   xPosition="after"> Fullscreen 
+    <i style="margin-left: 6px;" class="bi bi-arrows-fullscreen toolbar-button"></i>
+
+ 
+
+  </button>
+</div>
+
 <div style="max-height:245px"class="table-responsive">
 <table class="table align-middle">
   <thead class="table-dark">
@@ -82,7 +94,7 @@
  <td style ="color: black ; " >{{tested_By_Descr_arr[i]}}</td>
   <td style ="color: black ; " >Testing</td> 
 <td>
-<select [ngModel]="testedBy_phase_status_arr[i]" (change)="onTestedByTaskStatusSelect($event,d)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
+<select [ngModel]="testedBy_phase_status_arr[i]" (change)="onTestedByTaskStatusSelect($event,d,content)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
   <option class="form-control"  value="Acknowledge" >Acknowledge</option>
   <option class="form-control"  value="In Progress" >In Progress</option>
   <option class="form-control" value="Completed" >Completed</option>
@@ -102,7 +114,7 @@
  <td style ="color: black ; " >{{panel_Builders_Descr_arr[i]}}</td>
   <td style ="color: black ; " >Panel Build</td> 
 <td>
-<select [ngModel]="panelBuild_phase_status_arr[i]" (change)="onPanelBuildTaskStatusSelect($event,d)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': panelBuild_task_BC_arr[i], 'color': panelBuild_task_TC_arr[i]}">
+<select [ngModel]="panelBuild_phase_status_arr[i]" (change)="onPanelBuildTaskStatusSelect($event,d,content)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': panelBuild_task_BC_arr[i], 'color': panelBuild_task_TC_arr[i]}">
   <option class="form-control"  value="Acknowledge" >Acknowledge</option>
   <option class="form-control"  value="In Progress" >In Progress</option>
   <option class="form-control" value="Completed" >Completed</option>

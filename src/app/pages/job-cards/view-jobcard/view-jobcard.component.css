@@ -1,4 +1,5 @@
 mat-toolbar{
+  position: -webkit-fixed;
   position: fixed !important;
   background-color: rgb(255, 255, 255);;
   width: 100%;
@@ -12,17 +13,24 @@ mat-toolbar{
     flex: 1 1 auto;
   }
 
-@media screen and (max-width : 415px)
-{
-  .secondbar{
-    top:2rem;
-  }
-}
-
 .wrapper-grid{
 
   display: grid;
   grid-template-columns: repeat(auto-fit,360px);
   justify-content: center;
 
+}
+
+.pdfButton{
+  height: 20px;
+  width: 80px;
+  background-color: white;
+  border: 0;
+  font-size: small;
+  margin-bottom:11px;
+}
+
+.pdfButton:hover{
+  color: rgb(245, 59, 59);
+ background-color: transparent ;
 }

@@ -1,7 +1,18 @@
+mat-toolbar{
+  position: -webkit-fixed;
+  position: fixed !important;
+  background-color: rgb(255, 255, 255);;
+  width: 100%;
+  z-index: 101;
+}
+.toolbar-button:hover{
+    color: rgb(245, 59, 59);
+   background-color: transparent ;
+  }
 
+  
 .filter{
   margin-left: 3%;
-  margin-right: 97%;
   width: 375px;
 }
 

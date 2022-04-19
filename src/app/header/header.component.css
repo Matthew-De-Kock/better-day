@@ -6,7 +6,8 @@ span{
 mat-toolbar{
   position: -webkit-fixed;
   position: fixed !important;
-  background-color: rgb(255, 255, 255);;
+  height: 64px;
+  background-color: rgb(255, 255, 255);
   /* background-color: rgb(21, 38, 75); */
 
 

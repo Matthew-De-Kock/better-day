@@ -19,6 +19,8 @@ import { EditJobCardComponent } from './pages/job-cards/edit-job-card/edit-job-c
 import { ViewJobCardsInProgressComponent } from './pages/job-cards/view-job-cards-in-progress/view-job-cards-in-progress.component';
 import { ViewCompletedJobcardsComponent } from './pages/job-cards/view-completed-jobcards/view-completed-jobcards.component';
 import { ViewJobcardComponent } from './pages/job-cards/view-jobcard/view-jobcard.component';
+import { YourTasksComponent } from './pages/tasks/your-tasks/your-tasks.component';
+import { SearchfilterPipe } from './searchfilter.pipe';
 
 
 
@@ -47,6 +49,8 @@ import { ViewJobcardComponent } from './pages/job-cards/view-jobcard/view-jobcar
     ViewJobCardsInProgressComponent,
     ViewCompletedJobcardsComponent,
     ViewJobcardComponent,
+    YourTasksComponent,
+    SearchfilterPipe,
   ],
 
   providers: [],

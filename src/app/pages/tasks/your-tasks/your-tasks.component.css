@@ -1,0 +1,44 @@
+mat-toolbar{
+  position: -webkit-fixed;
+  position: fixed !important;
+  background-color: rgb(255, 255, 255);;
+  width: 100%;
+  z-index: 101;
+}
+.toolbar-button:hover{
+    color: rgb(245, 59, 59);
+   background-color: transparent ;
+  }
+
+
+  
+.my-hr-line {
+    position: relative;
+    left: -15px;
+    width: calc(100% + 30px);
+  
+  }
+  div
+  {
+      color: rgb(79, 79, 79);
+  }
+  
+  .table td.fit, 
+  .table th.fit {
+      white-space: nowrap;
+      width: 1%;
+  }
+  
+  
+  span { display: flex; 
+    justify-content: center }
+  
+  
+  
+    .table-responsive {
+      display: block;
+      width: 100%;
+      overflow: auto;
+  padding-left: 5px;
+  padding-right:5px
+    }

@@ -9,7 +9,11 @@ import { EditJobCardComponent } from './pages/job-cards/edit-job-card/edit-job-c
 import {ViewJobCardsInProgressComponent} from './pages/job-cards/view-job-cards-in-progress/view-job-cards-in-progress.component';
 import { ViewCompletedJobcardsComponent } from './pages/job-cards/view-completed-jobcards/view-completed-jobcards.component';
 import { ViewJobcardComponent } from './pages/job-cards/view-jobcard/view-jobcard.component';
+
+import { YourTasksComponent } from './pages/tasks/your-tasks/your-tasks.component';
+
 import { AuthGuard } from './auth/auth.guard';
+
 
 const routes: Routes = [
 
@@ -19,12 +23,16 @@ const routes: Routes = [
 {path: 'dashboard', component:DashboardComponent,canActivate:[AuthGuard]},
 {path: 'create-new-user', component:CreateNewUserComponent,canActivate:[AuthGuard]},
 
+{path: 'tasks/your-tasks', component:YourTasksComponent,canActivate:[AuthGuard]},
+
+
 {path: 'jobcard', component:JobCardHomeComponent,canActivate:[AuthGuard]},
 {path: 'jobcard/create-jobcard', component:CreateJobCardComponent,canActivate:[AuthGuard]},
 {path: 'jobcard/jobcards-in-progress', component:ViewJobCardsInProgressComponent,canActivate:[AuthGuard]},
 {path: 'jobcard/jobcards-in-progress/edit-jobcard', component:EditJobCardComponent,canActivate:[AuthGuard]},
 {path: 'jobcard/completed-jobcards', component:ViewCompletedJobcardsComponent,canActivate:[AuthGuard]},
 {path: 'jobcard/completed-jobcards/view-jobcard', component:ViewJobcardComponent,canActivate:[AuthGuard]},
+
 
 ];
 

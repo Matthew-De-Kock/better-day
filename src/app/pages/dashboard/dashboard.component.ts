@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/Service-Files/auth.service';
 import { DashboardService } from 'src/app/Service-Files/dashboard.service';
 import { JobCardService } from 'src/app/Service-Files/jobcard.service';
 
+import{JobCard} from 'src/app/models/job-card.model'
+
 
 
 @Component({
@@ -20,7 +22,10 @@ userName = localStorage.getItem("name")!;
 userEmail = localStorage.getItem("email")!;
 
 closeResult = '';
-phases!: string[]
+
+
+jobcard!:JobCard[]
+filterValue!:string
 
 drawings_JobNumber_arr! : string[];
 drawings_Descr_arr! : string[];
@@ -31,8 +36,7 @@ programmed_By_Descr_arr! : string[];
 tested_By_JobNumber_arr! : string[];
 tested_By_Descr_arr! : string[];
 
-statSelected:string[]=[];
-stat:any;
+
 
 drawings_task_BC_arr : string[]=[];
 drawings_task_TC_arr : string[]=[];
@@ -53,9 +57,9 @@ testedBy_task_BC_arr : string[]=[];
 testedBy_task_TC_arr : string[]=[];
 testedBy_phase_status_arr: string[]=[];
 
-  flag!: boolean;
-  panelOpenStateTasks = true;
-  panelOpenStateCompletedTasks=true;
+flag!: boolean;
+
+
 
   emailLoading:boolean=false;
   problemJobNum = '';
@@ -63,9 +67,7 @@ testedBy_phase_status_arr: string[]=[];
     , private as:AuthService) { }
 
 
-ngOnDestroy(){
-  this.flag=false;
-}
+
 
   ngOnInit(){
 
@@ -243,28 +245,6 @@ checkPhases(){
 
 }
 
-sendMail(){
-  this.emailLoading=true
-  let user ={
-    userName: this.userName,
-    email: this.userEmail
-
-  }
-  this.http.post("http://localhost:3000/sendmail", user).subscribe(
-    data=>{
-      let resp:any=data
-      console.log("Email has been sent out to Supervisor")
-    },
-    err=>{
-      console.log(err)
-      this.emailLoading=false
-    },()=>{
-      this.emailLoading=false
-    }
-  )
-
-}
-
 
 onSendMail(form: NgForm){
 
@@ -278,7 +258,6 @@ onSendMail(form: NgForm){
     problemDescription: problemDescription,
     jobNumber: this.problemJobNum
   }
-  console.log("hi")
   this.http.post("http://localhost:3000/sendmail", info).subscribe(
     data=>{
       let resp:any=data
@@ -296,7 +275,15 @@ onSendMail(form: NgForm){
 onDrawingTaskStatusSelect(stat:any,job_Number:string,content:any){
     this.ds.savePhaseStatus(1,stat.target.value,job_Number)
     .subscribe(data =>{
-    console.log(data)
+      this.problemJobNum = job_Number
+          if(stat.target.value=="Problem"){
+            this.modalService.open(content).result.then((result) => {
+              this.closeResult = `Closed with: ${result}`;
+            }, (reason) => {
+              this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            });
+          }
+      
 
 
 
@@ -308,8 +295,6 @@ onDrawingTaskStatusSelect(stat:any,job_Number:string,content:any){
   onProgrammedByTaskStatusSelect(stat:any, job_Number:string,content:any){
     this.ds.savePhaseStatus(3,stat.target.value,job_Number)
     .subscribe(data =>{
-    console.log(data)
-    console.log(stat.target.value)
 this.problemJobNum = job_Number
     if(stat.target.value=="Problem"){
       this.modalService.open(content).result.then((result) => {
@@ -324,18 +309,34 @@ this.problemJobNum = job_Number
 
     }
 
-    onTestedByTaskStatusSelect(stat:any,job_Number:string){
+    onTestedByTaskStatusSelect(stat:any, job_Number:string,content:any){
       this.ds.savePhaseStatus(4,stat.target.value,job_Number)
       .subscribe(data =>{
-      console.log(data)
+        this.problemJobNum = job_Number
+            if(stat.target.value=="Problem"){
+              this.modalService.open(content).result.then((result) => {
+                this.closeResult = `Closed with: ${result}`;
+              }, (reason) => {
+                this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+              });
+            }
+        
   })
   
       }
 
-      onPanelBuildTaskStatusSelect(stat:any,job_Number:string){
+      onPanelBuildTaskStatusSelect(stat:any, job_Number:string,content:any){
         this.ds.savePhaseStatus(2,stat.target.value,job_Number)
         .subscribe(data =>{
-        console.log(data)
+          this.problemJobNum = job_Number
+              if(stat.target.value=="Problem"){
+                this.modalService.open(content).result.then((result) => {
+                  this.closeResult = `Closed with: ${result}`;
+                }, (reason) => {
+                  this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+                });
+              }
+          
     })
     
         }
@@ -349,5 +350,9 @@ this.problemJobNum = job_Number
           } else {
             return `with: ${reason}`;
           }
+        }
+
+        ngOnDestroy(){
+          this.flag=false;
         }
 }
