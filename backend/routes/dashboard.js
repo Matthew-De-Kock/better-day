@@ -19,7 +19,7 @@ router.post("/dashboard/getuserjobs",(req, res, next) => {
   var MongoClient = require('mongodb').MongoClient;
   var url = "mongodb://localhost:27017/";
   MongoClient.connect(url, function(err, db) {
-if(db==undefined){}
+if(db.db("Betterday")==undefined){}
 else{}
      var dbo = db.db("Betterday");
      var query = {drawings_By: req.body.name  };

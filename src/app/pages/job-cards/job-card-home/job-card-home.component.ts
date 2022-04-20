@@ -9,9 +9,23 @@ import { JobCardService } from 'src/app/Service-Files/jobcard.service';
 })
 export class JobCardHomeComponent implements OnInit {
 
+disabled:boolean=false
+
+  role = localStorage.getItem("role")!;
+  userName = localStorage.getItem("name")!;
+  userEmail = localStorage.getItem("email")!;
+
   constructor(config: NgbModalConfig, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) { }
 
   ngOnInit() {
+
+    if (this.role!="User") {
+      this.disabled=false
+    }
+    else
+    this.disabled=true
+    
+
   }
 
 

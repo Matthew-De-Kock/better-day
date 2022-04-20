@@ -13,13 +13,48 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
   userIsAuthenticated =false;
   public authListenerSubs!: Subscription;
 
-  ngOnInit(){
-    this.userIsAuthenticated=this.authService.getIsAuth();
 
+  role = localStorage.getItem("role")!;
+  userName = localStorage.getItem("name")!;
+  userEmail = localStorage.getItem("email")!;
+
+
+
+  constructor(private authService: AuthService, private router: Router) {
+    // this.role = localStorage.getItem("role")!;
+    // this.userName = localStorage.getItem("name")!;
+    // this.userEmail = localStorage.getItem("email")!;
+
+
+    setInterval(() => {
+      this.role = localStorage.getItem("role")!;
+      this.userName = localStorage.getItem("name")!;
+      this.userEmail = localStorage.getItem("email")!;
+    }, 1000);
+
+//     this.role=this.authService.getRole()
+//     setInterval(() => {
+//   console.log(this.role)
+// }, 1000);
+   }
+
+
+
+
+
+
+  ngOnInit(){
+
+// setInterval(() => {
+//   console.log(this.role)
+// }, 1000);
+    
+
+
+    this.userIsAuthenticated=this.authService.getIsAuth();
     this.authListenerSubs = this.authService.getAuthStatusListener()
     .subscribe(isAuthenticated => {
       this.userIsAuthenticated = isAuthenticated;

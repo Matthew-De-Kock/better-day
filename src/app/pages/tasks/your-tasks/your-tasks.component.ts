@@ -118,8 +118,7 @@ TASKS:Tasks[]=[]
             this.tested_By_Descr_arr=data.tested_By_Descr_arr
             this.testedBy_phase_status_arr= data.testedBy_phase_status_arr
     
-var count=0
-       
+//var count=0
             // for (let i = 0; i < data.drawings_JobNumber_arr.length; i++) {
             //   this.TASKS[count]={
             //     jobNumber: data.drawings_JobNumber_arr[i],

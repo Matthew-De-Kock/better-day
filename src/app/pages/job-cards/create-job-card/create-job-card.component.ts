@@ -41,7 +41,7 @@ owner="owner"
 CreateJobCard(form: NgForm){
 
 
-  var job_number = form.value.job_number
+  var job_number = this.jobNumber
   var owner = form.value.owner
   var start_Date = form.value.start_Date
   var client = form.value.client

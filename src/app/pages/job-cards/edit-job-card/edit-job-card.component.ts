@@ -39,6 +39,10 @@ interface Storage {
 })
 export class EditJobCardComponent implements OnInit {
 ////////////////////
+
+role = localStorage.getItem("role")!;
+
+
   workers_assigned_phase_BG_color:any;
   workers_assigned_phase_Text_color:any;
 
@@ -101,6 +105,21 @@ color = 'primary'
   phases!: string[]
   status!:string;
 
+
+  ownerDisabled:boolean=false;
+  startDateDisabled:boolean=false
+  clientDisabled:boolean=false
+  orderNumberDisabled:boolean=false
+  companyDisabled:boolean=false
+  descriptionDisabled:boolean=false
+  panelNumberDisabled:boolean=false
+  drawingsByDisabled:boolean=false
+  panelBuildersDisabled:boolean=false
+  programmedByDisabled:boolean=false
+  testedByDisabled:boolean=false
+
+
+
   pb = new FormControl();
 PBs:string[]=["Rueben", "Jaryd", "Jussain"]
 flag!:boolean;
@@ -129,10 +148,18 @@ installationChecked:boolean = false
 //  clickedRows = new Set<StorageMaterials>();
 
  jobNumber!:number;
+  disabled: boolean;
   constructor(private http: HttpClient,config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) {
+    this.role = localStorage.getItem("role")!;
     config.backdrop = 'static';
     config.keyboard = false;
-
+    
+    if (this.role!="User") {
+      this.disabled=false
+    }
+    else
+    this.disabled=true
+    
   }
 
 
@@ -164,6 +191,46 @@ installationChecked:boolean = false
     this.programmed_By=this.JobCard_Service.getProgrammedBy()
     this.tested_By=this.JobCard_Service.getTestedBy()
     this.phases = this.JobCard_Service.getPhases();
+
+if (this.owner) {
+ this.ownerDisabled=true
+}
+// if (this.JC_StartDate) {
+//   this.startDateDisabled!=true
+//  }
+ if (this.client) {
+  this.clientDisabled=true
+ }
+ if (this.order_Number) {
+  this.orderNumberDisabled=true
+ }
+ if (this.company) {
+  this.companyDisabled=true
+ }
+ if (this.description) {
+  this.descriptionDisabled=true
+ }
+ if (this.panel_Number) {
+  this.panelNumberDisabled=true
+ }
+ if (this.drawings_By) {
+  this.drawingsByDisabled=true
+ }
+
+
+ if (this.panel_Builders.length!=0) {
+  this.panelBuildersDisabled=true
+ }
+ if (this.programmed_By) {
+  this.programmedByDisabled=true
+ }
+ if (this.tested_By) {
+  this.testedByDisabled=true
+ }
+
+
+
+
 
    var flag = setInterval(()=>{
     this.checkPhases()
@@ -476,9 +543,9 @@ else if( this.phases[0]=="Completed"&& this.phases[1]=="Completed"&& this.phases
   }
   SaveJobCard(form: NgForm){
 
-    var job_number = form.value.job_number
+    var job_number = this.job_Number
     var owner = form.value.owner
-    var start_Date = form.value.start_Date
+    var start_Date = this.JC_StartDate
 
  
     var client = form.value.client
@@ -514,6 +581,8 @@ var status = 'Completed'
       phases,
       status
     );
+
+    this.router.navigate(['jobcard'])
   }
 
   onPanelInstalled(event:any){
