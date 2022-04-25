@@ -1,3 +1,5 @@
+
+
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
@@ -68,6 +70,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options":{
+            "port": 20010
+            },
           "configurations": {
             "production": {
               "browserTarget": "better-day:build:production"

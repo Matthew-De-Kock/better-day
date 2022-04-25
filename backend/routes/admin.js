@@ -19,7 +19,6 @@ router.post("/jobcard/create-new-user"
       password: hash,
       role: req.body.role,
       });
-console.log(user)
         user.save().then(result =>{
           res.status(201).json({
             message: "User added successfully",

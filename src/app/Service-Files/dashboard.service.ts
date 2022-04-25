@@ -6,13 +6,14 @@ import { map } from 'rxjs/operators';
 
 import { User } from "../models/user.model";
 import { Router } from "@angular/router";
+import { ServerURLService } from "./server-Url.service";
 // import { ServerURLService } from "./server-url.service";
 
 
 @Injectable({ providedIn: "root" })
 export class DashboardService {
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,private su: ServerURLService,) {}
 
   GetJobs(name: string) {
   return this.http.post<{
@@ -38,7 +39,7 @@ export class DashboardService {
 
   savePhaseStatus(count:number,status:string,job_Number:any){
   
-  return this.http.post("http://localhost:3000/dashboard/save-phase-status", {count:count,status:status,job_Number:job_Number})
+  return this.http.post(this.su.serverURL+"/dashboard/save-phase-status", {count:count,status:status,job_Number:job_Number})
 
   }
 

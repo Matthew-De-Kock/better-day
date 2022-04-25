@@ -10,6 +10,7 @@ import { StorageParts  } from "../models/storage-parts.model";
 import { Invoice  } from "../models/invoice.model";
 
 import { Router } from "@angular/router";
+import { ServerURLService } from "./server-Url.service";
 // import { ServerURLService } from "./server-url.service";
 
 
@@ -30,7 +31,9 @@ export class JobCardService {
   tested_By!: string;
   phases!:string[];
   status!:string;
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,private su: ServerURLService) {
+    
+  }
 
 //   Get_Users():Observable<any[]>{
 //     return this.http.get<any[]>(this.su.serverURL+"/admin/manage-accounts")
@@ -39,13 +42,13 @@ export class JobCardService {
 
 
 Get_JobCard_Number():Observable<any[]>{//automated Number for create job card
-  return  this.http.get<any[]>("http://localhost:3000/jobcard/jobnum")
+  return  this.http.get<any[]>(this.su.serverURL+"/jobcard/jobnum")
 }
 Get_JobCards_InProgress():Observable<any[]>{
-  return  this.http.get<any[]>("http://localhost:3000/jobcard/jobcards-in-progress")
+  return  this.http.get<any[]>(this.su.serverURL+"/jobcard/jobcards-in-progress")
 } // for view job cards in progress component
 Get_Completed_JobCards():Observable<any[]>{
-  return  this.http.get<any[]>("http://localhost:3000/jobcard/completed-jobcards")
+  return  this.http.get<any[]>(this.su.serverURL+"/jobcard/completed-jobcards")
 } // for view completed job cards in progress component
 
 
@@ -85,7 +88,7 @@ CreateJobCard(
      };
       console.log(jobcard)
 
-   this.http.post("http://localhost:3000/jobcard/create-jobcard", jobcard)
+   this.http.post(this.su.serverURL+"/jobcard/create-jobcard", jobcard)
      .subscribe((responseData) => {
        console.log(responseData);
      }, error =>{
@@ -95,7 +98,7 @@ CreateJobCard(
 
   Fetch_JobCard(job_Number:number){
 
-    this.http.post<JobCard>("http://localhost:3000/jobcard/fetch-jobcard", {job_Number: job_Number})
+    this.http.post<JobCard>(this.su.serverURL+"/jobcard/fetch-jobcard", {job_Number: job_Number})
       .subscribe(responseData => {
        this.job_Number=responseData.job_Number
        this.owner=responseData.owner
@@ -153,7 +156,7 @@ CreateJobCard(
      };
 
 
-   this.http.post("http://localhost:3000/jobcard/save-jobcard", jobcard)
+   this.http.post(this.su.serverURL+"/jobcard/save-jobcard", jobcard)
      .subscribe((responseData) => {
        console.log(responseData);
      }, error =>{
@@ -180,7 +183,7 @@ CreateJobCard(
      };
       console.log(purchaseOrder)
   
-   this.http.post("http://localhost:3000/jobcard/jobcard-in-progress/add-purchase-order", purchaseOrder)
+   this.http.post(this.su.serverURL+"/jobcard/jobcard-in-progress/add-purchase-order", purchaseOrder)
      .subscribe((responseData) => {
        console.log(responseData);
      }, error =>{
@@ -188,7 +191,7 @@ CreateJobCard(
      });
    }
    Get_PurchaseOrdersForJobCard(job_Number:number){
-   return this.http.post<any>("http://localhost:3000/jobcard/jobcard-in-progress/get-purchase-orders", {job_Number: job_Number})
+   return this.http.post<any>(this.su.serverURL+"/jobcard/jobcard-in-progress/get-purchase-orders", {job_Number: job_Number})
   }
   AddManualPart(job_Number:number,part_Name:string,part_Number:string,part_Qty:number,part_Descr:string){
   const storageParts: StorageParts={
@@ -200,7 +203,7 @@ CreateJobCard(
   }
   
   console.log(storageParts)
-  this.http.post("http://localhost:3000/jobcard/jobcard-in-progress/add-part", storageParts)
+  this.http.post(this.su.serverURL+"/jobcard/jobcard-in-progress/add-part", storageParts)
   .subscribe(data => {
     console.log(data)
   }, error =>{
@@ -208,7 +211,7 @@ CreateJobCard(
   })
       }
   Get_JobCardParts(job_Number:number){
-      return this.http.post<any>("http://localhost:3000/jobcard/jobcard-in-progress/get-jobcard-parts", {job_Number: job_Number})
+      return this.http.post<any>(this.su.serverURL+"/jobcard/jobcard-in-progress/get-jobcard-parts", {job_Number: job_Number})
      }
   
   AddInvoice(job_Number:number,invoice_Number:string,client_Name:string,date:Date){
@@ -221,7 +224,7 @@ CreateJobCard(
         timestamp: timestamp
       }
       console.log(invoice)
-      this.http.post("http://localhost:3000/jobcard/jobcard-in-progress/add-invoice", invoice)
+      this.http.post(this.su.serverURL+"/jobcard/jobcard-in-progress/add-invoice", invoice)
       .subscribe(data => {
         console.log(data)
       }, error =>{
@@ -229,7 +232,7 @@ CreateJobCard(
       })
           }
   Get_Invoices(job_Number:number){
-      return this.http.post<any>("http://localhost:3000/jobcard/jobcard-in-progress/get-invoices", {job_Number: job_Number})
+      return this.http.post<any>(this.su.serverURL+"/jobcard/jobcard-in-progress/get-invoices", {job_Number: job_Number})
      }
   
 

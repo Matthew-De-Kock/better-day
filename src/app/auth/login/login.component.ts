@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/Service-Files/auth.service';
 export class LoginComponent implements OnInit {
 
 
-  constructor( private router: Router, private AS:AuthService) { }
+  constructor( private router: Router, public authService:AuthService) { }
 
   ngOnInit(){
 
@@ -31,7 +31,12 @@ export class LoginComponent implements OnInit {
 
     var email = form.value.email;
     email=email.toLowerCase()
-this.AS.login(email,form.value.password)
+this.authService.login(email,form.value.password)
   }
+
+
+  openSnackBar() {
+    this.authService.error=false;
+    };
 
 }

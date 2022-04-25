@@ -8,6 +8,7 @@ import { DashboardService } from 'src/app/Service-Files/dashboard.service';
 import { JobCardService } from 'src/app/Service-Files/jobcard.service';
 
 import{JobCard} from 'src/app/models/job-card.model'
+import { ServerURLService } from 'src/app/Service-Files/server-Url.service';
 
 
 
@@ -67,7 +68,7 @@ flag!: boolean;
   emailLoading:boolean=false;
   problemJobNum = '';
   constructor(private http: HttpClient,private ds: DashboardService, private JobCard_Service:JobCardService, private modalService: NgbModal 
-    , private as:AuthService) { }
+    , private as:AuthService,private su: ServerURLService) { }
 
 
 
@@ -261,7 +262,7 @@ onSendMail(form: NgForm){
     problemDescription: problemDescription,
     jobNumber: this.problemJobNum
   }
-  this.http.post("http://localhost:3000/sendmail", info).subscribe(
+  this.http.post( this.su.serverURL+"/sendmail", info).subscribe(
     data=>{
       let resp:any=data
       console.log("Email has been sent out to Supervisor")

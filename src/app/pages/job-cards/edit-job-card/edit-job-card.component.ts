@@ -10,6 +10,7 @@ import { StorageParts } from "src/app/models/storage-parts.model";
 import { Invoice } from "src/app/models/invoice.model";
 import { DashboardService } from 'src/app/Service-Files/dashboard.service';
 import { HttpClient } from '@angular/common/http';
+import { ServerURLService } from 'src/app/Service-Files/server-Url.service';
 
 
 
@@ -149,7 +150,8 @@ installationChecked:boolean = false
 
  jobNumber!:number;
   disabled: boolean;
-  constructor(private http: HttpClient,config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) {
+  constructor(private http: HttpClient,config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router
+    ,private su: ServerURLService) {
     this.role = localStorage.getItem("role")!;
     config.backdrop = 'static';
     config.keyboard = false;
@@ -483,7 +485,7 @@ else if( this.phases[0]=="Completed"&& this.phases[1]=="Completed"&& this.phases
             this.phases=responseData.phases
           })
 
-          this.http.post("http://localhost:3000/jobcard/save-status", {job_Number:this.job_Number,status:"Completed"})
+          this.http.post( this.su.serverURL+"/jobcard/save-status", {job_Number:this.job_Number,status:"Completed"})
           .subscribe((responseData) => {
             console.log(responseData);
           }, error =>{

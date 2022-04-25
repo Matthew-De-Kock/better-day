@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { User } from "../models/user.model";
 import { Router } from "@angular/router";
+import { ServerURLService } from "./server-Url.service";
 
 // import { ServerURLService } from "./server-url.service";
 
@@ -24,7 +25,7 @@ export class AuthService {
   errorMessage!: string;
   error:boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router,private su: ServerURLService) {
 
   }
 
@@ -63,8 +64,9 @@ export class AuthService {
 
   login( email: string, password:string){
     const user: User = {name:"",contactNumber:"", email:email, password:password, role:""  };
-
-   this.http.post<{token:string, expiresIn: number,name:string, role:string ,contactNumber:string, email:string, password:string}>("http://localhost:3000/login",user)
+    //http://localhost:3000
+   this.http.post<{token:string, expiresIn: number,name:string, role:string ,contactNumber:string, email:string, password:string}>(this.su.serverURL+"/login",user)
+   //this.http.post<{token:string, expiresIn: number,name:string, role:string ,contactNumber:string, email:string, password:string}>("http://localhost:3000/login",user)
     .subscribe(response=>{
    const token = response.token;
    this.token =token;
@@ -88,12 +90,12 @@ export class AuthService {
           this.router.navigate(['/dashboard']);
   }
     }, error=>{
-      console.log(error.error.message);
+      // console.log(error.error.message);
       this.authStatusListener.next(false);
       this.errorMessage = error.error.message;
       this.error= true;
-      this.errorMessage=error.message;
-      this.router.navigate(['/login']);
+      // this.errorMessage=error.message;
+      // this.router.navigate(['/login']);
     }
     )
   }

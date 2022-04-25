@@ -18,15 +18,18 @@ const User = require('../models/user');
 
      User.findOne({email: req.body.email})
       .then(user =>{
-          if (!user){
+          if (user==null){
             return res.status(401).json({
               message: "Username Invalid!"
-            });
+            });  
                }
-        fetchedUser=user;
-        return bcrypt.compare(req.body.password, user.password)
-       })
-       .then(result => {
+               else{
+                fetchedUser=user;
+              
+               }
+              
+               return bcrypt.compare(req.body.password, fetchedUser.password)
+               .then(result => {
          if (!result){
           return res.status(401).json({
             message: "Password Invalid!"
@@ -49,11 +52,14 @@ const User = require('../models/user');
 
 
        })
+      })
        .catch(err =>{
          return res.status(401).json({
            message: "Auth Failed"
          })
        })
+
+      
  });
 
 

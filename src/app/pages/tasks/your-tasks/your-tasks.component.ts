@@ -14,6 +14,7 @@ import{JobCard} from 'src/app/models/job-card.model'
 import { DecimalPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ServerURLService } from 'src/app/Service-Files/server-Url.service';
 
 
 interface Tasks {
@@ -84,7 +85,7 @@ TASKS:Tasks[]=[]
     emailLoading:boolean=false;
     problemJobNum = '';
     constructor(private http: HttpClient,private ds: DashboardService, private JobCard_Service:JobCardService, private modalService: NgbModal 
-      , private as:AuthService) {
+      , private as:AuthService,private su: ServerURLService) {
 
       //   this.tasks$ = this.filter.valueChanges.pipe(
       //     startWith(''),
@@ -336,7 +337,7 @@ TASKS:Tasks[]=[]
          problemDescription: problemDescription,
          jobNumber: this.problemJobNum
        }
-       this.http.post("http://localhost:3000/sendmail", info).subscribe(
+       this.http.post( this.su.serverURL+"/sendmail", info).subscribe(
          data=>{
            let resp:any=data
            console.log("Email has been sent out to Supervisor")

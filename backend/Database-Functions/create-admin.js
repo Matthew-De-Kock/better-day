@@ -17,7 +17,6 @@ function CreateAdmin(){ // Function that checks for admin account, if no account
   role: "Admin"
 } ,{new: true }).then((result=>{
 
-
 if (result==null) {
   const user = new User({
     name: "Admin",
