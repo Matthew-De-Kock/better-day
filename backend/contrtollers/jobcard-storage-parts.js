@@ -1,5 +1,5 @@
 const JobCardStorageParts = require('../models/jobcard-storage-parts');
-
+var configuration = require("../configuration")
 exports.AddJobCardStoragePart=(req,res,next)=>{
 
   const jobCardStorageParts = new JobCardStorageParts({
@@ -29,7 +29,7 @@ jobCardStorageParts.save().then(result =>{
 
 exports.GetJobCardStorageParts=(req,res,next)=>{
   var MongoClient = require('mongodb').MongoClient;
-  var url = "mongodb://localhost:27017/";
+  var url = configuration.connectionStringStandard;
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
      var dbo = db.db("Betterday");

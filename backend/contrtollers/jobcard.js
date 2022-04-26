@@ -1,11 +1,10 @@
 const JobCard = require('../models/jobcard');
-
-
+var configuration = require("../configuration")
 
 
 exports.GetNewJobCardNumber=(req,res,next)=>{
   var MongoClient = require('mongodb').MongoClient;
-  var url = "mongodb://localhost:27017/";
+  var url = configuration.connectionStringStandard;
   MongoClient.connect(url, function(err, db) {
 
      var dbo = db.db("Betterday");
@@ -125,7 +124,7 @@ exports.CreateNewJobCard=(req,res,next)=>{
 
       exports.GetListJobCardsInProgress=(req,res,next)=>{
         var MongoClient = require('mongodb').MongoClient;
-        var url = "mongodb://localhost:27017/";
+        var url = configuration.connectionStringStandard;
         MongoClient.connect(url, function(err, db) {
       
            var dbo = db.db("Betterday");
@@ -168,7 +167,7 @@ exports.CreateNewJobCard=(req,res,next)=>{
 
          exports.GetListCompletedJobCards=(req,res,next)=>{
           var MongoClient = require('mongodb').MongoClient;
-          var url = "mongodb://localhost:27017/";
+          var url = configuration.connectionStringStandard;
           MongoClient.connect(url, function(err, db) {
         
              var dbo = db.db("Betterday");

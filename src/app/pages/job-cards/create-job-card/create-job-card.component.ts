@@ -30,6 +30,9 @@ owner="owner"
     this.JobCard_Service.Get_JobCard_Number().subscribe(resp=>{
       var data:any
       data = resp
+      if(!this.jobNumber){
+this.jobNumber=0
+      }
       this.jobNumber=data.recentJobNum +1
     })
   }

@@ -1,5 +1,5 @@
 const PurchaseOrder = require('../models/purchase-order');
-
+var configuration = require("../configuration")
 
 exports.AddPurchaseOrder=(req,res,next)=>{
 
@@ -28,7 +28,7 @@ purchaseOrder.save().then(result =>{
 
 exports.GetPurchaseOrder=(req,res,next)=>{
   var MongoClient = require('mongodb').MongoClient;
-  var url = "mongodb://localhost:27017/";
+  var url = configuration.connectionStringStandard;
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
      var dbo = db.db("Betterday");

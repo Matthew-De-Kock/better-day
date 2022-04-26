@@ -1,6 +1,5 @@
 const Invoice = require('../models/invoice');
-
-
+var configuration = require("../configuration")
 
 
 exports.AddInvoice=(req,res,next)=>{
@@ -30,7 +29,7 @@ invoice.save().then(result =>{
 
 exports.GetInvoices=(req,res,next)=>{
   var MongoClient = require('mongodb').MongoClient;
-  var url = "mongodb://localhost:27017/";
+  var url = configuration.connectionStringStandard;
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
      var dbo = db.db("Betterday");
