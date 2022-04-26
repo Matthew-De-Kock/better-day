@@ -10,10 +10,12 @@ const JobCardRoutes = require("./routes/jobcards")
 const DashboardRoutes = require("./routes/dashboard")
 const Admin = require('./Database-Functions/create-admin')
 const Mail = require("./routes/mail")
+var configuration = require("./configuration")
 
 const app = express();
-
-mongoose.connect("mongodb://localhost:27017/Betterday", {useNewUrlParser: true})
+var conString = configuration.connectionStringMongoose;
+//mongoose.connect("mongodb://localhost:27017/Betterday", {useNewUrlParser: true})
+mongoose.connect(conString, {useNewUrlParser: true})
 .then(()=>{
 console.log('Connected to database')
 })

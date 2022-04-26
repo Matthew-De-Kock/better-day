@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken") ;
 const router = express.Router();
 const User = require('../models/user');
 const JobCard = require('../models/jobcard');
-
+var configuration = require("../configuration");
 
 router.post("/dashboard/getuserjobs",(req, res, next) => {
 
@@ -17,7 +17,9 @@ router.post("/dashboard/getuserjobs",(req, res, next) => {
 
 
   var MongoClient = require('mongodb').MongoClient;
-  var url = "mongodb://localhost:27017/";
+  var conString = configuration.connectionStringStandard;
+ // var url = "mongodb://localhost:27017/";
+  var url = conString;
   MongoClient.connect(url, function(err, db) {
 if(db.db("Betterday")==undefined){}
 else{}
