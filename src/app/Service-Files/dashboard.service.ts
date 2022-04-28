@@ -32,7 +32,7 @@ export class DashboardService {
     tested_By_JobNumber_arr:string[],
     tested_By_Descr_arr:string[],
     testedBy_phase_status_arr:string[]
-  }>("http://localhost:3000/dashboard/getuserjobs", {name:name})
+  }>(this.su.serverURL+"/dashboard/getuserjobs", {name:name})
 
   }
 

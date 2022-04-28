@@ -41,8 +41,8 @@ export class JobCardService {
 // }
 
 
-Get_JobCard_Number():Observable<any[]>{//automated Number for create job card
-  return  this.http.get<any[]>(this.su.serverURL+"/jobcard/jobnum")
+Get_JobCard_Number():Observable<any>{//automated Number for create job card
+  return  this.http.get<any>(this.su.serverURL+"/jobcard/jobnum")
 }
 Get_JobCards_InProgress():Observable<any[]>{
   return  this.http.get<any[]>(this.su.serverURL+"/jobcard/jobcards-in-progress")

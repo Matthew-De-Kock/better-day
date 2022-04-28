@@ -30,14 +30,18 @@ owner="owner"
     this.JobCard_Service.Get_JobCard_Number().subscribe(resp=>{
       var data:any
       data = resp
-      if(!this.jobNumber){
-this.jobNumber=0
+      if(!data.recentJobNum){
+this.jobNumber=1745
       }
-      this.jobNumber=data.recentJobNum +1
+      else
+       this.jobNumber=data.recentJobNum +1
     })
+
+ 
   }
 
   ngOnInit(){
+
 }
 
 
