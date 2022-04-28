@@ -219,7 +219,8 @@ if (this.owner) {
   this.drawingsByDisabled=true
  }
 
-
+console.log(this.panelBuildersDisabled)
+console.log(this.disabled)
  if (this.panel_Builders.length!=0) {
   this.panelBuildersDisabled=true
  }
