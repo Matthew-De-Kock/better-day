@@ -157,21 +157,13 @@ for (let i = 0; i < this.panel_Builders.length; i++) {
 switch (this.panel_Builders[i])
 {
 
-case"Rueben":
-this.pb1_CHECKED=true
-break
+  case"Reubin Kirton":
+  this.pb1_CHECKED=true
+  break
 
-case"Jaryd":
-this.pb2_CHECKED=true
-break
-
-case"Martin":
-this.pb3_CHECKED=true
-break
-
-case"Jusain":
-this.pb4_CHECKED=true
-break
+  case"Martin Marx":
+  this.pb2_CHECKED=true
+  break
 } //end switch
 }//end for loop
 

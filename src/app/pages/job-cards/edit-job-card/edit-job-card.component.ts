@@ -251,21 +251,21 @@ for (let i = 0; i < this.panel_Builders.length; i++) {
 switch (this.panel_Builders[i])
 {
 
-  case"Rueben":
+  case"Reubin Kirton":
   this.pb1_CHECKED=true
   break
 
-  case"Jaryd":
+  case"Martin Marx":
   this.pb2_CHECKED=true
   break
 
-  case"Martin":
-  this.pb3_CHECKED=true
-  break
+  // case"Martin":
+  // this.pb3_CHECKED=true
+  // break
 
-  case"Jusain":
-  this.pb4_CHECKED=true
-  break
+  // case"Jusain":
+  // this.pb4_CHECKED=true
+  // break
 } //end switch
 }//end for loop
 
@@ -510,7 +510,7 @@ else if( this.phases[0]=="Completed"&& this.phases[1]=="Completed"&& this.phases
 
    var  count=0
    if(form.value.pb1==true){
-     this.panel_Builders[count]= "Rueben"
+     this.panel_Builders[count]= "Reubin Kirton"
      this.pb1_CHECKED=true
      count++
    }
@@ -518,7 +518,7 @@ else if( this.phases[0]=="Completed"&& this.phases[1]=="Completed"&& this.phases
    { this.pb1_CHECKED=false}
 
    if(form.value.pb2==true){
-    this.panel_Builders[count]= "Jaryd"
+    this.panel_Builders[count]= "Martin Kirton"
      this.pb2_CHECKED=true
      count++
    }
