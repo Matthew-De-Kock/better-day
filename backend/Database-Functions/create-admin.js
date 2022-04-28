@@ -17,6 +17,9 @@ function CreateAdmin(){ // Function that checks for admin account, if no account
   role: "Admin"
 } ,{new: true }).then((result=>{
 
+if(result!=null){
+  console.log("Admin Updated Succesfully")
+}
 if (result==null) {
   const user = new User({
     name: "Admin",
@@ -27,7 +30,7 @@ if (result==null) {
     });
 
     user.save().then(result =>{
-
+      console.log("Admin Created Succesfuly")
     })
     .catch(err=>{
 
@@ -35,8 +38,7 @@ if (result==null) {
 
   
 }
-})  
-)
 
-}
+})  
+)}
 
