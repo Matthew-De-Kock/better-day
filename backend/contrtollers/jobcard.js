@@ -1,6 +1,10 @@
 const JobCard = require('../models/jobcard');
 var configuration = require("../configuration")
 
+const Invoice = require('../models/invoice'); //for delete record
+const PurchaseOrder = require('../models/purchase-order');//for delete record
+const JobCardStorageParts = require('../models/jobcard-storage-parts');//for delete record
+
 
 exports.GetNewJobCardNumber=(req,res,next)=>{
   var MongoClient = require('mongodb').MongoClient;
@@ -65,7 +69,7 @@ exports.CreateNewJobCard=(req,res,next)=>{
 
    exports.SaveJobCard=(req,res,next)=>{
     date = new Date( req.body.start_Date.year, req.body.start_Date.month, req.body.start_Date.day,12,00)
-
+console.log("STATUS::::::: "+req.body.status)
         var jobcard = {
           job_Number:  req.body.job_Number,
           owner: req.body.owner,
@@ -88,6 +92,7 @@ exports.CreateNewJobCard=(req,res,next)=>{
   JobCard.findOneAndUpdate({job_Number: req.body.job_Number},jobcard).then(result=>{
     res.status(200).json({
       message: "jobcard saved successfully",
+      result:result
     });
   })
             // .catch(err=>{
@@ -129,7 +134,7 @@ exports.CreateNewJobCard=(req,res,next)=>{
       
            var dbo = db.db("Betterday");
 
-           var query = {status:"In Progress" };
+           var query = { $or: [ { status:"Problem" }, { status:"In Progress" } ] };
            var jobcards_InProgress=[];
 
            dbo.collection("jobcards").find(query).toArray(function(err, data){
@@ -186,6 +191,78 @@ exports.CreateNewJobCard=(req,res,next)=>{
            });
          });
         })
+        }
+
+        exports.DeleteRow=(req,res,next)=>{
+         var itemNumber = req.body.itemNumber
+         var type = req.body.type
+////////////////////Invoice
+         if (type=="Invoice"){
+          const query = {invoice_Number:itemNumber}
+          Invoice.deleteOne(query).then(data =>{
+         console.log(data)
+                  res.status(201).json({
+                      message: "invoice Deleted successfully",
+                    });
+                  })
+                  .catch(err=>{
+                    res.status(500).json({
+                      error:err
+                    });
+                  });
+         }
+
+////////////////////Purchase Order
+         if (type=="Purchase Order"){
+          const query = {order_Number:itemNumber}
+          PurchaseOrder.deleteOne(query).then(data =>{
+         console.log(data)
+                  res.status(201).json({
+                      message: "invoice Deleted successfully",
+                    });
+                  })
+                  .catch(err=>{
+                    res.status(500).json({
+                      error:err
+                    });
+                  });
+        }
+
+////////////////////Storage
+        if (type=="Storage"){
+          const query = {part_Number:itemNumber}
+          JobCardStorageParts.deleteOne(query).then(data =>{
+         console.log(data)
+                  res.status(201).json({
+                      message: "invoice Deleted successfully",
+                    });
+                  })
+                  .catch(err=>{
+                    res.status(500).json({
+                      error:err
+                    });
+                  });
+        }
+       
+        }
+
+        exports.GetOwnerJobCards=(req,res,next)=>{
+      var ownerName = req.body.userName
+////////////////////Invoice
+          const query = {owner:ownerName}
+          JobCard.find(query).then(data =>{
+        //  console.log(data)
+                  res.status(201).json({
+                      message: "JobCards fetched successfully",
+                      record:data
+                    });
+                  })
+                  .catch(err=>{
+                    res.status(500).json({
+                      error:err
+                    });
+                  });
+   
         }
 
 

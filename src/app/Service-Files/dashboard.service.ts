@@ -32,6 +32,8 @@ export class DashboardService {
     tested_By_JobNumber_arr:string[],
     tested_By_Descr_arr:string[],
     testedBy_phase_status_arr:string[]
+
+    ownerForJobCards_arr:string[]
   }>(this.su.serverURL+"/dashboard/getuserjobs", {name:name})
 
   }

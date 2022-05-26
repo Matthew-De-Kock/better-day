@@ -51,4 +51,7 @@ const JobcardController = require("../contrtollers/jobcard")
 router.get("/jobcard/completed-jobcards", JobcardController.GetListCompletedJobCards)
 
 
+router.post("/jobcard/delete-row", JobcardController.DeleteRow)
+
+router.post("/jobcard/owner-jobcards", JobcardController.GetOwnerJobCards)
   module.exports= router;

@@ -29,7 +29,7 @@ auth:{
 
     let mailOptions = {
         from: info.userName + '<' + info.userEmail + '>',
-        to: info.supervisor,
+        to: info.ownerEmail,
         subject:"Jobcard " +info.jobNumber +" Problem",
         html: info.problemDescription 
     };

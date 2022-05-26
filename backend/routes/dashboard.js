@@ -7,6 +7,7 @@ const router = express.Router();
 const User = require('../models/user');
 const JobCard = require('../models/jobcard');
 var configuration = require("../configuration");
+const jobcard = require("../models/jobcard");
 
 router.post("/dashboard/getuserjobs",(req, res, next) => {
 
@@ -21,14 +22,21 @@ router.post("/dashboard/getuserjobs",(req, res, next) => {
  // var url = "mongodb://localhost:27017/";
   var url = conString;
   MongoClient.connect(url, function(err, db) {
+
+   
+
+
 if(db.db("Betterday")==undefined){}
 else{}
+var ownerForJobCards_arr=[]
+var count = 0
+
      var dbo = db.db("Betterday");
      var query = {drawings_By: req.body.name  };
      var drawings_JobNumber_arr=[];
      var drawings_Descr_arr=[];
      var drawings_phase_status_arr=[]
-     var count
+  
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
   //  if (err) throw err;
@@ -40,8 +48,10 @@ else{
       drawings_JobNumber_arr[i] =data[i].job_Number
       drawings_Descr_arr[i]=data[i].description
       drawings_phase_status_arr[i] = data[i].phases[1]
-         i++;
-         count = i
+         i++
+         ownerForJobCards_arr[count] = data[count].owner
+         count++
+   
      }
 
     }
@@ -51,19 +61,22 @@ else{
  var panel_Builders_JobNumber_arr=[];
  var panel_Builders_Descr_arr=[];
  var panelBuild_phase_status_arr=[]
- var count
+
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
-// if (err) throw err;
+//  if (err) throw err;
 i = 0;
+if(data.length==undefined){}
+else{
 while (i < data.length)
 {
   panel_Builders_JobNumber_arr[i] = data[i].job_Number
   panel_Builders_Descr_arr[i]= data[i].description
   panelBuild_phase_status_arr[i]=data[i].phases[2]
      i++;
-     count = i
- }
+           ownerForJobCards_arr[count] = data[count].owner
+         count++
+ }}
 });
 
 
@@ -71,37 +84,43 @@ var query = {programmed_By: req.body.name  };
 var programmed_By_JobNumber_arr=[];
 var programmed_By_Descr_arr=[];
 var programming_phase_status_arr=[]
-var count
+
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
 // if (err) throw err;
 i = 0;
+if(data.length==undefined){}
+else{
 while (i < data.length)
 {
  programmed_By_JobNumber_arr[i] = data[i].job_Number
  programmed_By_Descr_arr[i]= data[i].description
  programming_phase_status_arr[i]=data[i].phases[3]
     i++;
-    count = i
-}
+    ownerForJobCards_arr[count] = data[count].owner
+    count++
+}}
 });
 
 var query = {tested_By: req.body.name  };
 var tested_By_JobNumber_arr=[];
 var tested_By_Descr_arr=[];
 var testedBy_phase_status_arr=[]
-var count
-dbo.collection("jobcards").find(query).toArray(function(err, data){
 
+dbo.collection("jobcards").find(query).toArray(function(err, data){
+  // if (err) throw err;
   i = 0;
+  if(data.length==undefined){}
+else{
   while (i < data.length)
   {
     tested_By_JobNumber_arr[i] = data[i].job_Number
     tested_By_Descr_arr[i]= data[i].description
     testedBy_phase_status_arr[i]=data[i].phases[4]
       i++;
-      count = i
-  }
+      // ownerForJobCards_arr[count] = data[count].owner
+      // count++
+  }}
   res.status(200).json({
     drawings_JobNumber_arr,
     drawings_Descr_arr,
@@ -117,7 +136,9 @@ dbo.collection("jobcards").find(query).toArray(function(err, data){
 
     tested_By_JobNumber_arr,
     tested_By_Descr_arr,
-    testedBy_phase_status_arr
+    testedBy_phase_status_arr,
+
+    ownerForJobCards_arr
      });
   });
   
@@ -137,15 +158,28 @@ var status = req.body.status;
 var job_Number = req.body.job_Number
 
 
+
 var fetchedJobCard
 JobCard.findOne({job_Number: job_Number})
 .then(jobCard =>{
-
  fetchedJobCard=jobCard;
  var phaseArr = fetchedJobCard.phases
 phaseArr[count] = status
 
-JobCard.findOneAndUpdate({job_Number: job_Number},{phases:phaseArr}).then(result=>{
+var flag=false
+var i = 0
+var jb_Status="In Progress"
+
+while (i < 9) {
+ if (phaseArr[i]=="Problem") {
+  jb_Status="Problem"
+  flag = true
+ } 
+ i++
+}
+
+
+  JobCard.findOneAndUpdate({job_Number: job_Number},{phases:phaseArr, status:jb_Status}).then(result=>{
   console.log(result)
 res.status(200).json({
 message: "Jobcard saved successfully",
@@ -169,4 +203,14 @@ phases:phaseArr,
 })
 
 
+router.post("/get-owner-email",(req,res,next)=>{
+
+console.log(req.body.name)
+User.findOne({name:req.body.name}).then(result=>{
+  res.status(200).json({
+    message: "Jobcard saved successfully",
+    result:result,
+    });
+})
+})
   module.exports= router;

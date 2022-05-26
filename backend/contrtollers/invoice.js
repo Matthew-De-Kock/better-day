@@ -44,6 +44,7 @@ exports.GetInvoices=(req,res,next)=>{
 
      dbo.collection("invoices").find(query).toArray(function(err, data){
       if (err) throw err;
+
         i = 0;
     while (i < data.length)
     {

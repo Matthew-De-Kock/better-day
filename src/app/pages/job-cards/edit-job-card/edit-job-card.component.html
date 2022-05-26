@@ -26,7 +26,7 @@
   <div class="form-group">
     <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Owner:</span>
-      <select  [disabled]="disabled||ownerDisabled" class="form-select" id="exampleSelect" [(ngModel)]="owner" ngModel name="owner">
+      <select  [disabled]="disabled||ownerDisabled||accountsRoleDisabled" class="form-select" id="exampleSelect" [(ngModel)]="owner" ngModel name="owner">
         <option value="Owner" selected  hidden>Owner</option>
         <option class="form-control" >Warwick McCleland</option>
         <option class="form-control">Daniel Duvenage</option>
@@ -73,7 +73,7 @@
     <div class="col-sm-6">
       <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white " >Client:</span>
-      <input   [disabled]="disabled||clientDisabled" id=client class="form-control " placeholder="Client" [(ngModel)]="client" ngModel name="client"   >
+      <input   [disabled]="disabled||clientDisabled||accountsRoleDisabled" id=client class="form-control " placeholder="Client" [(ngModel)]="client" ngModel name="client"   >
     </div>
    </div>
 
@@ -83,7 +83,7 @@
   <div class="col-sm-6">
     <div class="input-group ">
     <span class="input-group-text " style="font-weight: 400; background-color:white " >Order Number:</span>
-    <input  [disabled]="disabled||orderNumberDisabled" id=order-no class="form-control " placeholder="ORDER No" [(ngModel)]="order_Number"  ngModel name="order_no"   >
+    <input  [disabled]="disabled||orderNumberDisabled||accountsRoleDisabled" id=order-no class="form-control " placeholder="ORDER No" [(ngModel)]="order_Number"  ngModel name="order_no"   >
   </div>
  </div>
  <br>
@@ -92,7 +92,7 @@
     <div class="form-group">
       <div class="input-group ">
         <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Company:</span>
-        <select  [disabled]="disabled||companyDisabled" class="form-select" id="exampleSelect" [(ngModel)]="company" ngModel name="company">
+        <select  [disabled]="disabled||companyDisabled||accountsRoleDisabled" class="form-select" id="exampleSelect" [(ngModel)]="company" ngModel name="company">
           <option class="form-control" >Mac-Automation </option>
           <option class="form-control" >All-Electrical </option>
           <option class="form-control">STS</option>
@@ -105,7 +105,7 @@
 <div class="form-group  mt-3 mb-4">
 <div class="input-group ">
 <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Description:</span>
-<textarea  [disabled]="disabled||descriptionDisabled" id=description class="form-control " placeholder="Description" [(ngModel)]="description" ngModel name="description"  rows="1"></textarea>
+<textarea  [disabled]="disabled||descriptionDisabled||accountsRoleDisabled" id=description class="form-control " placeholder="Description" [(ngModel)]="description" ngModel name="description"  rows="1"></textarea>
 </div>
 </div>
 <!-- ///////////////////////////////////////Owner////////////////////////////////////////// -->
@@ -116,13 +116,19 @@
   <div class="col-sm-6">
     <div class="input-group  ">
     <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel Number:</span>
-      <input  [disabled]="disabled||panelNumberDisabled" id=panel-no class="form-control " placeholder="Panel Number" [(ngModel)]="panel_Number" ngModel name="panel_Number"   >
+      <input  [disabled]="disabled||panelNumberDisabled||accountsRoleDisabled" id=panel-no class="form-control " placeholder="Panel Number" [(ngModel)]="panel_Number" ngModel name="panel_Number"   >
 
     </div>
   </div>
 <br>
 <br>
-  <div class="col-sm-6">
+<div class="col-sm-6">    <div class="input-group border-none">
+  <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Programmed By:</span>
+  <select  [disabled]="disabled||programmedByDisabled||accountsRoleDisabled" class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
+    <option class="form-control" >Daniel Duvenage</option>
+    <option class="form-control" >Gerard</option>
+  </select>
+</div>
 </div>
 </div>
 
@@ -131,32 +137,46 @@
   <div class="col-sm-6">
     <div class="input-group ">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Drawings By:</span>
-      <select  [disabled]="disabled||drawingsByDisabled" class="form-select" id="exampleSelect" [(ngModel)]="drawings_By" ngModel name="drawings_By">
+      <select  [disabled]="disabled||drawingsByDisabled||accountsRoleDisabled" class="form-select" id="exampleSelect" [(ngModel)]="drawings_By" ngModel name="drawings_By">
         <option class="form-control" >Luthando Gwina</option>
       </select>
     </div>
   </div>
   <br>
   <br>
-  <div class="col-sm-6">    <div class="input-group border-none">
-    <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Programmed By</span>
-    <select  [disabled]="disabled||programmedByDisabled" class="form-select" id="exampleSelect"  [(ngModel)]="programmed_By" ngModel name="programmed_By">
-      <option class="form-control" >Daniel Duvenage</option>
-      <option class="form-control" >Gerard</option>
-    </select>
-  </div>
+  <div class="col-sm-6">
+    <div class="input-group mt-1">
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Tested By:</span>
+      <select  [disabled]="disabled||testedByDisabled||accountsRoleDisabled" class="form-select" id="exampleSelect" [(ngModel)]="tested_By" ngModel name="tested_By">
+        <option class="form-control" >Daniel Duvenage</option>
+        <option class="form-control" >Gerard</option>
+      </select>
+    </div>
 </div>
 </div>
 
 <div class="row mt-3">
   <div class="col-sm-6">
     <div class="input-group border border-white" >
-      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel-Builder/s</span>
-      <div  id=pb class="form-control " placeholder=""    >
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel-Builder/s:</span>
+      <!-- <div  id=pb class="form-control " placeholder=""    >
         <button   type="button" mat-flat-button class="text-end" style=" font-size:15px; height:15px;width:100%; background-color:rgb(255, 255, 255); border-color:rgb(255, 255, 255); color:rgb(60, 60, 60)" (click)="open(panelBuilders)"><mat-icon style="margin-left: 30px; font-size:23px;">expand_more</mat-icon></button>
-      </div>
+
+      </div> -->
+<div class="form-control">
+  <mat-form-field   style="width: 295px; height: 50%;" >
+    <mat-label  >Panel Builders</mat-label>
+    <mat-select   [disabled]="disabled||panelBuildersDisabled||accountsRoleDisabled" multiple [formControl]="Panel_Builders_FC" >
+      <mat-option [value]="'Reubin Kirton'" style="background-color: var(--form-background-color);color: var(--overview-table-filter-color); font-weight: 600" > Reubin Kirton</mat-option>
+      <mat-option [value]="'Martin Marx'"style="background-color: var(--form-background-color);color: var(--overview-table-filter-color); font-weight: 600" > Martin Marx</mat-option>
+      <mat-option [value]="'Reubin Kirton'"style="background-color: var(--form-background-color);color: var(--overview-table-filter-color); font-weight: 600" > Reubin Kirton</mat-option>
+      <mat-option [value]="'Martin Marx'" style="background-color: var(--form-background-color);color: var(--overview-table-filter-color); font-weight: 600" > Martin Marx</mat-option>
+    </mat-select>
+      </mat-form-field>
+</div>
+
     </div>
-    <ng-template #panelBuilders let-modal>
+    <!-- <ng-template #panelBuilders let-modal>
 
       <div class="modal-header">
         <h2 class="modal-title" id="modal-basic-title">Panel Builders</h2>
@@ -177,33 +197,51 @@
             <input [disabled]="disabled" type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb2_CHECKED" ngModel name="pb2">Martin Marx
             <label class="form-check-label ps-4"></label>
           </div>
-          <!-- <div class="form-check text-start">
-            <input [disabled] type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb3_CHECKED" ngModel name="pb3">Martin
-            <label class="form-check-label ps-4"></label>
-          </div>
-          <div class="form-check text-start">
-            <input [disabled] type="checkbox" class="form-check-input me-3"  [(ngModel)]="pb4_CHECKED" ngModel name="pb4">Jusain
-            <label class="form-check-label ps-4"></label>
-          </div> -->
+
             <br>
             <button   [disabled]="disabled||panelBuildersDisabled" (click)="modal.dismiss()" class="modal-button btn btn-primary d-flex justify-content-center   " type="submit">Add Panel Builders</button>
             </div>
       </div>
     </form>
 
-    </ng-template>
+    </ng-template> -->
 </div>
-<br>
-<br>
 <div class="col-sm-6">
-      <div class="input-group mt-1">
-        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Tested By:</span>
-        <select  [disabled]="disabled||testedByDisabled" class="form-select" id="exampleSelect" [(ngModel)]="tested_By" ngModel name="tested_By">
-          <option class="form-control" >Daniel Duvenage</option>
-          <option class="form-control" >Gerard</option>
-        </select>
-      </div>
+  <div class="input-group " style="padding-top:0.2em" >
+    <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel Builders Selected: </span>
+    <div class="form-control">
+      <ul class="list-group">
+        <li class="list-group-item" style="font-size: 14px;"  *ngFor="let pb of panel_Builders">{{pb}}</li>
+      </ul>
+    </div>
   </div>
+</div>
+
+
+<div class="col-sm-6">
+  <div class="input-group mt-1"  style="padding-top:1em">
+    <mat-checkbox class="form-control" [disabled]="disabled||accountsRoleDisabled" [color]='color'  ngModel name="installationChecked" [(ngModel)]="installationChecked"  style="padding-left:5px" >Panel Installed</mat-checkbox>
+  </div>
+</div>
+
+  <!-- <div class="col-sm-6">
+    <div class="input-group mt-1" style="padding-top:1em" >
+      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Panel Builders Selected: </span>
+      <div class="form-control">
+        <ul class="list-group">
+          <li class="list-group-item">Cras justo odio</li>
+
+        </ul>
+      </div>
+ 
+    </div>
+</div> -->
+<br>
+<br>
+
+
+
+  
 
 </div>
 
@@ -226,7 +264,7 @@
 
 
 <div class="mt-4">
-  <button  [disabled]="disabled" class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Save</button>
+  <button  [disabled]="disabled||accountsRoleDisabled" class="btn btn-primary btn-md btn-block "  type="submit" style="width:250px">Save</button>
 </div>
 
 <hr>
@@ -290,17 +328,32 @@
 <hr>
 </form>
 
-<!-- ///////////////////////////////////////Purchase Order////////////////////////////////////////// -->
-<h2>Installation</h2>
-<mat-checkbox  [disabled]="disabled" [color]='color' [(ngModel)]="installationChecked" (change)="onPanelInstalled($event)" style="padding-left:5px" >Panel Installed</mat-checkbox>
 
-<hr>
+
+
+
+
+
+
+</div>
+  </div>
+
+
+
+  <div class="d-flex justify-content-center  text-center " >
+
+    <div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 1050px;  " >
+
+      
+  <h1>Parts</h1>
+  <hr class="shadow-lg">
+
 <!-- ///////////////////////////////////////Purchase Order////////////////////////////////////////// -->
 <h2>Purchase Orders</h2>
 
-<button  [disabled]="disabled" class="btn btn-lg btn-outline-primary" (click)="open(purchaseOrder)">Add Purchase Order</button>
-<button  [disabled]="disabled" class="btn btn-lg btn-outline-success ms-2" (click)="onCompletePurchaseOrders()">Complete Purchase Orders</button>
-<mat-checkbox  [disabled]="disabled" [color]='color' [(ngModel)]="itemsDeliveredChecked" (change)="onItemsDelivered($event)" style="padding-left:5px" >Items Delivered</mat-checkbox>
+<button  [disabled]="false" class="btn btn-lg btn-outline-primary" (click)="open(purchaseOrder)">Add Purchase Order</button>
+<button  [disabled]="false" class="btn btn-lg btn-outline-success ms-2" (click)="onCompletePurchaseOrders()">Complete Purchase Orders</button>
+<mat-checkbox  [disabled]="false" [color]='color' [(ngModel)]="itemsDeliveredChecked" (change)="onItemsDelivered($event)" style="padding-left:5px" >Items Delivered</mat-checkbox>
 
 
 
@@ -338,6 +391,7 @@
     <th scope="row">{{ i + 1 }}</th>
     <td>{{ purchase_order.supplier }}</td>
     <td>{{ purchase_order.order_Number }}</td>
+    <td><button (click)="deleteRow(  purchase_order.order_Number,'Purchase Order')" mat-icon-button><i style="font-size:20px" class="bi bi-x"></i></button></td>
   </tr>
   </tbody>
 </table>
@@ -349,7 +403,7 @@
 
 <!-- ///////////////////////////////////////////////add Parts From Storage-->
 <h2>Materials From Storage</h2>
-<button   [disabled]="disabled" class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Material From Store</button>
+<button   [disabled]="false" class="btn btn-lg btn-outline-primary" (click)="open(content)">Add Material From Store</button>
 <table class="table table-striped mt-4">
   <thead>
   <tr>
@@ -366,6 +420,7 @@
     <td>{{ jobcard_parts.part_Name }}</td>
     <td>{{ jobcard_parts.part_Number }}</td>
     <td>{{ jobcard_parts.part_Qty }}</td>
+    <td><button (click)="deleteRow( jobcard_parts.part_Number,'Storage')" mat-icon-button><i style="font-size:20px" class="bi bi-x"></i></button></td>
   </tr>
   </tbody>
 </table>
@@ -401,67 +456,67 @@
 
 
 
-
-
-<!-- ///////////////////////////////////////////////add Invoice ////////////////////////////////// -->
-<h2>Invoices</h2>
-<button  [disabled]="disabled" class="btn btn-lg btn-outline-primary" (click)="open(invoice)">Add Invoice</button>
-<button  [disabled]="disabled"class="btn btn-lg btn-outline-success ms-2" (click)="onCompleteInvoicing()">Complete Invoices</button>
-
-<table class="table table-striped mt-4">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Invoice Number</th>
-    <th scope="col">Client </th>
-    <th scope="col">Invoice Date</th>
-
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let invoice of INVOICES; index as i">
-    <th scope="row">{{ i + 1 }}</th>
-    <td>{{ invoice.invoice_Number }}</td>
-    <td>{{ invoice.client_Name }}</td>
-    <td>{{ invoice.date }}</td>
-  </tr>
-  </tbody>
-</table>
-
-<ng-template #invoice let-modal>
-  <div class="modal-header">
-    <h2 class="modal-title" id="modal-basic-title">Add Invoice</h2>
-    <button  mat-icon-button style="background-color:rgb(255, 255, 255)"(click)="modal.dismiss()" >
-      <mat-icon style="color:rgb(0, 0, 0)">close</mat-icon>
-    </button>
-  </div>
-
-  <form  #f="ngForm" (ngSubmit)="onAddInvoice(f)">
-  <div class="modal-body">
-    <div class="form-group">
-    <input  id=invoice_Number class="form-control  mt-1" placeholder="Invoice Number"  ngModel name="invoice_Number">
-    <div class="input-group mt-2">
-      <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Client:</span>
-      <select class="form-select" id="invoice_Client"  ngModel name="invoice_Client">
-        <option value="Owner" selected  hidden>Owner</option>
-        <option class="form-control" >Warwick McCleland</option>
-        <option class="form-control">Daniel Duvenage</option>
-        <option class="form-control" >Vaughan McCleland</option>
-      </select>
     </div>
-    <input type="date" min="1" id=qty class="form-control  mt-2"  placeholder="date"  ngModel name="date">
-
-    <button  class="modal-button btn btn-primary mt-3  d-flex justify-content-center" style="width:150px" type="submit">Add</button>
   </div>
+<!-- -------------------------------Invoices------------------------------------------ -->
+  <div class="d-flex justify-content-center  text-center " >
+    <div class="pt-3 shadow-sm p-3 mb-5 bg-body rounded "  style="width: 1050px;  " >
+
+      
+  <h1>Invoices</h1>
+  <button *ngIf="role=='Admin'||'Accounts'" [disabled]="disabled" class="btn btn-lg btn-outline-primary" (click)="open(invoice)">Add Invoice</button>
+  <button *ngIf="role=='Admin'||'Accounts'"  [disabled]="disabled"class="btn btn-lg btn-outline-success ms-2" (click)="onCompleteInvoicing()">Complete Invoices</button>
+  
+  <table class="table table-striped mt-4">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Invoice Number</th>
+      <th scope="col">Client </th>
+      <th scope="col">Invoice Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let invoice of INVOICES; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ invoice.invoice_Number }}</td>
+      <td>{{ invoice.client_Name }}</td>
+      <td>{{ invoice.date }}</td>
+      <td><button (click)="deleteRow(invoice.invoice_Number,'Invoice')" mat-icon-button><i style="font-size:20px" class="bi bi-x"></i></button></td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <ng-template #invoice let-modal>
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-basic-title">Add Invoice</h2>
+      <button  mat-icon-button style="background-color:rgb(255, 255, 255)"(click)="modal.dismiss()" >
+        <mat-icon style="color:rgb(0, 0, 0)">close</mat-icon>
+      </button>
+    </div>
+  
+    <form  #f="ngForm" (ngSubmit)="onAddInvoice(f)">
+    <div class="modal-body">
+      <div class="form-group">
+      <input  id=invoice_Number class="form-control  mt-1" placeholder="Invoice Number"  ngModel name="invoice_Number">
+      <div class="input-group mt-2">
+        <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Client:</span>
+        <select class="form-select" id="invoice_Client"  ngModel name="invoice_Client">
+          <option value="Owner" selected  hidden>Owner</option>
+          <option class="form-control" >Warwick McCleland</option>
+          <option class="form-control">Daniel Duvenage</option>
+          <option class="form-control" >Vaughan McCleland</option>
+        </select>
+      </div>
+      <input type="date" min="1" id=qty class="form-control  mt-2"  placeholder="date"  ngModel name="date">
+  
+      <button  class="modal-button btn btn-primary mt-3  d-flex justify-content-center" style="width:150px" type="submit">Add</button>
+    </div>
+    </div>
+  
+  </form>
+  </ng-template>
+  
+  
+    </div>
   </div>
-
-</form>
-</ng-template>
-
-
-
-
-</div>
-  </div>
-
-

@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalConfig, NgbModal,ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
 import { JobCardService } from 'src/app/Service-Files/jobcard.service';
-import { Router } from '@angular/router';
+import { CanDeactivate, Router } from '@angular/router';
 import { PurchaseOrder } from "src/app/models/purchase-order.model";
 import { StorageParts } from "src/app/models/storage-parts.model";
 import { Invoice } from "src/app/models/invoice.model";
 import { DashboardService } from 'src/app/Service-Files/dashboard.service';
 import { HttpClient } from '@angular/common/http';
 import { ServerURLService } from 'src/app/Service-Files/server-Url.service';
+
 
 
 
@@ -106,6 +107,7 @@ color = 'primary'
   phases!: string[]
   status!:string;
 
+  Panel_Builders_FC = new FormControl();
 
   ownerDisabled:boolean=false;
   startDateDisabled:boolean=false
@@ -118,6 +120,8 @@ color = 'primary'
   panelBuildersDisabled:boolean=false
   programmedByDisabled:boolean=false
   testedByDisabled:boolean=false
+
+  accountsRoleDisabled:boolean=false
 
 
 
@@ -179,7 +183,6 @@ installationChecked:boolean = false
 
     this.owner=this.JobCard_Service.getOwner()
     var start_Date=this.JobCard_Service.getStartDate()
-
     var date = start_Date.toString().split("T")
     var arr = date[0].split("-")
     this.JC_StartDate = {year:parseInt(arr[0]),month:parseInt(arr[1]),day:parseInt(arr[2])}
@@ -194,45 +197,113 @@ installationChecked:boolean = false
     this.tested_By=this.JobCard_Service.getTestedBy()
     this.phases = this.JobCard_Service.getPhases();
 
+    console.log(this.installationChecked)
+    if(this.phases[7]=='Completed'){
+      this.installationChecked = true
+    }
+    else if(this.phases[7]==undefined || this.phases[7]=='' ){
+     this.installationChecked = false
+    }
+    
+    this.Panel_Builders_FC.setValue(this.panel_Builders)
+
+
+if (this.role=="Accounts"){
+  this.accountsRoleDisabled=true
+}
+
 if (this.owner) {
+  if(this.role=="Admin"){
+    this.ownerDisabled=false
+  }
+  else
  this.ownerDisabled=true
 }
+
 // if (this.JC_StartDate) {
+//   if(this.role=="Admin"){
+//     this.startDateDisabled=false
+//   }
+//   else
 //   this.startDateDisabled!=true
 //  }
+
  if (this.client) {
+  if(this.role=="Admin"){
+    this.clientDisabled=false
+  }
+  else
   this.clientDisabled=true
  }
+
  if (this.order_Number) {
+  if(this.role=="Admin"){
+    this.orderNumberDisabled=false
+  }
+  else
   this.orderNumberDisabled=true
  }
+
  if (this.company) {
+  if(this.role=="Admin"){
+    this.companyDisabled=false
+  }
+  else
   this.companyDisabled=true
  }
+
  if (this.description) {
+  if(this.role=="Admin"){
+    this.descriptionDisabled=false
+  }
+  else
   this.descriptionDisabled=true
  }
+
  if (this.panel_Number) {
+  if(this.role=="Admin"){
+    this.panelNumberDisabled=false
+  }
+  else
   this.panelNumberDisabled=true
  }
+
  if (this.drawings_By) {
+  if(this.role=="Admin"){
+    this.drawingsByDisabled=false
+  }
+  else
   this.drawingsByDisabled=true
  }
 
-console.log(this.panelBuildersDisabled)
-console.log(this.disabled)
- if (this.panel_Builders.length!=0) {
+ if (this.panel_Builders) {
+  if(this.role=="Admin"){
+    this.panelBuildersDisabled=false
+  }
+  else
   this.panelBuildersDisabled=true
  }
+
  if (this.programmed_By) {
+  if(this.role=="Admin"){
+    this.programmedByDisabled=false
+  }
+    else
   this.programmedByDisabled=true
  }
+
  if (this.tested_By) {
+  if(this.role=="Admin"){
+    this.testedByDisabled=false
+  }
+  else
   this.testedByDisabled=true
  }
 
 
-
+setInterval(()=>{
+  // console.log(this.Panel_Builders_FC.value)
+},1000)
 
 
    var flag = setInterval(()=>{
@@ -429,17 +500,15 @@ switch (this.panel_Builders[i])
     //
 
         // Installation
-
         if(this.phases[7]=='Completed'){
           this.installation_phase_BG_color="#5cb85c"
           this.installation_phase_Text_color='white'
-          this.installationChecked = true
+          // this.installationChecked = true
         }
-        
         else if(this.phases[7]==undefined || this.phases[7]=='' ){
           this.installation_phase_BG_color="rgb(242, 242, 242) "
           this.installation_phase_Text_color='black'
-          this.installationChecked = false
+          // this.installationChecked = false
         }
         
         //
@@ -558,7 +627,7 @@ else if( this.phases[0]=="Completed"&& this.phases[1]=="Completed"&& this.phases
     var panel_Number = form.value.panel_Number
     var drawings_By = form.value.drawings_By
 
-    var panel_Builders = this.panel_Builders
+    var panel_Builders = this.Panel_Builders_FC.value
     var programmed_By = form.value.programmed_By
     var tested_By = form.value.tested_By
     var phases = this.phases
@@ -567,7 +636,7 @@ var status = 'Completed'
     }
     else
     var status = "In Progress"
-
+console.log(status)
     this.JobCard_Service.SaveJobCard(
       job_number,
       owner,
@@ -584,24 +653,37 @@ var status = 'Completed'
       phases,
       status
     );
+// console.log(form.value.installationChecked)
+    if (form.value.installationChecked==true)
+    {
+     this.ds.savePhaseStatus(7,"Completed",this.job_Number)
+     .subscribe((responseData:any) =>{
+       this.phases=responseData.phases
+     })
+   }
+   else 
+   this.ds.savePhaseStatus(7,"",this.job_Number)
+   .subscribe((responseData:any) =>{
+     this.phases=responseData.phases
+   })
 
     this.router.navigate(['jobcard'])
   }
 
-  onPanelInstalled(event:any){
-  if (event.checked==true)
-   {
-    this.ds.savePhaseStatus(7,"Completed",this.job_Number)
-    .subscribe((responseData:any) =>{
-      this.phases=responseData.phases
-    })
-  }
-  else 
-  this.ds.savePhaseStatus(7,"",this.job_Number)
-  .subscribe((responseData:any) =>{
-    this.phases=responseData.phases
-  })
-    }
+  // onPanelInstalled(event:any){
+  // if (event.checked==true)
+  //  {
+  //   this.ds.savePhaseStatus(7,"Completed",this.job_Number)
+  //   .subscribe((responseData:any) =>{
+  //     this.phases=responseData.phases
+  //   })
+  // }
+  // else 
+  // this.ds.savePhaseStatus(7,"",this.job_Number)
+  // .subscribe((responseData:any) =>{
+  //   this.phases=responseData.phases
+  // })
+  //   }
 
   onAddPurchaseOrder(form: NgForm){
 
@@ -674,12 +756,6 @@ var status = 'Completed'
 
   }
  
-
-
-
-
-
-
 onCompleteInvoicing(){
   this.ds.savePhaseStatus(8,"Completed",this.job_Number)
   .subscribe((responseData:any) =>{
@@ -712,7 +788,7 @@ callPurchaseOrderTable(){
   }, error =>{
      console.log(error.error.message)
   });
-
+  console.log( this.PURCHASE_ORDERS)
 }
 
 callJobCardPartsFromStorage(){
@@ -734,6 +810,8 @@ callJobCardPartsFromStorage(){
   }, error =>{
      console.log(error.error.message)
   });
+
+
 }
 
 callInvoices(){
@@ -757,10 +835,26 @@ callInvoices(){
 }
 
 
+deleteRow(itemNumber:any,type:string){
+
+  let info ={
+    itemNumber:itemNumber,
+    type:type
+  }
+  this.http.post(this.su.serverURL+"/jobcard/delete-row",info).subscribe(data=>{
+    console.log(data)
+  })
+  console.log(itemNumber)
+}
+
 
 ngOnDestroy(){
   this.flag=false
 }
+
+
+
+
 
 
 

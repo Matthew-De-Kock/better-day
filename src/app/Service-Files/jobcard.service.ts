@@ -155,7 +155,7 @@ CreateJobCard(
       status:status
      };
 
-
+console.log(status)
    this.http.post(this.su.serverURL+"/jobcard/save-jobcard", jobcard)
      .subscribe((responseData) => {
        console.log(responseData);
