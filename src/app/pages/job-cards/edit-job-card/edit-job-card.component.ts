@@ -42,8 +42,8 @@ interface Storage {
 export class EditJobCardComponent implements OnInit {
 ////////////////////
 
-role = localStorage.getItem("role")!;
 
+roles = JSON.parse(localStorage.getItem("roles")!);
 
   workers_assigned_phase_BG_color:any;
   workers_assigned_phase_Text_color:any;
@@ -120,6 +120,7 @@ color = 'primary'
   panelBuildersDisabled:boolean=false
   programmedByDisabled:boolean=false
   testedByDisabled:boolean=false
+  invoicesRole:boolean=false
 
   accountsRoleDisabled:boolean=false
 
@@ -153,25 +154,22 @@ installationChecked:boolean = false
 //  clickedRows = new Set<StorageMaterials>();
 
  jobNumber!:number;
-  disabled: boolean;
+  disabled: boolean=true;
   constructor(private http: HttpClient,config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router
     ,private su: ServerURLService) {
-    this.role = localStorage.getItem("role")!;
+    this.roles = JSON.parse(localStorage.getItem("roles")!);
     config.backdrop = 'static';
     config.keyboard = false;
     
-    if (this.role!="User") {
+
+    for (let i = 0; i < this.roles.length; i++) {
+    if (this.roles[i]=="Admin"||this.roles[i]=="Owner"||this.roles[i]=="Accounts") {
       this.disabled=false
     }
-    else
-    this.disabled=true
-    
+    }
+
   }
 
-
-  // openXl(content:any) {
-  //   this.modalService.open(content, { size: 'xl' });
-  // }
 
 
   ngOnInit(){
@@ -208,15 +206,19 @@ installationChecked:boolean = false
     this.Panel_Builders_FC.setValue(this.panel_Builders)
 
 
-if (this.role=="Accounts"){
-  this.accountsRoleDisabled=true
-}
+    for (let i = 0; i < this.roles.length; i++) {
+      if (this.roles[i]=="Accounts") {
+        this.accountsRoleDisabled=false
+      }
+      }
+
 
 if (this.owner) {
-  if(this.role=="Admin"){
+  this.ownerDisabled= this.roles.includes("Admin")
+  if(this.ownerDisabled==true){
     this.ownerDisabled=false
   }
-  else
+  else if(this.ownerDisabled==false)
  this.ownerDisabled=true
 }
 
@@ -228,77 +230,93 @@ if (this.owner) {
 //   this.startDateDisabled!=true
 //  }
 
+
  if (this.client) {
-  if(this.role=="Admin"){
+  this.clientDisabled= this.roles.includes("Admin")
+  if(this.clientDisabled==true){
     this.clientDisabled=false
   }
-  else
-  this.clientDisabled=true
+  else if(this.clientDisabled==false)
+ this.clientDisabled=true
  }
 
  if (this.order_Number) {
-  if(this.role=="Admin"){
+  this.orderNumberDisabled= this.roles.includes("Admin")
+  if(this.orderNumberDisabled==true){
     this.orderNumberDisabled=false
   }
-  else
-  this.orderNumberDisabled=true
+  else if(this.orderNumberDisabled==false)
+ this.orderNumberDisabled=true
  }
 
  if (this.company) {
-  if(this.role=="Admin"){
+  this.companyDisabled= this.roles.includes("Admin")
+  if(this.companyDisabled==true){
     this.companyDisabled=false
   }
-  else
-  this.companyDisabled=true
+  else if(this.companyDisabled==false)
+ this.companyDisabled=true
  }
 
  if (this.description) {
-  if(this.role=="Admin"){
+  this.descriptionDisabled= this.roles.includes("Admin")
+  if(this.descriptionDisabled==true){
     this.descriptionDisabled=false
   }
-  else
-  this.descriptionDisabled=true
+  else if(this.descriptionDisabled==false)
+ this.descriptionDisabled=true
  }
 
  if (this.panel_Number) {
-  if(this.role=="Admin"){
+  this.panelNumberDisabled= this.roles.includes("Admin")
+  if(this.panelNumberDisabled==true){
     this.panelNumberDisabled=false
   }
-  else
-  this.panelNumberDisabled=true
+  else if(this.panelNumberDisabled==false)
+ this.panelNumberDisabled=true
  }
 
  if (this.drawings_By) {
-  if(this.role=="Admin"){
+  this.drawingsByDisabled= this.roles.includes("Admin")
+  if(this.drawingsByDisabled==true){
     this.drawingsByDisabled=false
   }
-  else
-  this.drawingsByDisabled=true
+  else if(this.drawingsByDisabled==false)
+ this.drawingsByDisabled=true
  }
 
  if (this.panel_Builders) {
-  if(this.role=="Admin"){
+  this.panelBuildersDisabled= this.roles.includes("Admin")
+  if(this.panelBuildersDisabled==true){
     this.panelBuildersDisabled=false
   }
-  else
-  this.panelBuildersDisabled=true
+  else if(this.panelBuildersDisabled==false)
+ this.panelBuildersDisabled=true
  }
 
  if (this.programmed_By) {
-  if(this.role=="Admin"){
+  this.programmedByDisabled= this.roles.includes("Admin")
+  if(this.programmedByDisabled==true){
     this.programmedByDisabled=false
   }
-    else
-  this.programmedByDisabled=true
+  else if(this.programmedByDisabled==false)
+ this.programmedByDisabled=true
  }
 
  if (this.tested_By) {
-  if(this.role=="Admin"){
+  this.testedByDisabled= this.roles.includes("Admin")
+  if(this.testedByDisabled==true){
     this.testedByDisabled=false
   }
-  else
-  this.testedByDisabled=true
+  else if(this.testedByDisabled==false)
+ this.testedByDisabled=true
  }
+
+for (let i = 0; i < this.roles.length; i++) {
+  if(this.roles[i]=="Admin"||this.roles[i]=="Accounts"){
+this.invoicesRole=true
+  }
+}
 
 
 setInterval(()=>{

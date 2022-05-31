@@ -17,7 +17,7 @@ router.post("/jobcard/create-new-user"
       contactNumber: req.body.contactNumber,
       email: req.body.email,
       password: hash,
-      role: req.body.role,
+      roles: req.body.roles,
       });
         user.save().then(result =>{
           res.status(201).json({

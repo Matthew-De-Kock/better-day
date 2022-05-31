@@ -17,28 +17,26 @@ export class HeaderComponent implements OnInit {
   public authListenerSubs!: Subscription;
 
 
-  role = localStorage.getItem("role")!;
+  roles:string[]=[]
   userName = localStorage.getItem("name")!;
   userEmail = localStorage.getItem("email")!;
 
 
 
   constructor(private authService: AuthService, private router: Router) {
-    // this.role = localStorage.getItem("role")!;
-    // this.userName = localStorage.getItem("name")!;
-    // this.userEmail = localStorage.getItem("email")!;
 
 
     setInterval(() => {
-      this.role = localStorage.getItem("role")!;
+      this.roles = JSON.parse(localStorage.getItem("roles")!);
       this.userName = localStorage.getItem("name")!;
       this.userEmail = localStorage.getItem("email")!;
+     
     }, 1000);
 
-//     this.role=this.authService.getRole()
-//     setInterval(() => {
-//   console.log(this.role)
-// }, 1000);
+    this.roles=this.authService.getRole()
+    setInterval(() => {
+
+}, 1000);
    }
 
 
@@ -48,9 +46,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(){
 
-// setInterval(() => {
-//   console.log(this.role)
-// }, 1000);
+
     
 
 

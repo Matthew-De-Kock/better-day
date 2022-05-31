@@ -15,13 +15,13 @@ export class AdminService {
 
   constructor(private http: HttpClient, private router: Router,private su: ServerURLService) {}
 
-  createUser(name: string, contactNumber: string, email: string, password: string, role:string) {
+  createUser(name: string, contactNumber: string, email: string, password: string, roles:string[]) {
     const user: User = {
       name: name,
       contactNumber: contactNumber,
       email:email,
       password:password,
-      role: role,
+      roles: roles,
      };
 
      console.log(user)

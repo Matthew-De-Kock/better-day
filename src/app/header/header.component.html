@@ -6,12 +6,14 @@
         <h1 class="text-start pt-4 ps-2" style="font-size:26px ;color:rgb(255, 255, 255)">Better Day</h1>
       <!-- </div> -->
 
-
-     <div *ngIf="role=='Admin'">
-<hr style="width:100%">
-<label class="text-start mb-3 ps-3" style="width: 100%; font-weight: 500; color: rgb(238, 238, 238);  font-size: 14px;">Admin</label>
-      <button  (click)="sidenav.toggle()"style="width: 100%;" mat-button class="item"routerLink="/create-new-user" ><mat-icon  mat-list-icon style="margin-right: 10%;">person_add</mat-icon>Create New User</button>
-    </div>
+<div *ngFor="let d of roles; index as i">
+  <div *ngIf="roles[i]=='Admin'">
+    <hr style="width:100%">
+    <label class="text-start mb-3 ps-3" style="width: 100%; font-weight: 500; color: rgb(238, 238, 238);  font-size: 14px;">Admin</label>
+          <button  (click)="sidenav.toggle()"style="width: 100%;" mat-button class="item"routerLink="/create-new-user" ><mat-icon  mat-list-icon style="margin-right: 10%;">person_add</mat-icon>Create New User</button>
+        </div>
+</div>
+ 
 
 <hr>
       <button  (click)="sidenav.toggle()" style="width: 100%;" mat-button class="item" routerLink="dashboard"><mat-icon  class="ml-4 " mat-list-icon style="margin-right: 10%;" >dashboard</mat-icon>Dashboard</button><br>

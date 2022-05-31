@@ -36,18 +36,18 @@ const User = require('../models/user');
           });
          }
         const token = jwt.sign(
-          {email: fetchedUser.email,userId: fetchedUser._id,name:fetchedUser.name,contactNumber:fetchedUser.contactNumber,role:fetchedUser.role }
+          {email: fetchedUser.email,userId: fetchedUser._id,name:fetchedUser.name,contactNumber:fetchedUser.contactNumber,roles:fetchedUser.roles }
         ,'secret_this_should_be_longer'//middleware auth
         ,{expiresIn:"1h"});
 
-
+console.log(fetchedUser.roles)
     res.status(200).json({
       token: token,
       expiresIn: 36000,
       name: fetchedUser.name,
       contactNumber: fetchedUser.contactNumber,
       email: fetchedUser.email,
-     role: fetchedUser.role
+     roles: fetchedUser.roles
     });
 
 

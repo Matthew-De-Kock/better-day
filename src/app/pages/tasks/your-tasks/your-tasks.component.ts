@@ -31,7 +31,8 @@ interface Tasks {
   styleUrls: ['./your-tasks.component.css']
 })
 export class YourTasksComponent implements OnInit {
-  role = localStorage.getItem("role")!;
+  // roles = localStorage.getItem("roles")!;
+  roles = JSON.parse(localStorage.getItem("roles")!);
   userName = localStorage.getItem("name")!;
   userEmail = localStorage.getItem("email")!;
   

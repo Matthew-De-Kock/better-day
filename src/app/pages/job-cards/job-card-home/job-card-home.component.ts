@@ -9,22 +9,34 @@ import { JobCardService } from 'src/app/Service-Files/jobcard.service';
 })
 export class JobCardHomeComponent implements OnInit {
 
-disabled:boolean=false
+disabled:boolean=true
 
-  role = localStorage.getItem("role")!;
+ // roles = localStorage.getItem("role")!;
+ roles = JSON.parse(localStorage.getItem("roles")!);
   userName = localStorage.getItem("name")!;
   userEmail = localStorage.getItem("email")!;
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router) { }
 
   ngOnInit() {
+    for (let i = 0; i < this.roles.length; i++) {
+if (this.roles[i]=="Admin"||this.roles[i]=="Owner"){
+this.disabled=false;
+}
+}
 
-    if (this.role!="User") {
-      this.disabled=false
-    }
-    else
-    this.disabled=true
-    
+
+
+
+  // if (this.roles[i]=="Admin" ) {
+  //   this.disabled=false
+  // }
+  // else
+  // this.disabled=true
+  
+  
+
+
 
   }
 

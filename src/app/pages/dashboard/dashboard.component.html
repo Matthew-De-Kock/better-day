@@ -6,7 +6,7 @@
 
 
 <!-- Owner Critical Items -->
-<div class="row ms-3 me-3" >
+<div *ngIf="ownerDashboard==true" class="row ms-3 me-3" >
   <mat-accordion >
   <mat-expansion-panel expanded='true'>
   <mat-expansion-panel-header>
@@ -39,7 +39,6 @@
                    <td style ="color: black ; " >{{ow_CI_Descr_Arr[i]}}</td>
                     <td style ="color: black ; " >{{ow_CI_Task_Arr[i]}}</td> 
               <td>
-                
                   <select [ngModel]="ow_CI_phaseStatus_Arr[i]" (change)="onCriticalItemsStatusSelect($event,d,content,ow_CI_Task_Arr[i])"class="form-select " style="font-weight: 400; background-color:#d9534f; color:white; ">
                     <option class="form-control"  value="In Progress" >In Progress</option>
                     <option class="form-control" value="Problem" >Problem</option>
@@ -59,7 +58,7 @@
   <br>
 
 <!-- Owner Active Job Cards Tasks -->
-<div class="row ms-3 me-3" >
+<div  *ngIf="ownerDashboard==true" class="row ms-3 me-3" >
   <mat-accordion >
   <mat-expansion-panel expanded='true'>
   <mat-expansion-panel-header>

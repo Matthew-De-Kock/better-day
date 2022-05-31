@@ -1,4 +1,4 @@
-
+<div style="background-color: rgb(245, 248, 250);">
 
 
 
@@ -40,27 +40,40 @@
 <div >
 
 </div>
-<div required>
 
-  <div class="form-check text-start"  >
-    <input type="radio" class="form-check-input me-3" id="radio1" name="optradio" value="Admin" ngModel name="role">Admin
-    <label class="form-check-label " for="radio1"></label>
-  </div>
-  <div class="form-check text-start">
-    <input type="radio" class="form-check-input me-3" id="radio2" name="optradio" value="Accounts" ngModel name="role">Accounts
-    <label class="form-check-label ps-4" for="radio2"></label>
-  </div>
-  <div class="form-check text-start">
-    <input type="radio" class="form-check-input me-3" id="radio3" name="optradio" value="Owner" ngModel name="role">Owner
-    <label class="form-check-label ps-4" for="radio3"></label>
-  </div>
-  <div class="form-check text-start">
-    <input type="radio" class="form-check-input me-3" id="radio4" name="optradio" value="User" ngModel name="role">User
-    <label class="form-check-label ps-4" for="radio4"></label>
-  </div>
 
+<div class="text-start">
+  <hr>
+  <h3>Supervisors:</h3>
+  <div>
+    <mat-checkbox  style="padding-right: 2em" ngModel name="admin"> Admin </mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox   ngModel name="owner"   >Owner</mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox   ngModel name="accounts"   >Accounts</mat-checkbox>
+  </div>
+<hr>
+  <h3>Users:</h3>
+  <div>
+    <mat-checkbox   ngModel name="panel_builder"   >Panel Builder</mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox   ngModel name="drawer"   >Drawer</mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox   ngModel name="programmer"   >Programmer</mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox   ngModel name="testing"   >Tester</mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox   ngModel name="installer"   >Installer</mat-checkbox>
+  </div>
 
 </div>
+
 
 
 
@@ -84,4 +97,4 @@
   </form>
 
   </div>
-
+</div>

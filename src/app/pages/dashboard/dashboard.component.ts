@@ -18,7 +18,7 @@ import { ServerURLService } from 'src/app/Service-Files/server-Url.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-role = localStorage.getItem("role")!;
+roles!:string[];
 userName = localStorage.getItem("name")!;
 userEmail = localStorage.getItem("email")!;
 
@@ -86,6 +86,7 @@ flag!: boolean;
   ow_CI_Task_Arr:string[]=[]
   ow_CI_phaseStatus_Arr:string[]=[]
   
+  ownerDashboard:boolean=false
  // ow_CI_phaseStatus_2D_Arr:string[]=[]
   //ow_CI_phaseStatus_1D_Arr:string[]=[]
   
@@ -98,23 +99,17 @@ flag!: boolean;
 
   ngOnInit(){
 
-this.role = localStorage.getItem("role")!
+    this.roles = JSON.parse(localStorage.getItem("roles")!);
 
-
+    for (let i = 0; i < this.roles.length; i++) {
+      if (this.roles[i]=="Admin"||this.roles[i]=="Owner"){
+        this.ownerDashboard=true
+      }
+    }
 
     var flag = setInterval(()=>{
-
-
-
       this.getOwnerJobCards()
-
 var count  =0
-
-
-
-     
-
-
 
       this.ds.GetJobs(this.userName).subscribe((data=>{
         this.drawings_JobNumber_arr=data.drawings_JobNumber_arr
@@ -475,7 +470,17 @@ this.problemJobNum = job_Number
         //Owner Functions
 
         getOwnerJobCards(){
- if (this.role=="Owner"|| this.role=="Admin"){
+var ownerRole:boolean=false
+
+for (let i = 0; i < this.roles.length; i++) {
+  if (this.roles[i]=="Admin"||this.roles[i]=="Owner"){
+    ownerRole=true
+  }
+}
+
+
+
+ if (ownerRole==true){
    let info={
      userName: this.userName
    }

@@ -16,7 +16,7 @@ export class AuthService {
   private name!: string;
   private contactNumber! : string
   private email!: string;
-  private role! : string
+  private roles! : string[]
   private token:string ="";
 
   private tokenTimer : any;
@@ -44,7 +44,7 @@ export class AuthService {
   }
 
   getRole(){
-    return this.role;
+    return this.roles;
   }
 
   getIsAuth(){
@@ -63,10 +63,10 @@ export class AuthService {
 
 
   login( email: string, password:string){
-    const user: User = {name:"",contactNumber:"", email:email, password:password, role:""  };
+    const user: User = {name:"",contactNumber:"", email:email, password:password, roles:[]  };
     //http://localhost:3000
-   this.http.post<{token:string, expiresIn: number,name:string, role:string ,contactNumber:string, email:string, password:string}>(this.su.serverURL+"/login",user)
-   //this.http.post<{token:string, expiresIn: number,name:string, role:string ,contactNumber:string, email:string, password:string}>("http://localhost:3000/login",user)
+   this.http.post<{token:string, expiresIn: number,name:string, roles:string[] ,contactNumber:string, email:string, password:string}>(this.su.serverURL+"/login",user)
+   //this.http.post<{token:string, expiresIn: number,name:string, roles:string ,contactNumber:string, email:string, password:string}>("http://localhost:3000/login",user)
     .subscribe(response=>{
    const token = response.token;
    this.token =token;
@@ -79,14 +79,16 @@ export class AuthService {
 
         this.name=response.name;
         this.contactNumber=response.contactNumber;
-        this.role=response.role;
+        console.log()
+        this.roles=response.roles;
 
         this.email=response.email;
         this.authStatusListener.next(true);
         const now = new Date();
         const expirationDate = new Date (now.getTime() + expiresInDuration*1000);
-
-          this.saveAuthData(token,expirationDate,this.name, this.contactNumber,this.email,this.role)
+        console.log(this.email)
+console.log(this.roles)
+          this.saveAuthData(token,expirationDate,this.name, this.contactNumber,this.email,this.roles)
           this.router.navigate(['/dashboard']);
   }
     }, error=>{
@@ -114,7 +116,7 @@ export class AuthService {
    this.name = authInformation.name;
    this.contactNumber = authInformation.contactNumber;
    this.email = authInformation.email;
-   this.role = authInformation.role;
+   this.roles = authInformation.roles;
 
    this.setAuthTimer(expiresIn/1000);
    this.authStatusListener.next(true);
@@ -133,7 +135,7 @@ export class AuthService {
    this.name='';
    this.contactNumber='';
    this.email=''
-   this.role='';
+   this.roles=[];
    this.router.navigate(['/login']);
    }
 
@@ -146,14 +148,14 @@ export class AuthService {
      },duration * 1000) ;
    }
 
-   private saveAuthData(token:string, expirationDate: Date, name: string, contactNumber:string, email:string, role:string){
+   private saveAuthData(token:string, expirationDate: Date, name: string, contactNumber:string, email:string, roles:string[]){
      localStorage.setItem("token", token);
      localStorage.setItem("expiration", expirationDate.toISOString());
 
      localStorage.setItem("name", name);
      localStorage.setItem("contactNumber", contactNumber);
      localStorage.setItem("email", email);
-     localStorage.setItem("role", role);
+     localStorage.setItem("roles", JSON.stringify(roles));
    }
 
    private clearAuthData(){
@@ -162,7 +164,7 @@ export class AuthService {
      localStorage.removeItem("name");
      localStorage.removeItem("contactNumber");
      localStorage.removeItem("email");
-     localStorage.removeItem("role")
+     localStorage.removeItem("roles")
    }
 
    private getAuthData(){
@@ -171,7 +173,7 @@ export class AuthService {
      const name = localStorage.getItem("name")!;
      const contactNumber = localStorage.getItem("contactNumber")!;
      const email = (localStorage.getItem("email")!);
-     const role = (localStorage.getItem("role")!);
+     const roles = JSON.parse(localStorage.getItem("roles")!);
 
      if(!token || !expirationDate ){
    return;
@@ -182,7 +184,7 @@ export class AuthService {
        name: name,
        contactNumber: contactNumber,
        email: email,
-       role: role,
+       roles: roles,
      }
 
    }

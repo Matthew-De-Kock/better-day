@@ -14,7 +14,7 @@ function CreateAdmin(){ // Function that checks for admin account, if no account
   contactNumber: "0723320909",
   email: "admin@macautomation.co.za",
   password: "$2a$06$QVSnHGgtsDfzV8RwDdk6sOA1gctzxoNcWKNlqgpX7lSO0JGxLIjEa", //encrypted password for M@CAutomation1
-  role: "Admin"
+  roles: ["Admin"]
 } ,{new: true }).then((result=>{
 
 if(result!=null){
@@ -26,7 +26,7 @@ if (result==null) {
     contactNumber: "0723320909",
     email: "admin@macautomation.co.za",
     password: "$2a$06$QVSnHGgtsDfzV8RwDdk6sOA1gctzxoNcWKNlqgpX7lSO0JGxLIjEa", //encrypted password for M@CAutomation1
-    role: "Admin"
+    roles: ["Admin"]
     });
 
     user.save().then(result =>{

@@ -7,7 +7,7 @@ name: {type: String },
 contactNumber: {type: String },
 email:{type: String },
 password:{type: String },
-role: {type: String}
+roles: {type: Array}
 });
 
 userScheme.plugin(uniqueValidator);
