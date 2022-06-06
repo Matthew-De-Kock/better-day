@@ -56,15 +56,17 @@ TASKS:Tasks[]=[]
   
   
   
+drawings_task_disabled_Arr:boolean[]=[]
   drawings_task_BC_arr : string[]=[];
   drawings_task_TC_arr : string[]=[];
   drawings_phase_status_arr: string[]=[];
   
-  
+  panelBuild_task_disabled_Arr:boolean[]=[]
   panelBuild_task_BC_arr : string[]=[];
   panelBuild_task_TC_arr : string[]=[];
   panelBuild_phase_status_arr: string[]=[]
   
+  programmedBy_task_disabled_Arr:boolean[]=[]
   programmedBy_task_BC_arr : string[]=[];
   programmedBy_task_TC_arr : string[]=[];
 
@@ -72,14 +74,21 @@ TASKS:Tasks[]=[]
   programming_phase_arr: string[]=[];
   programming_phase_completed_arr: string[]=[];
   
+  
+testedBy_task_disabled_Arr:boolean[]=[]
   testedBy_task_BC_arr : string[]=[];
   testedBy_task_TC_arr : string[]=[];
   testedBy_phase_status_arr: string[]=[];
   
+
+  ownerForJobCards_arr: string[]=[];
+ownerForProblem:string = ""
+
+
   flag!: boolean;
   
   
-  
+
   // tasks$: Observable<Task[]>;
   filter = new FormControl('');
 
@@ -120,6 +129,7 @@ TASKS:Tasks[]=[]
             this.tested_By_Descr_arr=data.tested_By_Descr_arr
             this.testedBy_phase_status_arr= data.testedBy_phase_status_arr
     
+            this.ownerForJobCards_arr=data.ownerForJobCards_arr
 //var count=0
             // for (let i = 0; i < data.drawings_JobNumber_arr.length; i++) {
             //   this.TASKS[count]={
@@ -209,24 +219,27 @@ TASKS:Tasks[]=[]
         if(this.drawings_phase_status_arr[i]=='Acknowledge'){
           this.drawings_task_BC_arr[i]="#f0ad4e"
           this.drawings_task_TC_arr[i]='white'
+          this.drawings_task_disabled_Arr[i]=false
         }
         else if(this.drawings_phase_status_arr[i]=='Completed'){
           this.drawings_task_BC_arr[i]="#5cb85c"
           this.drawings_task_TC_arr[i]='white'
+          this.drawings_task_disabled_Arr[i]=false
         }
         else if(this.drawings_phase_status_arr[i]=='In Progress'){
           this.drawings_task_BC_arr[i]="#0275d8"
           this.drawings_task_TC_arr[i]='white'
+          this.drawings_task_disabled_Arr[i]=false
         }
         else if(this.drawings_phase_status_arr[i]==undefined){
           this.drawings_task_BC_arr[i]="rgb(242, 242, 242) "
           this.drawings_task_TC_arr[i]='black'
+          this.drawings_task_disabled_Arr[i]=false
         }
         else if(this.drawings_phase_status_arr[i]=='Problem'){
           this.drawings_task_BC_arr[i]="#d9534f"
           this.drawings_task_TC_arr[i]='white'
-    
-    
+          this.drawings_task_disabled_Arr[i]=true
         }
         
       }
@@ -236,50 +249,60 @@ TASKS:Tasks[]=[]
         if(this.panelBuild_phase_status_arr[i]=='Acknowledge'){
           this.panelBuild_task_BC_arr[i]="#f0ad4e"
           this.panelBuild_task_TC_arr[i]='white'
+          this.panelBuild_task_disabled_Arr[i]=false
         }
         else if(this.panelBuild_phase_status_arr[i]=='Completed'){
           this.panelBuild_task_BC_arr[i]="#5cb85c"
           this.panelBuild_task_TC_arr[i]='white'
+          this.panelBuild_task_disabled_Arr[i]=false
         }
         else if(this.panelBuild_phase_status_arr[i]=='In Progress'){
           this.panelBuild_task_BC_arr[i]="#0275d8"
           this.panelBuild_task_TC_arr[i]='white'
+          this.panelBuild_task_disabled_Arr[i]=false
         }
         else if(this.panelBuild_phase_status_arr[i]==undefined){
           this.panelBuild_task_BC_arr[i]="rgb(242, 242, 242) "
           this.panelBuild_task_TC_arr[i]='black'
+          this.panelBuild_task_disabled_Arr[i]=false
         }
         else if(this.panelBuild_phase_status_arr[i]=='Problem'){
           this.panelBuild_task_BC_arr[i]="#d9534f"
           this.panelBuild_task_TC_arr[i]='white'
+          this.panelBuild_task_disabled_Arr[i]=true
         }
         
       }
-    
     
     
       for (let i = 0; i < this.programming_phase_status_arr.length; i++) {
         if(this.programming_phase_status_arr[i]=='Acknowledge'){
           this.programmedBy_task_BC_arr[i]="#f0ad4e"
           this.programmedBy_task_TC_arr[i]='white'
-          this.programming_phase_arr[i]= ""
+          // this.programming_phase_arr[i]= ""
+          this.programmedBy_task_disabled_Arr[i]=false
         }
         else if(this.programming_phase_status_arr[i]=='Completed'){
           this.programmedBy_task_BC_arr[i]="#5cb85c"
           this.programmedBy_task_TC_arr[i]='white'
+          this.programmedBy_task_disabled_Arr[i]=false
         }
         else if(this.programming_phase_status_arr[i]=='In Progress'){
           this.programmedBy_task_BC_arr[i]="#0275d8"
           this.programmedBy_task_TC_arr[i]='white'
+          this.programmedBy_task_disabled_Arr[i]=false
         }
         else if(this.programming_phase_status_arr[i]==undefined){
           this.programmedBy_task_BC_arr[i]="rgb(242, 242, 242) "
           this.programmedBy_task_TC_arr[i]='black'
+          this.programmedBy_task_disabled_Arr[i]=false
         }
         else if(this.programming_phase_status_arr[i]=='Problem'){
           this.programmedBy_task_BC_arr[i]="#d9534f"
           this.programmedBy_task_TC_arr[i]='white'
+          this.programmedBy_task_disabled_Arr[i]=true
         }
+      
       }
     
     
@@ -288,29 +311,33 @@ TASKS:Tasks[]=[]
             if(this.testedBy_phase_status_arr[i]=='Acknowledge'){
               this.testedBy_task_BC_arr[i]="#f0ad4e"
               this.testedBy_task_TC_arr[i]='white'
+              this.testedBy_task_disabled_Arr[i]
             }
             else if(this.testedBy_phase_status_arr[i]=='Completed'){
               this.testedBy_task_BC_arr[i]="#5cb85c"
               this.testedBy_task_TC_arr[i]='white'
+              this.testedBy_task_disabled_Arr[i]
             }
             else if(this.testedBy_phase_status_arr[i]=='In Progress'){
               this.testedBy_task_BC_arr[i]="#0275d8"
               this.testedBy_task_TC_arr[i]='white'
+              this.testedBy_task_disabled_Arr[i]
             }
             else if(this.testedBy_phase_status_arr[i]==undefined){
               this.testedBy_task_BC_arr[i]="rgb(242, 242, 242) "
               this.testedBy_task_TC_arr[i]='black'
+              this.testedBy_task_disabled_Arr[i]
             }
             else if(this.testedBy_phase_status_arr[i]=='Problem'){
               this.testedBy_task_BC_arr[i]="#d9534f"
               this.testedBy_task_TC_arr[i]='white'
+              this.testedBy_task_disabled_Arr[i]
     
        
     
     
             }
           }
-        
     
     
     }
@@ -328,13 +355,27 @@ TASKS:Tasks[]=[]
     
     onSendMail(form: NgForm){
 
-      var supervisorEmail= form.value.supervisor
-      var problemDescription =  form.value.description
+      //  var supervisorEmail= form.value.supervisor
+        var problemDescription =  form.value.description
+      
+      
+      var ownerName= this.ownerForProblem
+       var problemDescription =  form.value.description
+       var ownerEmail:string = ""
+       let info={
+         name:ownerName
+       }
+      this.http.post(this.su.serverURL+"/get-owner-email",info).subscribe(data=>{
+        var rsp:any = data
+      
+       ownerEmail = rsp.result.email
+       console.log(ownerEmail)
+      /////////////////////////////////////////
        this.emailLoading=true
        let info ={
          userName: this.userName,
          userEmail: this.userEmail,
-         supervisor: supervisorEmail,
+         ownerEmail: ownerEmail,
          problemDescription: problemDescription,
          jobNumber: this.problemJobNum
        }
@@ -342,84 +383,92 @@ TASKS:Tasks[]=[]
          data=>{
            let resp:any=data
            console.log("Email has been sent out to Supervisor")
-     
-          
+      
            this.emailLoading=false
-     
-           
          },
-     
        )
-     
-     }
-     onDrawingTaskStatusSelect(stat:any,job_Number:string,content:any){
-         this.ds.savePhaseStatus(1,stat.target.value,job_Number)
-         .subscribe(data =>{
-           this.problemJobNum = job_Number
-               if(stat.target.value=="Problem"){
-                 this.modalService.open(content).result.then((result) => {
-                   this.closeResult = `Closed with: ${result}`;
-                 }, (reason) => {
-                   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-                 });
-               }
-           
-     
-     
-     
-     })
-     
-     
-       }
-     
-       onProgrammedByTaskStatusSelect(stat:any, job_Number:string,content:any){
-         this.ds.savePhaseStatus(3,stat.target.value,job_Number)
-         .subscribe(data =>{
-     this.problemJobNum = job_Number
-         if(stat.target.value=="Problem"){
-           this.modalService.open(content).result.then((result) => {
-             this.closeResult = `Closed with: ${result}`;
-           }, (reason) => {
-             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-           });
-         }
-     
-     
-     })
-     
-         }
-     
-         onTestedByTaskStatusSelect(stat:any, job_Number:string,content:any){
-           this.ds.savePhaseStatus(4,stat.target.value,job_Number)
-           .subscribe(data =>{
-             this.problemJobNum = job_Number
-                 if(stat.target.value=="Problem"){
-                   this.modalService.open(content).result.then((result) => {
-                     this.closeResult = `Closed with: ${result}`;
-                   }, (reason) => {
-                     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-                   });
-                 }
-             
-       })
-       
-           }
-     
-           onPanelBuildTaskStatusSelect(stat:any, job_Number:string,content:any){
-             this.ds.savePhaseStatus(2,stat.target.value,job_Number)
-             .subscribe(data =>{
-               this.problemJobNum = job_Number
-                   if(stat.target.value=="Problem"){
-                     this.modalService.open(content).result.then((result) => {
-                       this.closeResult = `Closed with: ${result}`;
-                     }, (reason) => {
-                       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-                     });
-                   }
-               
-         })
-         
-             }
+      
+      
+      
+      })
+      
+      
+      
+      
+      }
+      onDrawingTaskStatusSelect(stat:any,job_Number:string,content:any,i:any){
+        this.ownerForProblem = this.ownerForJobCards_arr[i]
+          this.ds.savePhaseStatus(1,stat.target.value,job_Number)
+          .subscribe(data =>{
+            this.problemJobNum = job_Number
+                if(stat.target.value=="Problem"){
+                  this.modalService.open(content).result.then((result) => {
+                    this.closeResult = `Closed with: ${result}`;
+                  }, (reason) => {
+                    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+                  });
+                }
+            
+      
+      
+      
+      })
+      
+      
+        }
+      
+        onProgrammedByTaskStatusSelect(stat:any, job_Number:string,content:any,i:any){
+        this.ownerForProblem = this.ownerForJobCards_arr[i]
+          this.ds.savePhaseStatus(3,stat.target.value,job_Number)
+          .subscribe(data =>{
+            console.log(data)
+      this.problemJobNum = job_Number
+          if(stat.target.value=="Problem"){
+            this.modalService.open(content).result.then((result) => {
+              this.closeResult = `Closed with: ${result}`;
+            }, (reason) => {
+              this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+            });
+          }
+      
+      
+      })
+      
+          }
+      
+          onTestedByTaskStatusSelect(stat:any, job_Number:string,content:any,i:any){
+            this.ownerForProblem = this.ownerForJobCards_arr[i]
+            this.ds.savePhaseStatus(4,stat.target.value,job_Number)
+            .subscribe(data =>{
+              this.problemJobNum = job_Number
+                  if(stat.target.value=="Problem"){
+                    this.modalService.open(content).result.then((result) => {
+                      this.closeResult = `Closed with: ${result}`;
+                    }, (reason) => {
+                      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+                    });
+                  }
+              
+        })
+        
+            }
+      
+            onPanelBuildTaskStatusSelect(stat:any, job_Number:string,content:any,i:any){
+              this.ownerForProblem = this.ownerForJobCards_arr[i]
+              this.ds.savePhaseStatus(2,stat.target.value,job_Number)
+              .subscribe(data =>{
+                this.problemJobNum = job_Number
+                    if(stat.target.value=="Problem"){
+                      this.modalService.open(content).result.then((result) => {
+                        this.closeResult = `Closed with: ${result}`;
+                      }, (reason) => {
+                        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+                      });
+                    }
+                
+          })
+          
+              }
      
      
              private getDismissReason(reason: any): string {

@@ -16,10 +16,9 @@
     <div class="input-group">
       <span class="input-group-text " style="font-weight: 400; background-color:white ;" >Owner:</span>
       <select class="form-select" id="exampleSelect" ngModel name="owner">
-        <option value="Owner" selected  hidden>Owner</option>
-        <option class="form-control" >Warwick McCleland</option>
-        <option class="form-control">Daniel Duvenage</option>
-        <option class="form-control" >Vaughan McCleland</option>
+        <option value="Owner" selected  hidden></option>
+        <option  *ngFor="let d of owners; index as i" class="form-control" >{{d}}</option>
+
       </select>
     </div>
 
@@ -79,7 +78,14 @@
 
 <textarea id=description class="form-control  mt-3 mb-4" placeholder="Description" ngModel name="description"  rows="1"></textarea>
 
+
 <button class="btn btn-primary mt-4 " style="width:200px">Create Job Card</button>
+<br>
+<br>
+
+<button class="snackbar" *ngIf="start_date_Invalid==true" mat-stroked-button (click)="openSnackBar()">
+  Please Select Start Date!
+</button>
 </form>
 <!-- <hr> -->
 <!-- ///////////////////////////////////////Add Material From Store////////////////////////////////////////// -->

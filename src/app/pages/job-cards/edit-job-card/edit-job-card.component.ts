@@ -89,6 +89,13 @@ color = 'primary'
   pb3_CHECKED:boolean = false
   pb4_CHECKED:boolean = false
 
+  owners!:string[]
+  drawers!:string[]
+  programmers!:string[]
+  testers!:string[]
+  panelBuilders!:string[]
+  installers!:string[]
+
   job_Number!: number ;
   owner!: string;
   start_Date!: Date;
@@ -142,19 +149,32 @@ purchase_Orders_complete:boolean = false
 invoices_complete:boolean = false
 itemsDeliveredChecked:boolean = false
 installationChecked:boolean = false
+installationNAChecked:boolean = false
+installationDisabled:boolean=false
+
 
   STORAGE: Storage[]=[]
   storages:any;
 
  displayedColumns: string[] = ['select','name', 'part_number', 'qty', 'description'];
-//  dataSource = ELEMENT_DATA;
-
-//  selection = new SelectionModel<StorageMaterials>(true,[])
-
-//  clickedRows = new Set<StorageMaterials>();
 
  jobNumber!:number;
-  disabled: boolean=true;
+ disabled: boolean=true;
+
+ invNum!:any
+ invClient!:string
+ invDate!:any
+
+ partName:any
+ partNumber:any
+ partQty:any
+ partDesc:any
+
+ poSupplier:any
+ poOrderNum:any
+
+
+
   constructor(private http: HttpClient,config: NgbModalConfig,private ds: DashboardService, private modalService: NgbModal, private JobCard_Service:JobCardService, private router: Router
     ,private su: ServerURLService) {
     this.roles = JSON.parse(localStorage.getItem("roles")!);
@@ -195,10 +215,26 @@ installationChecked:boolean = false
     this.tested_By=this.JobCard_Service.getTestedBy()
     this.phases = this.JobCard_Service.getPhases();
 
-    console.log(this.installationChecked)
+    this.getComboboxData()
+
+
+
     if(this.phases[7]=='Completed'){
       this.installationChecked = true
+
+      for (let i = 0; i < this.roles.length; i++) {
+        console.log(this.roles[i])
+      if (this.roles[i]=="Admin") {
+
+        this.installationDisabled=false
+i=100
+      }
+      else
+      this.installationDisabled=true
+      }
+    console.log( this.installationDisabled)  
     }
+
     else if(this.phases[7]==undefined || this.phases[7]=='' ){
      this.installationChecked = false
     }
@@ -285,14 +321,22 @@ if (this.owner) {
  this.drawingsByDisabled=true
  }
 
+
+
  if (this.panel_Builders) {
-  this.panelBuildersDisabled= this.roles.includes("Admin")
-  if(this.panelBuildersDisabled==true){
-    this.panelBuildersDisabled=false
-  }
-  else if(this.panelBuildersDisabled==false)
- this.panelBuildersDisabled=true
+for (let i = 0; i < this.roles.length; i++) {
+  (this.roles[i])
+if (this.roles[i]=="Admin"||this.roles[i]=="Owner") {
+  ("IN iF")
+  this.panelBuildersDisabled=false
+  i=100
+}
+else
+this.panelBuildersDisabled=true
+}
  }
+
+ (this.panelBuildersDisabled)
 
  if (this.programmed_By) {
   this.programmedByDisabled= this.roles.includes("Admin")
@@ -311,6 +355,16 @@ if (this.owner) {
   else if(this.testedByDisabled==false)
  this.testedByDisabled=true
  }
+
+ if (this.tested_By) {
+  this.testedByDisabled= this.roles.includes("Admin")
+  if(this.testedByDisabled==true){
+    this.testedByDisabled=false
+  }
+  else if(this.testedByDisabled==false)
+ this.testedByDisabled=true
+ }
+
 
 for (let i = 0; i < this.roles.length; i++) {
   if(this.roles[i]=="Admin"||this.roles[i]=="Accounts"){
@@ -654,7 +708,7 @@ var status = 'Completed'
     }
     else
     var status = "In Progress"
-console.log(status)
+
     this.JobCard_Service.SaveJobCard(
       job_number,
       owner,
@@ -721,6 +775,10 @@ console.log(status)
 
      })
     }
+
+    this.poSupplier=""
+    this.poOrderNum=""
+   
   }
 
 
@@ -754,7 +812,10 @@ console.log(status)
     var part_Descr = form.value.manual_part_descr_add;
 
     this.JobCard_Service.AddManualPart(this.job_Number,part_Name,part_Number,part_Qty,part_Descr)
-
+    this.partName=""
+    this.partNumber=""
+    this.partQty=""
+    this.partDesc=""
   }
 
 
@@ -772,6 +833,9 @@ console.log(status)
       this.phases=responseData.phases
     })
 
+
+    this.poSupplier=""
+    this.poOrderNum=""
   }
  
 onCompleteInvoicing(){
@@ -806,7 +870,6 @@ callPurchaseOrderTable(){
   }, error =>{
      console.log(error.error.message)
   });
-  console.log( this.PURCHASE_ORDERS)
 }
 
 callJobCardPartsFromStorage(){
@@ -859,12 +922,93 @@ deleteRow(itemNumber:any,type:string){
     itemNumber:itemNumber,
     type:type
   }
-  this.http.post(this.su.serverURL+"/jobcard/delete-row",info).subscribe(data=>{
-    console.log(data)
+  this.http.post<any>(this.su.serverURL+"/jobcard/delete-row",info).subscribe(responseData=>{
+var data = responseData
+
+  if (data.type=="Invoice"){
+    this.INVOICES=[]
+
+    for (let i = 0; i < data.record.length; i++) {
+
+      this.INVOICES[i]= {
+        job_Number:0,
+        invoice_Number: data.record.invoice_Number[i],
+        client_Name: data.record.client_Name[i],
+        date: data.record.date[0],
+        timestamp:data.record.timestamp[i]
+        }
+    }
+  }
+  else   if (data.type=="Purchase Order"){
+  
+    this.PURCHASE_ORDERS=[]
+    for (let i = 0; i < data.record.length; i++) {
+      this.PURCHASE_ORDERS[i]=
+        {
+        job_Number:0,
+        supplier: data.record.supplier[i],
+        order_Number: data.record.order_Number[i],
+        }
+    }
+  
+  }
+  else if (data.type=="Storage"){
+    this.JOBCARD_PARTS=[]
+
+
+    for (let i = 0; i < data.record.length; i++) {
+      this.JOBCARD_PARTS[i]=
+        {
+        job_Number:0,
+        part_Name: data.record.part_Name[i],
+        part_Number: data.record.part_Number[i],
+        part_Qty: data.record.part_Qty[i],
+        part_Descr: data.record.part_Descr[i],
+        }
+    }
+  }
+
+
+
+
   })
+
   console.log(itemNumber)
 }
 
+getComboboxData(){
+
+
+  this.http.get<any>(this.su.serverURL+"/get-owners").subscribe(data=>{
+    this.owners=data.record
+  })
+
+  this.http.get<any>(this.su.serverURL+"/get-drawers").subscribe(data=>{
+    this.drawers=data.record
+   // console.log(this.drawers)
+  })
+
+  this.http.get<any>(this.su.serverURL+"/get-programmers").subscribe(data=>{
+    this.programmers=data.record
+  //  console.log(this.programmers)
+  })
+
+  this.http.get<any>(this.su.serverURL+"/get-testers").subscribe(data=>{
+    this.testers=data.record
+   // console.log(this.testers)
+  })
+
+  this.http.get<any>(this.su.serverURL+"/get-panelbuilders").subscribe(data=>{
+    this.panelBuilders=data.record
+   // console.log(this.panelBuilders)
+  })
+
+  this.http.get<any>(this.su.serverURL+"/get-installers").subscribe(data=>{
+    this.installers=data.record
+    //console.log(this.installers)
+  })
+
+}
 
 ngOnDestroy(){
   this.flag=false

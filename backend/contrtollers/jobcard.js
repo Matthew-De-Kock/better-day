@@ -4,7 +4,7 @@ var configuration = require("../configuration")
 const Invoice = require('../models/invoice'); //for delete record
 const PurchaseOrder = require('../models/purchase-order');//for delete record
 const JobCardStorageParts = require('../models/jobcard-storage-parts');//for delete record
-
+const User = require('../models/user')
 
 exports.GetNewJobCardNumber=(req,res,next)=>{
   var MongoClient = require('mongodb').MongoClient;
@@ -202,7 +202,9 @@ console.log("STATUS::::::: "+req.body.status)
           Invoice.deleteOne(query).then(data =>{
          console.log(data)
                   res.status(201).json({
-                      message: "invoice Deleted successfully",
+                      message: "Invoice Deleted successfully",
+                      record:data,
+                      type:"Invoice"
                     });
                   })
                   .catch(err=>{
@@ -217,15 +219,23 @@ console.log("STATUS::::::: "+req.body.status)
           const query = {order_Number:itemNumber}
           PurchaseOrder.deleteOne(query).then(data =>{
          console.log(data)
-                  res.status(201).json({
-                      message: "invoice Deleted successfully",
-                    });
-                  })
-                  .catch(err=>{
-                    res.status(500).json({
-                      error:err
-                    });
-                  });
+         PurchaseOrder.find().then(data=>{
+           console.log(data)
+
+           res.status(201).json({
+            message: "Purchase Order Deleted successfully",
+            record: data,
+            type:"Purchase Order"
+          });
+        })
+        .catch(err=>{
+          res.status(500).json({
+            error:err
+          });
+        });
+         })
+
+ 
         }
 
 ////////////////////Storage
@@ -234,7 +244,10 @@ console.log("STATUS::::::: "+req.body.status)
           JobCardStorageParts.deleteOne(query).then(data =>{
          console.log(data)
                   res.status(201).json({
-                      message: "invoice Deleted successfully",
+                      message: "Storage Deleted successfully",
+                      record: data,
+                      type:"Storage"
+
                     });
                   })
                   .catch(err=>{
@@ -264,6 +277,172 @@ console.log("STATUS::::::: "+req.body.status)
                   });
    
         }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                            JOBCARD POPULATION
+   
+exports.GetOwners=(req,res,next)=>{   
+      User.find().then(data =>{
+      console.log(data)
+      var data_arr=[]
+      var count=0
+      for (let i = 0; i < data.length; i++) {
+        for (let m = 0; m < data[i].roles.length; m++) {
+        if (data[i].roles[m]=="Owner") {
+          data_arr[count]=data[i].name
+          count++
+  }
+  }
+}
+              res.status(201).json({
+                  message: "Owners fetched successfully",
+                  record:data_arr
+                });
+              })
+              .catch(err=>{
+                res.status(500).json({
+                  error:err
+                });
+              });
 
+    }
+
+
+    exports.GetDrawers=(req,res,next)=>{   
+      User.find().then(data =>{
+      console.log(data)
+      var data_arr=[]
+      var count=0
+      for (let i = 0; i < data.length; i++) {
+        for (let m = 0; m < data[i].roles.length; m++) {
+        if (data[i].roles[m]=="Drawer") {
+          data_arr[count]=data[i].name
+          count++
+  }
+  }
+}
+              res.status(201).json({
+                  message: "Drawers fetched successfully",
+                  record:data_arr
+                });
+              })
+              .catch(err=>{
+                res.status(500).json({
+                  error:err
+                });
+              });
+
+    }
+
+
+
+    exports.GetProgrammers=(req,res,next)=>{   
+      User.find().then(data =>{
+      console.log(data)
+      var data_arr=[]
+      var count=0
+      for (let i = 0; i < data.length; i++) {
+        for (let m = 0; m < data[i].roles.length; m++) {
+        if (data[i].roles[m]=="Programmer") {
+          data_arr[count]=data[i].name
+          count++
+  }
+  }
+}
+              res.status(201).json({
+                  message: "Programmers fetched successfully",
+                  record:data_arr
+                });
+              })
+              .catch(err=>{
+                res.status(500).json({
+                  error:err
+                });
+              });
+
+    }
+
+
+
+    exports.GetTesters=(req,res,next)=>{   
+      User.find().then(data =>{
+      console.log(data)
+      var data_arr=[]
+      var count=0
+      for (let i = 0; i < data.length; i++) {
+        for (let m = 0; m < data[i].roles.length; m++) {
+        if (data[i].roles[m]=="Tester") {
+          data_arr[count]=data[i].name
+          count++
+  }
+  }
+}
+              res.status(201).json({
+                  message: "Testers fetched successfully",
+                  record:data_arr
+                });
+              })
+              .catch(err=>{
+                res.status(500).json({
+                  error:err
+                });
+              });
+
+    }
+
+
+
+    exports.GetPanelBuilders=(req,res,next)=>{   
+      User.find().then(data =>{
+      console.log(data)
+      var data_arr=[]
+      var count=0
+      for (let i = 0; i < data.length; i++) {
+        for (let m = 0; m < data[i].roles.length; m++) {
+        if (data[i].roles[m]=="Panel Builder") {
+          data_arr[count]=data[i].name
+          count++
+  }
+  }
+}
+              res.status(201).json({
+                  message: "Panel Builders fetched successfully",
+                  record:data_arr
+                });
+              })
+              .catch(err=>{
+                res.status(500).json({
+                  error:err
+                });
+              });
+
+    }
+
+
+
+    exports.GetInstallers=(req,res,next)=>{   
+      User.find().then(data =>{
+      console.log(data)
+      var data_arr=[]
+      var count=0
+      for (let i = 0; i < data.length; i++) {
+        for (let m = 0; m < data[i].roles.length; m++) {
+        if (data[i].roles[m]=="Installer") {
+          data_arr[count]=data[i].name
+          count++
+  }
+  }
+}
+              res.status(201).json({
+                  message: "Installers fetched successfully",
+                  record:data_arr
+                });
+              })
+              .catch(err=>{
+                res.status(500).json({
+                  error:err
+                });
+              });
+
+    }
 
 

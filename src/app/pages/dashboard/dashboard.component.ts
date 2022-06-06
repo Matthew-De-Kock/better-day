@@ -45,16 +45,19 @@ drawings_task_disabled_Arr:boolean[]=[]
 drawings_task_BC_arr : string[]=[];
 drawings_task_TC_arr : string[]=[];
 drawings_phase_status_arr: string[]=[];
+drawings_status_arr: string[]=[];
 
 panelBuild_task_disabled_Arr:boolean[]=[]
 panelBuild_task_BC_arr : string[]=[];
 panelBuild_task_TC_arr : string[]=[];
 panelBuild_phase_status_arr: string[]=[]
+panelBuild_status_arr: string[]=[]
 
 programmedBy_task_disabled_Arr:boolean[]=[]
 programmedBy_task_BC_arr : string[]=[];
 programmedBy_task_TC_arr : string[]=[];
 programming_phase_status_arr: string[]=[];
+programming_status_arr: string[]=[];
 // programming_phase_arr: string[]=[];
 
 
@@ -62,6 +65,7 @@ testedBy_task_disabled_Arr:boolean[]=[]
 testedBy_task_BC_arr : string[]=[];
 testedBy_task_TC_arr : string[]=[];
 testedBy_phase_status_arr: string[]=[];
+testedBy_status_arr: string[]=[];
 
 
 ownerForJobCards_arr: string[]=[];
@@ -115,18 +119,27 @@ var count  =0
         this.drawings_JobNumber_arr=data.drawings_JobNumber_arr
         this.drawings_Descr_arr=data.drawings_Descr_arr
         this.drawings_phase_status_arr= data.drawings_phase_status_arr
+        this.drawings_status_arr = data.drawings_status_arr
+        
     
         this.panel_Builders_JobNumber_arr=data.panel_Builders_JobNumber_arr
         this.panel_Builders_Descr_arr=data.panel_Builders_Descr_arr
         this.panelBuild_phase_status_arr= data.panelBuild_phase_status_arr
+        this.panelBuild_status_arr  = data.panelBuild_status_arr
 
         this.programmed_By_JobNumber_arr=data.programmed_By_JobNumber_arr
         this.programmed_By_Descr_arr=data.programmed_By_Descr_arr
         this.programming_phase_status_arr= data.programming_phase_status_arr
+        this.programming_status_arr = data.programming_status_arr
+
+        console.log( this.programming_status_arr)
 
         this.tested_By_JobNumber_arr=data.tested_By_JobNumber_arr
         this.tested_By_Descr_arr=data.tested_By_Descr_arr
         this.testedBy_phase_status_arr= data.testedBy_phase_status_arr
+        this.testedBy_status_arr = data.testedBy_status_arr
+
+
 
        this.ownerForJobCards_arr=data.ownerForJobCards_arr
 

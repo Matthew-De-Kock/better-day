@@ -6,6 +6,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { JobCardService } from 'src/app/Service-Files/jobcard.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { ServerURLService } from 'src/app/Service-Files/server-Url.service';
 
 
 
@@ -20,11 +22,15 @@ import { Router } from '@angular/router';
 export class CreateJobCardComponent implements OnInit {
 ;
 
-owner="owner"
+   owner="owner"
    model!: NgbDateStruct;
+   jobNumber!:number;
 
-  jobNumber!:number;
-  constructor(config: NgbModalConfig, private modalService: NgbModal, private JobCard_Service:JobCardService,  private router: Router) {
+   start_date_Invalid:boolean=false
+
+   owners!:string[]
+
+  constructor(private http: HttpClient,config: NgbModalConfig, private modalService: NgbModal, private JobCard_Service:JobCardService,  private router: Router,private su: ServerURLService) {
     config.backdrop = 'static';
     config.keyboard = false;
     this.JobCard_Service.Get_JobCard_Number().subscribe(resp=>{
@@ -37,7 +43,7 @@ this.jobNumber=1745
        this.jobNumber=data.recentJobNum +1
     })
 
- 
+    this.getOwners()
   }
 
   ngOnInit(){
@@ -64,6 +70,11 @@ CreateJobCard(form: NgForm){
   var status = "In Progress"
 
 
+if(!start_Date){
+this.start_date_Invalid=true;
+return
+}
+
   this.JobCard_Service.CreateJobCard(
     job_number,
     owner,
@@ -84,7 +95,24 @@ CreateJobCard(form: NgForm){
 
 }
 
+getOwners(){
+  this.http.get<any>(this.su.serverURL+"/get-owners").subscribe(data=>{
+    this.owners=data.record
+  })
 
+
+}
+
+
+openSnackBar() {
+
+  if ( this.start_date_Invalid==true) {
+    this.start_date_Invalid=false
+  }
+  else if  ( this.start_date_Invalid==false) {
+    this.start_date_Invalid=true
+  }
+  };
 
 }
 

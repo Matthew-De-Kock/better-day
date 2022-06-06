@@ -54,4 +54,24 @@ router.get("/jobcard/completed-jobcards", JobcardController.GetListCompletedJobC
 router.post("/jobcard/delete-row", JobcardController.DeleteRow)
 
 router.post("/jobcard/owner-jobcards", JobcardController.GetOwnerJobCards)
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                            JOBCARD POPULATION
+
+router.get("/get-owners", JobcardController.GetOwners)
+ router.get("/get-drawers", JobcardController.GetDrawers)
+ router.get("/get-programmers", JobcardController.GetProgrammers)
+ router.get("/get-testers", JobcardController.GetTesters)
+ router.get("/get-panelbuilders", JobcardController.GetPanelBuilders)
+ router.get("/get-installers", JobcardController.GetInstallers)
+
+
+
+
+
+
+
+
   module.exports= router;

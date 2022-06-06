@@ -25,8 +25,8 @@ router.post("/dashboard/getuserjobs",(req, res, next) => {
 
    
 
-
-if(db.db("Betterday")==undefined){}
+//console.log(db.db("Betterday"))
+if(!db.db("Betterday")){}
 else{}
 var ownerForJobCards_arr=[]
 var count = 0
@@ -36,21 +36,24 @@ var count = 0
      var drawings_JobNumber_arr=[];
      var drawings_Descr_arr=[];
      var drawings_phase_status_arr=[]
+     var drawings_status_arr=[]
   
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
   //  if (err) throw err;
    i = 0;
-if(data.length==undefined){}
+if(!data){}
 else{
     while (i < data.length)
     {
       drawings_JobNumber_arr[i] =data[i].job_Number
       drawings_Descr_arr[i]=data[i].description
       drawings_phase_status_arr[i] = data[i].phases[1]
-         i++
-         ownerForJobCards_arr[count] = data[count].owner
+      drawings_status_arr = data[i].status
+
+         ownerForJobCards_arr[count] = data[i].owner
          count++
+         i++
    
      }
 
@@ -61,21 +64,24 @@ else{
  var panel_Builders_JobNumber_arr=[];
  var panel_Builders_Descr_arr=[];
  var panelBuild_phase_status_arr=[]
+ var panelBuild_status_arr=[]
 
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
 //  if (err) throw err;
 i = 0;
-if(data.length==undefined){}
+if(!data){}
 else{
 while (i < data.length)
 {
   panel_Builders_JobNumber_arr[i] = data[i].job_Number
   panel_Builders_Descr_arr[i]= data[i].description
   panelBuild_phase_status_arr[i]=data[i].phases[2]
-     i++;
-           ownerForJobCards_arr[count] = data[count].owner
+  panelBuild_status_arr[i] = data[i].status
+
+        ownerForJobCards_arr[count] = data[i].owner
          count++
+         i++;
  }}
 });
 
@@ -84,21 +90,25 @@ var query = {programmed_By: req.body.name  };
 var programmed_By_JobNumber_arr=[];
 var programmed_By_Descr_arr=[];
 var programming_phase_status_arr=[]
+var programming_status_arr=[]
 
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
 // if (err) throw err;
 i = 0;
-if(data.length==undefined){}
+if(!data){}
 else{
 while (i < data.length)
 {
  programmed_By_JobNumber_arr[i] = data[i].job_Number
  programmed_By_Descr_arr[i]= data[i].description
  programming_phase_status_arr[i]=data[i].phases[3]
-    i++;
-    ownerForJobCards_arr[count] = data[count].owner
+ programming_status_arr[i] = data[i].status
+
+
+    ownerForJobCards_arr[count] = data[i].owner
     count++
+    i++;
 }}
 });
 
@@ -106,21 +116,25 @@ var query = {tested_By: req.body.name  };
 var tested_By_JobNumber_arr=[];
 var tested_By_Descr_arr=[];
 var testedBy_phase_status_arr=[]
+var testedBy_status_arr=[]
 
 dbo.collection("jobcards").find(query).toArray(function(err, data){
   // if (err) throw err;
   i = 0;
-  if(data.length==undefined){}
+  if(!data){}
 else{
   while (i < data.length)
   {
     tested_By_JobNumber_arr[i] = data[i].job_Number
     tested_By_Descr_arr[i]= data[i].description
     testedBy_phase_status_arr[i]=data[i].phases[4]
+    testedBy_status_arr[i] = data[i].status
+
+      ownerForJobCards_arr[count] = data[i].owner
+      count++
       i++;
-      // ownerForJobCards_arr[count] = data[count].owner
-      // count++
   }}
+
   res.status(200).json({
     drawings_JobNumber_arr,
     drawings_Descr_arr,
@@ -137,6 +151,11 @@ else{
     tested_By_JobNumber_arr,
     tested_By_Descr_arr,
     testedBy_phase_status_arr,
+
+    drawings_status_arr,
+    panelBuild_status_arr,
+    programming_status_arr,
+    testedBy_status_arr,
 
     ownerForJobCards_arr
      });

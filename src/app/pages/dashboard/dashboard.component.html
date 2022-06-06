@@ -157,7 +157,7 @@
                <td style ="color: black ; " >{{drawings_Descr_arr[i]}}</td>
                 <td style ="color: black ; " >Drawing</td> 
           <td>
-              <select [ngModel]="drawings_phase_status_arr[i]" (change)="onDrawingTaskStatusSelect($event,d,content,i)" style="min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
+              <select [disabled]="drawings_task_disabled_Arr[i]" [ngModel]="drawings_phase_status_arr[i]" (change)="onDrawingTaskStatusSelect($event,d,content,i)" style="min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': drawings_task_BC_arr[i], 'color': drawings_task_TC_arr[i]}">
                 <option class="form-control"  value="Acknowledge" >Acknowledge</option>
                 <option class="form-control"  value="In Progress" >In Progress</option>
                 <option class="form-control" value="Completed" >Completed</option>
@@ -199,7 +199,7 @@
  <td style ="color: black ; " >{{tested_By_Descr_arr[i]}}</td>
   <td style ="color: black ; " >Testing</td> 
 <td>
-<select [ngModel]="testedBy_phase_status_arr[i]" (change)="onTestedByTaskStatusSelect($event,d,content,i)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
+<select [disabled]="testedBy_task_disabled_Arr[i]" [ngModel]="testedBy_phase_status_arr[i]" (change)="onTestedByTaskStatusSelect($event,d,content,i)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': testedBy_task_BC_arr[i], 'color': testedBy_task_TC_arr[i]}">
   <option class="form-control"  value="Acknowledge" >Acknowledge</option>
   <option class="form-control"  value="In Progress" >In Progress</option>
   <option class="form-control" value="Completed" >Completed</option>
@@ -219,7 +219,7 @@
  <td style ="color: black ; " >{{panel_Builders_Descr_arr[i]}}</td>
   <td style ="color: black ; " >Panel Build</td> 
 <td>
-<select [ngModel]="panelBuild_phase_status_arr[i]" (change)="onPanelBuildTaskStatusSelect($event,d,content,i)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': panelBuild_task_BC_arr[i], 'color': panelBuild_task_TC_arr[i]}">
+<select [disabled]="panelBuild_task_disabled_Arr[i]" [ngModel]="panelBuild_phase_status_arr[i]" (change)="onPanelBuildTaskStatusSelect($event,d,content,i)" style=" min-width:100px;"  class="form-select " id="exampleSelect"  [ngStyle]="{'background-color': panelBuild_task_BC_arr[i], 'color': panelBuild_task_TC_arr[i]}">
   <option class="form-control"  value="Acknowledge" >Acknowledge</option>
   <option class="form-control"  value="In Progress" >In Progress</option>
   <option class="form-control" value="Completed" >Completed</option>
@@ -275,7 +275,7 @@
     border-style : solid ;
     border-width : 0">
 
-        <tr *ngIf="drawings_phase_status_arr[i]=='Completed'" >
+        <tr *ngIf="drawings_phase_status_arr[i]=='Completed'&& drawings_status_arr[i]!= 'Completed' " >
                   <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
                  <td style ="color: black ; " >{{drawings_Descr_arr[i]}}</td>
                   <td style ="color: black ; " >Drawing</td> 
@@ -292,7 +292,7 @@
             border-style : solid ;
             border-width : 0">
        
-        <tr *ngIf="programming_phase_status_arr[i]=='Completed'" >
+        <tr *ngIf="programming_phase_status_arr[i]=='Completed' && programming_status_arr[i]!= 'Completed' " >
          
           <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
          <td style ="color: black ; " >{{programmed_By_Descr_arr[i]}}</td>
@@ -309,7 +309,7 @@
       style="border-color : rgb(223, 223, 223) ;
       border-style : solid ;
       border-width : 0">
-  <tr  *ngIf="testedBy_phase_status_arr[i]=='Completed'" >
+  <tr  *ngIf="testedBy_phase_status_arr[i]=='Completed'&& testedBy_status_arr[i]!= 'Completed' " >
     <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
    <td style ="color: black ; " >{{tested_By_Descr_arr[i]}}</td>
     <td style ="color: black ; " >Testing</td> 
@@ -325,7 +325,7 @@
       border-style : solid ;
       border-width : 0">
  
-  <tr *ngIf="panelBuild_phase_status_arr[i]=='Completed'">
+  <tr *ngIf="panelBuild_phase_status_arr[i]=='Completed'&& panelBuild_status_arr[i]!= 'Completed' ">
     <td style ="color: rgb(255, 0, 0);  font-weight: 600;" >{{d}}</td>
    <td style ="color: black ; " >{{panel_Builders_Descr_arr[i]}}</td>
     <td style ="color: black ; " >Panel Build</td> 
